@@ -29,7 +29,7 @@
     {% if kpis %}
         <ul>
             {% for kpi in kpis %}
-                <li style="font-weight: bold;">{{ kpi.employee.name }} - {{kpi.employee.position}} - {{kpi.kpi_name}} -- {{kpi.metric}} - {{ kpi.performance_score }} --  {{kpi.fact}} -{{kpi.finished}} - {{kpi.premium}} - {{kpi.definition}} - {{kpi.method}} - {{kpi.weight}} - {{kpi.activity}}-{{kpi.overall}}</li>
+                <li style="font-weight: bold;">{{ kpi.employee.name }} - {{kpi.employee.position}} -- {{kpi.metric}} - {{ kpi.performance_score }} --  {{kpi.fact}} -{{kpi.finished}} - {{kpi.premium}} - {{kpi.definition}} - {{kpi.method}} - {{kpi.weight}} - {{kpi.activity}}-{{kpi.overall}}  - {{kpi.kpi_name}}</li>
             {% endfor %}
         </ul>
     {% else %}
