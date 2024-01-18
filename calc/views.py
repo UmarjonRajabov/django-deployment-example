@@ -1,20 +1,24 @@
 # calc/views.py
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from .forms import ExcelFileUploadForm
 from .models import Employee, KPI
 import pandas as pd
 from datetime import datetime
+from .utils import process_excel_file
 
-
+@staff_member_required
 def upload_excel(request):
     if request.method == 'POST':
         form = ExcelFileUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            excel_file = request.FILES['excel_file']
-            df = pd.read_excel(excel_file)
-
-            # Process the data and calculate KPIs
-            process_data_and_calculate_kpis(df)
+            excel_file = form.cleaned_data['excel_file']
+            process_excel_file(excel_file)
+            # excel_file = request.FILES['excel_file']
+            # df = pd.read_excel(excel_file)
+            #
+            # # Process the data and calculate KPIs
+            # process_data_and_calculate_kpis(df)
 
             return redirect('success_page')
     else:
