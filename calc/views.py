@@ -1,11 +1,30 @@
 # calc/views.py
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import ExcelFileUploadForm
 from .models import Employee, KPI
 import pandas as pd
 from datetime import datetime
 from .utils import process_excel_file
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('login')  # Replace 'dashboard' with your desired redirect URL
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
+
 
 @staff_member_required
 def upload_excel(request):
