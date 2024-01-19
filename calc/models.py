@@ -5,6 +5,10 @@ from django.db import models
 
 # calc/models.py
 
+class ExcelFile(models.Model):
+    file = models.FileField(upload_to='excel_files/')
+
+
 class Employee(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)

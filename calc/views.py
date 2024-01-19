@@ -33,11 +33,11 @@ def upload_excel(request):
         if form.is_valid():
             excel_file = form.cleaned_data['excel_file']
             process_excel_file(excel_file)
-            # excel_file = request.FILES['excel_file']
-            # df = pd.read_excel(excel_file)
+            excel_file = request.FILES['excel_file']
+            df = pd.read_excel(excel_file)
             #
             # # Process the data and calculate KPIs
-            # process_data_and_calculate_kpis(df)
+            process_data_and_calculate_kpis(df)
 
             return redirect('success_page')
     else:
