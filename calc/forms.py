@@ -8,7 +8,11 @@ class ExcelFileForm(forms.ModelForm):
         model = ExcelFile
         fields = ['file']
 
-class ExcelFileUploadForm(forms.Form):
-    excel_file = forms.FileField()
+# class ExcelFileUploadForm(forms.ModelForm):
+#     excel_file = forms.FileField()
+#
+#     class Meta:
+#         model = ExcelFile
+#         fields = ['file']
 
 #Add other forms as needed

@@ -1,0 +1,23 @@
+<!-- excel_content.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Content</title>
+</head>
+<body>
+    <h2>Excel Content</h2>
+    {% if excel_content %}
+        <table>
+            <!-- Table content as before -->
+        </table>
+        <p>Download Excel file: <a href="{{ file_path }}" download>Click here</a></p>
+       <p>
+<a href="{% url 'excel_content' %}">Link to Excel Content</a>
+Upload</p>
+    {% else %}
+        <p>No Excel content available.</p>
+    {% endif %}
+</body>
+</html>

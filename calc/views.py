@@ -3,11 +3,23 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import ExcelFileUploadForm
+from .forms import ExcelFileForm
 from .models import Employee, KPI
 import pandas as pd
 from datetime import datetime
 from .utils import process_excel_file
+from .models import ExcelFile
+
+
+# def excel_content(request):
+#     file_id = request.GET.get('file_id')
+#     if file_id:
+#         excel_file = ExcelFile.objects.get(pk=file_id)
+#         excel_content = pd.read_excel(excel_file.file.path)
+#         return render(request, 'excel_content.html',
+#                       {'excel_content': excel_content, 'file_path': excel_file.file_path()})
+#     else:
+#         return render(request, 'excel_content.html', {'excel_content': None, 'file_path': None})
 
 
 def login_view(request):
@@ -29,19 +41,25 @@ def login_view(request):
 @staff_member_required
 def upload_excel(request):
     if request.method == 'POST':
-        form = ExcelFileUploadForm(request.POST, request.FILES)
+        form = ExcelFileForm(request.POST, request.FILES)
         if form.is_valid():
-            excel_file = form.cleaned_data['excel_file']
-            process_excel_file(excel_file)
-            excel_file = request.FILES['excel_file']
-            df = pd.read_excel(excel_file)
+            excel_file = form.save(commit=False)
+            excel_file.uploaded_by = request.user
+            excel_file.save()
+            print(f"File path: {excel_file.file.path}")
+            return redirect('excel_content')
+            # excel_file = form.cleaned_data['excel_file']
+            # process_excel_file(excel_file)
+            # excel_file = request.FILES['excel_file']
+            # df = pd.read_excel(excel_file)
+            # #
+            # # # Process the data and calculate KPIs
+            # process_data_and_calculate_kpis(df)
             #
-            # # Process the data and calculate KPIs
-            process_data_and_calculate_kpis(df)
+            # return redirect('success_page')
 
-            return redirect('success_page')
     else:
-        form = ExcelFileUploadForm()
+        form = ExcelFileForm()
 
     return render(request, 'upload_excel.html', {'form': form})
 

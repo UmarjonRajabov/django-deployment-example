@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+from back_project import settings
 
 
 # Create your models here.
@@ -7,6 +10,10 @@ from django.db import models
 
 class ExcelFile(models.Model):
     file = models.FileField(upload_to='excel_files/')
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def file_path(self):
+        return self.file.path[len(settings.MEDIA_ROOT):]
 
 
 class Employee(models.Model):

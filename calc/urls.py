@@ -7,6 +7,7 @@ urlpatterns = [
     path('success_page/', success_page, name='success_page'),
     path('view_kpis/', view_kpis, name='view_kpis'),
     path('login/', login_view, name='login'),
+    # path('excel_content/', excel_content, name='excel_content'),
 ]
 
 # # kpi_project/urls.py
