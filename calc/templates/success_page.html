@@ -22,9 +22,20 @@
     <title>Success Page</title>
 </head>
 <body>
-    <h2>File Uploaded Successfully</h2>
-    <p>Your KPI calculations have been processed successfully.</p>
-    <p><a href="{% url 'view_kpis' %}">View KPIs</a></p>
+<!--    <h2>File Uploaded Successfully</h2>-->
+<!--    <p>Your KPI calculations have been processed successfully.</p>-->
+<!--    <p><a href="{% url 'view_kpis' %}">View KPIs</a></p>-->
+<!-- base.html or other template -->
+{% if user.is_authenticated %}
+    {% if user.is_staff %}
+        <a href="{% url 'view_kpis' %}">View KPIs</a>
+        <!-- Other staff-specific links or content -->
+    {% endif %}
+    <!-- Common links or content for all logged-in users -->
+{% else %}
+    <!-- Links or content for unauthenticated users -->
+{% endif %}
+
 </body>
 </html>
 

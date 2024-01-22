@@ -1,5 +1,6 @@
 # calc/views.py
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
@@ -117,6 +118,17 @@ def process_data_and_calculate_kpis(data_frame):
         print("Column 'performance_column_name' not found in the DataFrame.")
 
 
+# def view_kpis(request):
+#     kpis = KPI.objects.all()
+#     return render(request, 'view_kpis.html', {'kpis': kpis})
+@login_required
 def view_kpis(request):
-    kpis = KPI.objects.all()
-    return render(request, 'view_kpis.html', {'kpis': kpis})
+    if request.user.is_staff:
+        kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
+        return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
+    else:
+        return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
+
+
+def access_denied(request):
+    return render(request, 'access_denied.html')
