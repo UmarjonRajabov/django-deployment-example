@@ -21,6 +21,8 @@ class Employee(models.Model):
     position = models.CharField(max_length=255)
     # Add other relevant fields
 
+    def __str__(self):
+        return self.name
 
 class KPI(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
