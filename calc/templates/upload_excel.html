@@ -19,11 +19,11 @@
         <button type="submit">Upload</button>
     </form>
     {% endif %}
-
+    <a href="{% url 'view_kpis' %}">View Excel Content</a>
     <!-- Other links or content for all logged-in users -->
 {% else %}
     <!-- Links or content for unauthenticated users -->
- <a href="{% url 'view_kpis' %}">View Excel Content</a>
+ <a href="{% url 'login' %}">You need to login before proceeding</a>
 {% endif %}
 
 </body>
