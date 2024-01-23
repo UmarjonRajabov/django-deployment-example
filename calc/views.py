@@ -48,7 +48,7 @@ def upload_excel(request):
             excel_file.uploaded_by = request.user
             excel_file.save()
             print(f"File path: {excel_file.file.path}")
-            return redirect('excel_content')
+            return redirect('success_page')
             # excel_file = form.cleaned_data['excel_file']
             # process_excel_file(excel_file)
             # excel_file = request.FILES['excel_file']

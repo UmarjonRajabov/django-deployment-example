@@ -26,9 +26,9 @@
 </head>
 <body>
     <h2>View KPIs</h2>
-    {% if kpis %}
+    {% if kpi_entries %}
         <ul>
-            {% for kpi in kpis %}
+            {% for kpi in kpi_entries %}
                 <li style="font-weight: bold;">{{ kpi.employee.name }} - {{kpi.employee.position}} -- {{kpi.metric}} - {{ kpi.performance_score }} --  {{kpi.fact}} -{{kpi.finished}} - {{kpi.premium}} - {{kpi.definition}} - {{kpi.method}} - {{kpi.weight}} - {{kpi.activity}}-{{kpi.overall}}  - {{kpi.kpi_name}}</li>
             {% endfor %}
         </ul>
