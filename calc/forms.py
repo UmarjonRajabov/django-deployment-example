@@ -8,6 +8,12 @@ class ExcelFileForm(forms.ModelForm):
         model = ExcelFile
         fields = ['file']
 
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.uploaded_by = self.user  # Set the user
+        if commit:
+            instance.save()
+        return instance
 # class ExcelFileUploadForm(forms.ModelForm):
 #     excel_file = forms.FileField()
 #

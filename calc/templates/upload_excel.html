@@ -13,5 +13,16 @@
         {{ form }}
         <button type="submit">Upload</button>
     </form>
+<!-- template.html -->
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <a href="{% url 'upload_excel_file' %}">Upload Excel File</a>
+    {% endif %}
+    <a href="{% url 'excel_content' %}">View Excel Content</a>
+    <!-- Other links or content for all logged-in users -->
+{% else %}
+    <!-- Links or content for unauthenticated users -->
+{% endif %}
+
 </body>
 </html>
