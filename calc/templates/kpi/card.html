@@ -14,7 +14,9 @@
             <img src="images/odam.jfif" alt="Inson rasmi">
         </div>
         <div class="info">
-            <h1 style="font-size: 60px;">МЎСИНОВ ХУСАН ШУХРАТОВИЧ</h1>
+            {% for kpi in kpi_entries %}
+            <h1 style="font-size: 60px;">{{ kpi.employee.name }}</h1>
+              {% endfor %}
             <div class="info_item">
                 <span>Филиал /Го</span>
                 <span class="ikki">Главное управление по г.Ташкент</span>
