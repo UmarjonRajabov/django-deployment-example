@@ -132,3 +132,9 @@ def view_kpis(request):
 
 def access_denied(request):
     return render(request, 'access_denied.html')
+
+def kpi_index(request):
+    return render(request, 'kpi/index.html')
+
+def kpi_card(request):
+    return render(request, 'kpi/card.html')

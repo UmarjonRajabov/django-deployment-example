@@ -11,7 +11,7 @@
 <!-- template.html -->
 {% if user.is_authenticated %}
     {% if user.is_superuser %}
-        <a href="{% url 'upload_excel' %}">Upload Excel File</a>
+<!--        <a href="{% url 'upload_excel' %}">Upload Excel File</a>-->
  <h2>Upload Excel File</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -19,7 +19,7 @@
         <button type="submit">Upload</button>
     </form>
     {% endif %}
-    <a href="{% url 'view_kpis' %}">View Excel Content</a>
+<!--    <a href="{% url 'view_kpis' %}">View Excel Content</a>-->
     <!-- Other links or content for all logged-in users -->
 {% else %}
     <!-- Links or content for unauthenticated users -->
