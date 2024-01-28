@@ -125,7 +125,7 @@ def process_data_and_calculate_kpis(data_frame):
 def view_kpis(request):
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
-        return render(request, 'kpi/view_kpis.html', {'kpi_entries': kpi_entries})
+        return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
     else:
         return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
