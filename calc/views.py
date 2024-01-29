@@ -44,20 +44,20 @@ def upload_excel(request):
     if request.method == 'POST':
         form = ExcelFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # excel_file = form.save(commit=False)
-            # excel_file.uploaded_by = request.user
-            # excel_file.save()
+            excel_file = form.save(commit=False)
+            excel_file.uploaded_by = request.user
+            excel_file.save()
             # print(f"File path: {excel_file.file.path}")
-            # return redirect('success_page')
-            excel_file = form.cleaned_data['excel_file']
-            process_excel_file(excel_file)
-            excel_file = request.FILES['excel_file']
-            df = pd.read_excel(excel_file)
-            #
-            # # Process the data and calculate KPIs
-            process_data_and_calculate_kpis(df)
-
             return redirect('success_page')
+            # excel_file = form.cleaned_data['excel_file']
+            # process_excel_file(excel_file)
+            # excel_file = request.FILES['excel_file']
+            # df = pd.read_excel(excel_file)
+            # #
+            # # # Process the data and calculate KPIs
+            # process_data_and_calculate_kpis(df)
+
+            # return redirect('success_page')
 
     else:
         form = ExcelFileForm()
@@ -125,6 +125,7 @@ def process_data_and_calculate_kpis(data_frame):
 def view_kpis(request):
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
+        print(kpi_entries)
         return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
     else:
         return redirect('access_denied')  # Redirect to an access denied page or another appropriate view

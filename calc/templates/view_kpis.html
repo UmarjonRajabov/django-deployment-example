@@ -1,35 +1,27 @@
-<!--&lt;!&ndash; kpi_app/templates/kpi_app/view_kpis.html &ndash;&gt;-->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>View KPIs</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h2>View KPIs</h2>-->
-<!--    <ul>-->
-<!--        {% for kpi in kpis %}-->
-<!--            <li>{{ kpi.employee.name }} - {{ kpi.performance_score }}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
-<!--</body>-->
-<!--</html>-->
-
-<!-- kpi_app/templates/kpi_app/view_kpis.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View KPIs</title>
+    <style>
+        /* Add your external CSS styles here */
+        li {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <h2>View KPIs</h2>
     {% if kpi_entries %}
         <ul>
             {% for kpi in kpi_entries %}
-                <li style="font-weight: bold;">{{ kpi.employee.name }} - {{kpi.employee.position}} -- {{kpi.metric}} - {{ kpi.performance_score }} --  {{kpi.fact}} -{{kpi.finished}} - {{kpi.premium}} - {{kpi.definition}} - {{kpi.method}} - {{kpi.weight}} - {{kpi.activity}}-{{kpi.overall}}  - {{kpi.kpi_name}}</li>
+                <li>
+                    {{ kpi.employee.name }} - {{ kpi.employee.position }} - {{ kpi.metric }} - {{ kpi.performance_score }}
+                    - {{ kpi.fact }} - {{ kpi.finished }} - {{ kpi.premium }} - {{ kpi.definition }} - {{ kpi.method }}
+                    - {{ kpi.weight }} - {{ kpi.activity }} - {{ kpi.overall }} - {{ kpi.kpi_name }}
+                </li>
             {% endfor %}
         </ul>
     {% else %}
