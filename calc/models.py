@@ -34,7 +34,7 @@ class KPI(models.Model):
     metric = models.CharField(max_length=255, default='default_value')
     fact = models.FloatField()
     finished = models.FloatField(null=True)
-    premium = models.FloatField(null=True)
+    premium = models.TextField(default='default_value')
     definition = models.TextField(default='default_value')
     method = models.TextField(default='default_value')
     weight = models.FloatField(null=True)

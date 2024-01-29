@@ -84,10 +84,10 @@ def process_data_and_calculate_kpis(data_frame):
             metric = row['Единица']
             fact = row['ФАКТ']
             finished = row['ИСПОЛНЕНИЕ']
-            premium = row['СТАВКА_ПРЕМИРОВАНИЯ']
+            premium = row['Функционал']
             definition = row['Definition']
             method = row['Метод_расчота']
-            weight = row['Весь']
+            weight = row['Вес_показателья']
             activity = row['Активность']
             overall = row['Общий_KPI']
 

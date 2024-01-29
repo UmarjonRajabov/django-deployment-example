@@ -5,6 +5,7 @@ from .models import ExcelFile
 
 
 class ExcelFileForm(forms.ModelForm):
+    excel_file = forms.FileField()
     class Meta:
         model = ExcelFile
         fields = ['file']
