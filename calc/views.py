@@ -44,20 +44,20 @@ def upload_excel(request):
     if request.method == 'POST':
         form = ExcelFileForm(request.POST, request.FILES)
         if form.is_valid():
-            excel_file = form.save(commit=False)
-            excel_file.uploaded_by = request.user
-            excel_file.save()
-            print(f"File path: {excel_file.file.path}")
-            return redirect('success_page')
-            # excel_file = form.cleaned_data['excel_file']
-            # process_excel_file(excel_file)
-            # excel_file = request.FILES['excel_file']
-            # df = pd.read_excel(excel_file)
-            # #
-            # # # Process the data and calculate KPIs
-            # process_data_and_calculate_kpis(df)
-            #
+            # excel_file = form.save(commit=False)
+            # excel_file.uploaded_by = request.user
+            # excel_file.save()
+            # print(f"File path: {excel_file.file.path}")
             # return redirect('success_page')
+            excel_file = form.cleaned_data['excel_file']
+            process_excel_file(excel_file)
+            excel_file = request.FILES['excel_file']
+            df = pd.read_excel(excel_file)
+            #
+            # # Process the data and calculate KPIs
+            process_data_and_calculate_kpis(df)
+
+            return redirect('success_page')
 
     else:
         form = ExcelFileForm()
