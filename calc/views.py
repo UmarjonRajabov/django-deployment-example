@@ -12,15 +12,15 @@ from .utils import process_excel_file
 from .models import ExcelFile
 
 
-def excel_content(request):
-    file_id = request.GET.get('file_id')
-    if file_id:
-        excel_file = ExcelFile.objects.get(pk=file_id)
-        excel_content = pd.read_excel(excel_file.file.path)
-        return render(request, 'excel_content.html',
-                      {'excel_content': excel_content, 'file_path': excel_file.file_path()})
-    else:
-        return render(request, 'excel_content.html', {'excel_content': None, 'file_path': None})
+# def excel_content(request):
+#     file_id = request.GET.get('file_id')
+#     if file_id:
+#         excel_file = ExcelFile.objects.get(pk=file_id)
+#         excel_content = pd.read_excel(excel_file.file.path)
+#         return render(request, 'excel_content.html',
+#                       {'excel_content': excel_content, 'file_path': excel_file.file_path()})
+#     else:
+#         return render(request, 'excel_content.html', {'excel_content': None, 'file_path': None})
 
 
 def login_view(request):
@@ -47,8 +47,18 @@ def upload_excel(request):
             excel_file = form.save(commit=False)
             excel_file.uploaded_by = request.user
             excel_file.save()
-            # print(f"File path: {excel_file.file.path}")
+            try:
+                excel_content = pd.read_excel(excel_file.file.path)
+            except pd.errors.EmptyDataError:
+                # Handle empty Excel file
+                return render(request, 'upload_excel.html', {'form': form, 'error_message': 'Empty Excel file'})
+
+            # Process the data and calculate KPIs
+            process_data_and_calculate_kpis(excel_content)
+
             return redirect('success_page')
+            # print(f"File path: {excel_file.file.path}")
+            # return redirect('success_page')
             # excel_file = form.cleaned_data['excel_file']
             # process_excel_file(excel_file)
             # excel_file = request.FILES['excel_file']
