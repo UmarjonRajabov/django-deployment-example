@@ -28,7 +28,7 @@ class Employee(models.Model):
 
 class KPI(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    month = models.DateField()
+    month = models.DateTimeField()
     performance_score = models.FloatField()
     kpi_name = models.CharField(max_length=255, default='default_value')
     metric = models.CharField(max_length=255, default='default_value')
