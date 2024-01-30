@@ -76,11 +76,12 @@ def success_page(request):
 # update this function
 
 def process_data_and_calculate_kpis(data_frame):
+    print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
-    print(data_frame.columns)  # Check the column names
     print(data_frame.head())    # Print the first few rows of the DataFrame
-    if 'ДОЛЖНОСТЬ' in data_frame.columns:
+    if 'Definition' in data_frame.columns:
         for index, row in data_frame.iterrows():
+            print(f"Processing row {index}: {row}")
             performance_score = row['ПЛАН']
             kpi_name = row['KPI_name']
             metric = row['Единица']
