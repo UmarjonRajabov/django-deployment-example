@@ -8,6 +8,7 @@ from .forms import ExcelFileForm
 from .models import Employee, KPI
 import pandas as pd
 from datetime import datetime
+from django.shortcuts import get_object_or_404
 from .utils import process_excel_file
 from .models import ExcelFile
 
@@ -139,9 +140,11 @@ def view_kpis(request):
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
         print(kpi_entries)
-        return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
     else:
-        return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
+        user_name = request.user.employee.name
+        kpi_entries = KPI.objects.filter(employee__name=user_name)
+    return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
+        # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
 
 def access_denied(request):

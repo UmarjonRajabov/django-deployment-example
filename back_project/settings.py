@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'calc',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -128,7 +132,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')  # Define STATIC_ROOT
 # settings.py
 LOGIN_URL = '/login/'
-
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'success_page'
+AUTH_USER_MODEL = 'calc.CustomUser'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
