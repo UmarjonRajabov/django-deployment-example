@@ -106,14 +106,21 @@ def process_data_and_calculate_kpis(data_frame):
             overall = row['Общий_KPI']
 
             # Save KPI to the database (adjust the fields based on your models)
-            user=request.user
-            employee = Employee.objects.create(
+            # user=request.user
+            # employee = Employee.objects.create(
+            #     user=user,
+            #     name=row['Имя_сотрудника_или_кандидата'],
+            #     position=row['ДОЛЖНОСТЬ'],
+            #     # Add other relevant fields
+            # )
+            # Try to get an existing employee for the user
+            user = request.user
+            employee, created = Employee.objects.get_or_create(
                 user=user,
                 name=row['Имя_сотрудника_или_кандидата'],
                 position=row['ДОЛЖНОСТЬ'],
                 # Add other relevant fields
             )
-
             KPI.objects.create(
                 employee=employee,
                 month=datetime.now(),  # Update with actual month from the Excel file

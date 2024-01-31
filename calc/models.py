@@ -36,7 +36,7 @@ class ExcelFile(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # Add other relevant fields
 
