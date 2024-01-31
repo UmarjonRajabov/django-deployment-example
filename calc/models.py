@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)
-    table_number = models.CharField(max_length=10, unique=True)
+    table_number = models.CharField(max_length=10, unique=False)
 
     def __str__(self):
         return f"{self.name} {self.surname}"
