@@ -144,7 +144,10 @@ def view_kpis(request):
         print(kpi_entries)
     else:
         user = request.user
-        kpi_entries = KPI.objects.filter(employee__user=user)
+        # kpi_entries = KPI.objects.filter(employee__user=user)
+        employee = get_object_or_404(Employee, user=user)
+        kpi_entries = KPI.objects.filter(employee=employee)
+
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
         # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 

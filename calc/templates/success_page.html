@@ -34,6 +34,7 @@
         <!-- Other staff-specific links or content -->
     {% endif %}
     <!-- Common links or content for all logged-in users -->
+        <a href="{% url 'view_kpis' %}">View KPIs</a>
 {% else %}
     <!-- Links or content for unauthenticated users -->
 {% endif %}

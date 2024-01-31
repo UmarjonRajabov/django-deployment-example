@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from datetime import datetime
 from back_project import settings
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
 
 
 class CustomUser(AbstractUser):
@@ -34,6 +36,7 @@ class ExcelFile(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     # Add other relevant fields
 
