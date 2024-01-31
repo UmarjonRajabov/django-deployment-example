@@ -42,6 +42,7 @@ class Employee(models.Model):
 
 
 class KPI(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,default=1)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     month = models.DateTimeField()
     performance_score = models.FloatField()

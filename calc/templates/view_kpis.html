@@ -1,225 +1,225 @@
-<!--{% load static %}-->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>View KPIs</title>-->
-<!--    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">-->
-<!--    <style>-->
-<!--        /* Add your external CSS styles here */-->
-<!--        li {-->
-<!--            font-weight: bold;-->
-<!--            margin-bottom: 10px;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h2>View KPIs</h2>-->
-<!--    {% if kpi_entries %}-->
-<!--        <ul>-->
-<!--            {% for kpi in kpi_entries %}-->
-<!--                <li>-->
-<!--                    {{ kpi.employee.name }} - {{ kpi.employee.position }} - {{ kpi.metric }} - {{ kpi.performance_score }}-->
-<!--                    - {{ kpi.fact }} - {{ kpi.finished }} - {{ kpi.premium }} - {{ kpi.definition }} - {{ kpi.method }}-->
-<!--                    - {{ kpi.weight }} - {{ kpi.activity }} - {{ kpi.overall }} - {{ kpi.kpi_name }}-->
-<!--                </li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
-<!--    {% else %}-->
-<!--        <p>No KPI entries available.</p>-->
-<!--    {% endif %}-->
-<!--</body>-->
-<!--</html>-->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-      <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>View KPIs</title>
+    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">
+    <style>
+        /* Add your external CSS styles here */
+        li {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="rasm">
-            <!-- <img src="images/odam.jfif" alt="Inson rasmi"> -->
-        </div>
-        {% if kpi_entries %}
-        <div class="info">
+    <h2>View KPIs</h2>
+    {% if kpi_entries %}
+        <ul>
             {% for kpi in kpi_entries %}
-            <h1 style="font-size: 60px;">{{ kpi.employee.name }}</h1>
-              {% endfor %}
-            <div class="info_item">
-                <span>Филиал /Го</span>
-                <span class="ikki">Главное управление по г.Ташкент</span>
-            </div>
-         {% else %}
-            <div class="info_item">
-                <span>ВСП (ОПЕРУ/БХМ/БХО)</span>
-                <span class="ikki">Академик филиали</span>
-            </div>
-         {% endif %}
-            <div class="info_item">
-                <span>ПОДРАЗДЕЛЕНИЕ</span>
-                <span class="ikki">Отдел обслуживания и выпуска пластиковых карточек</span>
-            </div>
-            <div class="info_item">
-                <span>ДОЛЖНОСТЬ</span>
-                <span class="ikki">Главный специалист</span>
-            </div>
-            <div class="info_item">
-                <span>ТАБЕЛЬНЫЙ НОМЕР РАБОТНИКА</span>
-                <span class="ikki">2552</span>
-            </div>
-            <div class="info_item">
-                <span>ПИНФЛ РАБОТНИКА</span>
-                 <span class="ikki">32525018332557</span>
-            </div>
-            <div class="info_item">
-                <span>ОКЛАД РАБОТНИКА, СУМ</span>
-                <span class="ikki">1 500 000,00</span>
-            </div>
-    </div>
-        <div class="diagram">
-            <h1>KPI</h1>
-            <p style="float: right; padding-top: 1px; font-size: 29px; font-weight: 900;">за июль 2023 г.            </p>
-            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
-
-<script>
-const xValues = ["", "", "", ""];
-const yValues = [55, 49, 44, 24, 15];
-const barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
-
-new Chart("myChart1", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "World Wide Wine Production 2018"
-    }
-  }
-});
-</script>
-
-        </div>
-    </div>
-
-    <nav class="chart1">
-        <p style="font-style: italic; font-size: 30px; font-weight: 500;">Динамика выполнение общего плановые показателей KPI</p>
-        <canvas id="myChart"></canvas>
-    </nav>
-<div class="umumiy">
-
-  <div class="flex-container1">
-    <div style="width: 97%;"></div>
-    <div style="width: 23%;" > <br> ПЛАН </div>
-    <div > <br> ФАКТ</div>
-    <div style="width: 12%;">ИСПОЛ- <br>  НЕНИЕ,<br> %</div>
-    <div style="width: 31.5%;">СТАВКА <br>
-      ПРЕМИРОВАНИЯ, <br>
-      СУМ</div>
-    <div style="width: 31.5%;">СУММА <br>
-      ПРЕМИРОВАНИЯ, <br>
-      СУМ
-      </div>
-  </div>
-
-
-  <div class="flex-container">
-    <div id="title">Чистая прибыль НБУ области/филиала/ЦБУ (после налогов), млн.сум</div>
-    <div id="plan">500</div>
-    <div id="fact">487</div>
-    <div id="done">97%</div>
-    <div id="pos">500</div>
-    <div id="prem">500</div>
-  </div>
-
-
-  <div class="flex-container">
-    <div id="title">Объём кредитного портфеля НБУ, млн.сум</div>
-    <div id="plan">1000</div>
-    <div id="fact">825</div>
-    <div id="done">82%</div>
-    <div id="pos">1000</div>
-    <div id="prem">1000</div>
-  </div>
-
-
-  <div class="flex-container">
-    <div id="title">ЧПД+ЧНД по области/филиала/ЦБУ, шт</div>
-    <div id="plan">2500</div>
-    <div id="fact">2700</div>
-    <div id="done">105%</div>
-    <div id="pos">2500</div>
-    <div id="prem">2500</div>
-  </div>
-
-
-  <div class="flex-container">
-    <div id="title">Объём выданных кредитов ФЛ за отчетный период, %        </div>
-    <div id="plan">100</div>
-    <div id="fact">97</div>
-    <div id="done">97%</div>
-    <div id="pos">11500</div>
-    <div id="prem">11500</div>
-  </div>
-
-
-  <div class="flex-container">
-    <div id="title">Milly, QR, Эл.коммерция (взвешенный показатель выполнения плана),</div>
-    <div id="plan">750</div>
-    <div id="fact">950</div>
-    <div id="done">125%</div>
-    <div id="pos">750</div>
-    <div id="prem">750</div>
-  </div>
-
-</div>
-<script>
-  // Sample data for the chart
-  var data = {
-      labels: ["January", "February", "March", "April", "May","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"],
-      datasets: [{
-          label: "",
-          data: [10, 20, 15,12,14,16,18,22,24,26,28, 25, 30],
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 2,
-          fill: false
-      }]
-  };
-
-  // Chart configuration
-  var options = {
-      maintainAspectRatio: false, // Set to false to adjust the aspect ratio
-      aspectRatio: 0.9, // Adjust the height of the chart
-      responsive: true
-  };
-
-  // Get the context of the canvas element
-  var ctx = document.getElementById('myChart').getContext('2d');
-
-  // Create the chart
-  var myChart = new Chart(ctx, {
-      type: 'line',
-      data: data,
-      options: options
-  });
-</script>
+                <li>
+                    {{ kpi.employee.name }} - {{ kpi.employee.position }} - {{ kpi.metric }} - {{ kpi.performance_score }}
+                    - {{ kpi.fact }} - {{ kpi.finished }} - {{ kpi.premium }} - {{ kpi.definition }} - {{ kpi.method }}
+                    - {{ kpi.weight }} - {{ kpi.activity }} - {{ kpi.overall }} - {{ kpi.kpi_name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No KPI entries available.</p>
+    {% endif %}
 </body>
 </html>
+
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Document</title>-->
+<!--      <link rel="stylesheet" href="{% static 'kpi/main.css' %}">-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <div class="rasm">-->
+<!--            &lt;!&ndash; <img src="images/odam.jfif" alt="Inson rasmi"> &ndash;&gt;-->
+<!--        </div>-->
+<!--        {% if kpi_entries %}-->
+<!--        <div class="info">-->
+<!--            {% for kpi in kpi_entries %}-->
+<!--            <h1 style="font-size: 60px;">{{ kpi.employee.name }}</h1>-->
+<!--              {% endfor %}-->
+<!--            <div class="info_item">-->
+<!--                <span>Филиал /Го</span>-->
+<!--                <span class="ikki">Главное управление по г.Ташкент</span>-->
+<!--            </div>-->
+<!--         {% else %}-->
+<!--            <div class="info_item">-->
+<!--                <span>ВСП (ОПЕРУ/БХМ/БХО)</span>-->
+<!--                <span class="ikki">Академик филиали</span>-->
+<!--            </div>-->
+<!--         {% endif %}-->
+<!--            <div class="info_item">-->
+<!--                <span>ПОДРАЗДЕЛЕНИЕ</span>-->
+<!--                <span class="ikki">Отдел обслуживания и выпуска пластиковых карточек</span>-->
+<!--            </div>-->
+<!--            <div class="info_item">-->
+<!--                <span>ДОЛЖНОСТЬ</span>-->
+<!--                <span class="ikki">Главный специалист</span>-->
+<!--            </div>-->
+<!--            <div class="info_item">-->
+<!--                <span>ТАБЕЛЬНЫЙ НОМЕР РАБОТНИКА</span>-->
+<!--                <span class="ikki">2552</span>-->
+<!--            </div>-->
+<!--            <div class="info_item">-->
+<!--                <span>ПИНФЛ РАБОТНИКА</span>-->
+<!--                 <span class="ikki">32525018332557</span>-->
+<!--            </div>-->
+<!--            <div class="info_item">-->
+<!--                <span>ОКЛАД РАБОТНИКА, СУМ</span>-->
+<!--                <span class="ikki">1 500 000,00</span>-->
+<!--            </div>-->
+<!--    </div>-->
+<!--        <div class="diagram">-->
+<!--            <h1>KPI</h1>-->
+<!--            <p style="float: right; padding-top: 1px; font-size: 29px; font-weight: 900;">за июль 2023 г.            </p>-->
+<!--            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>-->
+
+<!--<script>-->
+<!--const xValues = ["", "", "", ""];-->
+<!--const yValues = [55, 49, 44, 24, 15];-->
+<!--const barColors = [-->
+<!--  "#b91d47",-->
+<!--  "#00aba9",-->
+<!--  "#2b5797",-->
+<!--  "#e8c3b9",-->
+<!--  "#1e7145"-->
+<!--];-->
+
+<!--new Chart("myChart1", {-->
+<!--  type: "pie",-->
+<!--  data: {-->
+<!--    labels: xValues,-->
+<!--    datasets: [{-->
+<!--      backgroundColor: barColors,-->
+<!--      data: yValues-->
+<!--    }]-->
+<!--  },-->
+<!--  options: {-->
+<!--    title: {-->
+<!--      display: true,-->
+<!--      text: "World Wide Wine Production 2018"-->
+<!--    }-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <nav class="chart1">-->
+<!--        <p style="font-style: italic; font-size: 30px; font-weight: 500;">Динамика выполнение общего плановые показателей KPI</p>-->
+<!--        <canvas id="myChart"></canvas>-->
+<!--    </nav>-->
+<!--<div class="umumiy">-->
+
+<!--  <div class="flex-container1">-->
+<!--    <div style="width: 97%;"></div>-->
+<!--    <div style="width: 23%;" > <br> ПЛАН </div>-->
+<!--    <div > <br> ФАКТ</div>-->
+<!--    <div style="width: 12%;">ИСПОЛ- <br>  НЕНИЕ,<br> %</div>-->
+<!--    <div style="width: 31.5%;">СТАВКА <br>-->
+<!--      ПРЕМИРОВАНИЯ, <br>-->
+<!--      СУМ</div>-->
+<!--    <div style="width: 31.5%;">СУММА <br>-->
+<!--      ПРЕМИРОВАНИЯ, <br>-->
+<!--      СУМ-->
+<!--      </div>-->
+<!--  </div>-->
+
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Чистая прибыль НБУ области/филиала/ЦБУ (после налогов), млн.сум</div>-->
+<!--    <div id="plan">500</div>-->
+<!--    <div id="fact">487</div>-->
+<!--    <div id="done">97%</div>-->
+<!--    <div id="pos">500</div>-->
+<!--    <div id="prem">500</div>-->
+<!--  </div>-->
+
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Объём кредитного портфеля НБУ, млн.сум</div>-->
+<!--    <div id="plan">1000</div>-->
+<!--    <div id="fact">825</div>-->
+<!--    <div id="done">82%</div>-->
+<!--    <div id="pos">1000</div>-->
+<!--    <div id="prem">1000</div>-->
+<!--  </div>-->
+
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">ЧПД+ЧНД по области/филиала/ЦБУ, шт</div>-->
+<!--    <div id="plan">2500</div>-->
+<!--    <div id="fact">2700</div>-->
+<!--    <div id="done">105%</div>-->
+<!--    <div id="pos">2500</div>-->
+<!--    <div id="prem">2500</div>-->
+<!--  </div>-->
+
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Объём выданных кредитов ФЛ за отчетный период, %        </div>-->
+<!--    <div id="plan">100</div>-->
+<!--    <div id="fact">97</div>-->
+<!--    <div id="done">97%</div>-->
+<!--    <div id="pos">11500</div>-->
+<!--    <div id="prem">11500</div>-->
+<!--  </div>-->
+
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Milly, QR, Эл.коммерция (взвешенный показатель выполнения плана),</div>-->
+<!--    <div id="plan">750</div>-->
+<!--    <div id="fact">950</div>-->
+<!--    <div id="done">125%</div>-->
+<!--    <div id="pos">750</div>-->
+<!--    <div id="prem">750</div>-->
+<!--  </div>-->
+
+<!--</div>-->
+<!--<script>-->
+<!--  // Sample data for the chart-->
+<!--  var data = {-->
+<!--      labels: ["January", "February", "March", "April", "May","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"],-->
+<!--      datasets: [{-->
+<!--          label: "",-->
+<!--          data: [10, 20, 15,12,14,16,18,22,24,26,28, 25, 30],-->
+<!--          borderColor: 'rgba(75, 192, 192, 1)',-->
+<!--          borderWidth: 2,-->
+<!--          fill: false-->
+<!--      }]-->
+<!--  };-->
+
+<!--  // Chart configuration-->
+<!--  var options = {-->
+<!--      maintainAspectRatio: false, // Set to false to adjust the aspect ratio-->
+<!--      aspectRatio: 0.9, // Adjust the height of the chart-->
+<!--      responsive: true-->
+<!--  };-->
+
+<!--  // Get the context of the canvas element-->
+<!--  var ctx = document.getElementById('myChart').getContext('2d');-->
+
+<!--  // Create the chart-->
+<!--  var myChart = new Chart(ctx, {-->
+<!--      type: 'line',-->
+<!--      data: data,-->
+<!--      options: options-->
+<!--  });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
