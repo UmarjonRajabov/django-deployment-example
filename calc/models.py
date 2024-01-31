@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from datetime import datetime
 from back_project import settings
 from django.contrib.auth.models import AbstractUser
 
@@ -13,16 +14,21 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return f"{self.name} {self.surname}"
 
+
 # Create your models here.
 
 # calc/models.py
 
 class ExcelFile(models.Model):
     file = models.FileField(upload_to='excel_files/')
-    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    uploaded_at = models.DateTimeField(default=datetime.now, blank=True)
+    uploaded_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def file_path(self):
         return self.file.path[len(settings.MEDIA_ROOT):]
+
+    def __str__(self):
+        return f"{self.file.name} - {self.uploaded_by.username}"
 
 
 class Employee(models.Model):
