@@ -104,6 +104,7 @@ def process_data_and_calculate_kpis(data_frame):
             weight = row['Вес_показателья']
             activity = row['Активность']
             overall = row['Общий_KPI']
+            username = row['username']
 
             # Save KPI to the database (adjust the fields based on your models)
             # user=request.user
@@ -114,7 +115,7 @@ def process_data_and_calculate_kpis(data_frame):
             #     # Add other relevant fields
             # )
             # Try to get an existing employee for the user
-            user = request.user
+            user = CustomUser.objects.get(username=username)
             employee, created = Employee.objects.get_or_create(
                 user=user,
                 name=row['Имя_сотрудника_или_кандидата'],
