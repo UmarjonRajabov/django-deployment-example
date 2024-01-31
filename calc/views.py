@@ -106,7 +106,9 @@ def process_data_and_calculate_kpis(data_frame):
             overall = row['Общий_KPI']
 
             # Save KPI to the database (adjust the fields based on your models)
+            user=request.user
             employee = Employee.objects.create(
+                user=user,
                 name=row['Имя_сотрудника_или_кандидата'],
                 position=row['ДОЛЖНОСТЬ'],
                 # Add other relevant fields
@@ -141,8 +143,8 @@ def view_kpis(request):
         kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
         print(kpi_entries)
     else:
-        user_name = request.user.employee.name
-        kpi_entries = KPI.objects.filter(employee__name=user_name)
+        user = request.user
+        kpi_entries = KPI.objects.filter(employee__user=user)
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
         # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
