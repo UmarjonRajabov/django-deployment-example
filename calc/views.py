@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import ExcelFileForm
-from .models import Employee, KPI
+from .models import Employee, KPI, CustomUser
 import pandas as pd
 from datetime import datetime
 from django.shortcuts import get_object_or_404
@@ -91,20 +91,21 @@ def process_data_and_calculate_kpis(data_frame):
     print(data_frame)  # Add this line to print the DataFrame
     print(data_frame.head())    # Print the first few rows of the DataFrame
     if 'Definition' in data_frame.columns:
-        for index, row in data_frame.iterrows():
-            print(f"Processing row {index}: {row}")
-            performance_score = row['ПЛАН']
-            kpi_name = row['KPI_name']
-            metric = row['Единица']
-            fact = row['ФАКТ']
-            finished = row['ИСПОЛНЕНИЕ']
-            premium = row['Functional']
-            definition = row['Definition']
-            method = row['Метод_расчота']
-            weight = row['Вес_показателья']
-            activity = row['Активность']
-            overall = row['Общий_KPI']
-            username = row['Username']
+        if 'username' in data_frame.columns:
+            for index, row in data_frame.iterrows():
+                print(f"Processing row {index}: {row}")
+                performance_score = row['ПЛАН']
+                kpi_name = row['KPI_name']
+                metric = row['Единица']
+                fact = row['ФАКТ']
+                finished = row['ИСПОЛНЕНИЕ']
+                premium = row['Functional']
+                definition = row['Definition']
+                method = row['Метод_расчота']
+                weight = row['Вес_показателья']
+                activity = row['Активность']
+                overall = row['Общий_KPI']
+                username = row['Username']
 
             # Save KPI to the database (adjust the fields based on your models)
             # user=request.user
@@ -118,28 +119,44 @@ def process_data_and_calculate_kpis(data_frame):
             user = CustomUser.objects.get(username=username)
             employee, created = Employee.objects.get_or_create(
                 user=user,
-                name=row['Имя_сотрудника_или_кандидата'],
-                position=row['ДОЛЖНОСТЬ'],
+                name=row.get('Имя_сотрудника_или_кандидата', ''),
+                position=row.get('ДОЛЖНОСТЬ', ''),
+                # name=row['Имя_сотрудника_или_кандидата'],
+                # position=row['ДОЛЖНОСТЬ'],
                 # Add other relevant fields
             )
             KPI.objects.create(
                 employee=employee,
                 month=datetime.now(),  # Update with actual month from the Excel file
-                performance_score=performance_score,
-                kpi_name=kpi_name,
-                metric=metric,
-                fact=fact,
-                finished=finished,
-                premium=premium,
-                definition=definition,
-                method=method,
-                weight=weight,
-                activity=activity,
-                overall=overall,
+                performance_score=row['ПЛАН'],
+                kpi_name=row['KPI_name'],
+                metric=row['Единица'],
+                fact=row['ФАКТ'],
+                finished=row['ИСПОЛНЕНИЕ'],
+                premium=row['Functional'],
+                definition=row['Definition'],
+                method=row['Метод_расчота'],
+                weight=row['Вес_показателья'],
+                activity=row['Активность'],
+                overall=row['Общий_KPI'],
+                # performance_score=performance_score,
+                # kpi_name=kpi_name,
+                # metric=metric,
+                # fact=fact,
+                # finished=finished,
+                # premium=premium,
+                # definition=definition,
+                # method=method,
+                # weight=weight,
+                # activity=activity,
+                # overall=overall,
                 # Add other KPI-related fields
             )
+
+        else:
+            print("Column 'username' not found in the DataFrame.")
     else:
-        print("Column 'performance_column_name' not found in the DataFrame.")
+        print("Column 'Definition' not found in the DataFrame.")
 
 
 # def view_kpis(request):
