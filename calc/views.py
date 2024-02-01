@@ -89,9 +89,9 @@ def success_page(request):
 def process_data_and_calculate_kpis(data_frame):
     print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
-    print(data_frame.head())    # Print the first few rows of the DataFrame
+    print(data_frame.head())  # Print the first few rows of the DataFrame
     if 'Definition' in data_frame.columns:
-        if 'username' in data_frame.columns:
+        if 'Username' in data_frame.columns:
             for index, row in data_frame.iterrows():
                 print(f"Processing row {index}: {row}")
                 performance_score = row['ПЛАН']
@@ -116,42 +116,42 @@ def process_data_and_calculate_kpis(data_frame):
             #     # Add other relevant fields
             # )
             # Try to get an existing employee for the user
-            user = CustomUser.objects.get(username=username)
-            employee, created = Employee.objects.get_or_create(
-                user=user,
-                name=row.get('Имя_сотрудника_или_кандидата', ''),
-                position=row.get('ДОЛЖНОСТЬ', ''),
-                # name=row['Имя_сотрудника_или_кандидата'],
-                # position=row['ДОЛЖНОСТЬ'],
-                # Add other relevant fields
-            )
-            KPI.objects.create(
-                employee=employee,
-                month=datetime.now(),  # Update with actual month from the Excel file
-                performance_score=row['ПЛАН'],
-                kpi_name=row['KPI_name'],
-                metric=row['Единица'],
-                fact=row['ФАКТ'],
-                finished=row['ИСПОЛНЕНИЕ'],
-                premium=row['Functional'],
-                definition=row['Definition'],
-                method=row['Метод_расчота'],
-                weight=row['Вес_показателья'],
-                activity=row['Активность'],
-                overall=row['Общий_KPI'],
-                # performance_score=performance_score,
-                # kpi_name=kpi_name,
-                # metric=metric,
-                # fact=fact,
-                # finished=finished,
-                # premium=premium,
-                # definition=definition,
-                # method=method,
-                # weight=weight,
-                # activity=activity,
-                # overall=overall,
-                # Add other KPI-related fields
-            )
+                user = CustomUser.objects.get(username=username)
+                employee, created = Employee.objects.get_or_create(
+                    user=user,
+                    name=row.get('Имя_сотрудника_или_кандидата', ''),
+                    position=row.get('ДОЛЖНОСТЬ', ''),
+                    # name=row['Имя_сотрудника_или_кандидата'],
+                    # position=row['ДОЛЖНОСТЬ'],
+                    # Add other relevant fields
+                )
+                KPI.objects.create(
+                    employee=employee,
+                    month=datetime.now(),  # Update with actual month from the Excel file
+                    performance_score=row['ПЛАН'],
+                    kpi_name=row['KPI_name'],
+                    metric=row['Единица'],
+                    fact=row['ФАКТ'],
+                    finished=row['ИСПОЛНЕНИЕ'],
+                    premium=row['Functional'],
+                    definition=row['Definition'],
+                    method=row['Метод_расчота'],
+                    weight=row['Вес_показателья'],
+                    activity=row['Активность'],
+                    overall=row['Общий_KPI'],
+                    # performance_score=performance_score,
+                    # kpi_name=kpi_name,
+                    # metric=metric,
+                    # fact=fact,
+                    # finished=finished,
+                    # premium=premium,
+                    # definition=definition,
+                    # method=method,
+                    # weight=weight,
+                    # activity=activity,
+                    # overall=overall,
+                    # Add other KPI-related fields
+                )
 
         else:
             print("Column 'username' not found in the DataFrame.")
@@ -174,14 +174,16 @@ def view_kpis(request):
         kpi_entries = KPI.objects.filter(employee=employee)
 
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
-        # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
+    # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
 
 def access_denied(request):
     return render(request, 'access_denied.html')
 
+
 def kpi_index(request):
     return render(request, 'kpi/index.html')
+
 
 def kpi_card(request):
     return render(request, 'kpi/card.html')
