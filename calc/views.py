@@ -121,6 +121,7 @@ def process_data_and_calculate_kpis(data_frame):
                     user=user,
                     name=row.get('Имя_сотрудника_или_кандидата', ''),
                     position=row.get('ДОЛЖНОСТЬ', ''),
+                    branch = row.get('ФИЛИАЛ_ГО', ''),
                     # name=row['Имя_сотрудника_или_кандидата'],
                     # position=row['ДОЛЖНОСТЬ'],
                     # Add other relevant fields
