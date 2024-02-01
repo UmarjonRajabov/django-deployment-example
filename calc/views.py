@@ -104,7 +104,7 @@ def process_data_and_calculate_kpis(data_frame):
             weight = row['Вес_показателья']
             activity = row['Активность']
             overall = row['Общий_KPI']
-            username = row['username']
+            username = row['Username']
 
             # Save KPI to the database (adjust the fields based on your models)
             # user=request.user
