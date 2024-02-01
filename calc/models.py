@@ -8,9 +8,10 @@ from django.contrib.auth.models import User
 
 
 class CustomUser(AbstractUser):
-    name = models.CharField(max_length=30)
-    username = models.CharField(max_length=30)
+    name = models.CharField(max_length=30,default='John Doe')
+    username = models.CharField(unique=True, max_length=30)
     table_number = models.CharField(max_length=10, unique=False)
+    USERNAME_FIELD = 'username'
 
     def __str__(self):
         return f"{self.name} {self.surname}"
@@ -23,7 +24,7 @@ class CustomUser(AbstractUser):
 class ExcelFile(models.Model):
     file = models.FileField(upload_to='excel_files/')
     uploaded_at = models.DateTimeField(default=datetime.now, blank=True)
-    uploaded_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def file_path(self):
         return self.file.path[len(settings.MEDIA_ROOT):]
@@ -44,7 +45,7 @@ class Employee(models.Model):
 
 
 class KPI(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     month = models.DateTimeField()
     performance_score = models.FloatField()
