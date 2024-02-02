@@ -40,7 +40,7 @@ class Employee(models.Model):
     branch = models.TextField(default='default_value')
     division = models.TextField(default='default_value')
     department =models.TextField(default="Bo'linma")
-    user_id = models.FloatField(unique=True)
+    # user_id = models.FloatField(unique=True)
 
     # Add other relevant fields
 
