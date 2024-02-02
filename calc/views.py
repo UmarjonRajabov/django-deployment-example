@@ -107,21 +107,23 @@ def process_data_and_calculate_kpis(data_frame):
                 overall = row['Общий_KPI']
                 username = row['Username']
 
-            # Save KPI to the database (adjust the fields based on your models)
-            # user=request.user
-            # employee = Employee.objects.create(
-            #     user=user,
-            #     name=row['Имя_сотрудника_или_кандидата'],
-            #     position=row['ДОЛЖНОСТЬ'],
-            #     # Add other relevant fields
-            # )
-            # Try to get an existing employee for the user
+                # Save KPI to the database (adjust the fields based on your models)
+                # user=request.user
+                # employee = Employee.objects.create(
+                #     user=user,
+                #     name=row['Имя_сотрудника_или_кандидата'],
+                #     position=row['ДОЛЖНОСТЬ'],
+                #     # Add other relevant fields
+                # )
+                # Try to get an existing employee for the user
                 user = CustomUser.objects.get(username=username)
                 employee, created = Employee.objects.get_or_create(
                     user=user,
                     name=row.get('Имя_сотрудника_или_кандидата', ''),
                     position=row.get('ДОЛЖНОСТЬ', ''),
-                    branch = row.get('ФИЛИАЛ_ГО', ''),
+                    branch=row.get('ФИЛИАЛ_ГО', ''),
+                    division=row.get('ОПЕРУ_БХМ_БХО', ''),
+
                     # name=row['Имя_сотрудника_или_кандидата'],
                     # position=row['ДОЛЖНОСТЬ'],
                     # Add other relevant fields

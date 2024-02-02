@@ -47,7 +47,6 @@
         <div class="rasm">
             <!-- <img src="images/odam.jfif" alt="Inson rasmi"> -->
         </div>
-        {% if kpi_entries %}
         <div class="info">
             {% for kpi in kpi_entries %}
             <h1 style="font-size: 60px;">{{ kpi.employee.name }}</h1>
@@ -56,12 +55,10 @@
                 <span>Филиал /Го</span>
                 <span class="ikki">Главное управление по г.Ташкент</span>
             </div>
-         {% else %}
             <div class="info_item">
                 <span>ВСП (ОПЕРУ/БХМ/БХО)</span>
                 <span class="ikki">Академик филиали</span>
             </div>
-         {% endif %}
             <div class="info_item">
                 <span>ПОДРАЗДЕЛЕНИЕ</span>
                 <span class="ikki">Отдел обслуживания и выпуска пластиковых карточек</span>

@@ -38,6 +38,9 @@ class Employee(models.Model):
     position = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     branch = models.TextField(default='default_value')
+    division = models.TextField(default='default_value')
+    department =models.TextField(default="Bo'linma")
+    user_id = models.FloatField(unique=True)
 
     # Add other relevant fields
 
