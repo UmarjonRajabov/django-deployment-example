@@ -140,54 +140,65 @@ new Chart("myChart1", {
   </div>
 
 
-  <div class="flex-container">
-    <div id="title">Чистая прибыль НБУ области/филиала/ЦБУ (после налогов), млн.сум</div>
-    <div id="plan">500</div>
-    <div id="fact">487</div>
-    <div id="done">97%</div>
-    <div id="pos">500</div>
-    <div id="prem">500</div>
-  </div>
+ {% for kpi in kpi_entries %}
+    <div class="flex-container">
+        <div id="title">{{ kpi.kpi_name }}</div>
+        <div id="plan">{{ kpi.performance_score }}</div>
+        <div id="fact">{{ kpi.fact }}</div>
+        <div id="done">{{ kpi.finished }}</div>
+        <div id="pos">{{ kpi.premium }}</div>
+        <div id="prem">{{ kpi.premium }}</div>
+    </div>
+    {% endfor %}
+
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Чистая прибыль НБУ области/филиала/ЦБУ (после налогов), млн.сум</div>-->
+<!--    <div id="plan">500</div>-->
+<!--    <div id="fact">487</div>-->
+<!--    <div id="done">97%</div>-->
+<!--    <div id="pos">500</div>-->
+<!--    <div id="prem">500</div>-->
+<!--  </div>-->
 
 
-  <div class="flex-container">
-    <div id="title">Объём кредитного портфеля НБУ, млн.сум</div>
-    <div id="plan">1000</div>
-    <div id="fact">825</div>
-    <div id="done">82%</div>
-    <div id="pos">1000</div>
-    <div id="prem">1000</div>
-  </div>
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Объём кредитного портфеля НБУ, млн.сум</div>-->
+<!--    <div id="plan">1000</div>-->
+<!--    <div id="fact">825</div>-->
+<!--    <div id="done">82%</div>-->
+<!--    <div id="pos">1000</div>-->
+<!--    <div id="prem">1000</div>-->
+<!--  </div>-->
 
 
-  <div class="flex-container">
-    <div id="title">ЧПД+ЧНД по области/филиала/ЦБУ, шт</div>
-    <div id="plan">2500</div>
-    <div id="fact">2700</div>
-    <div id="done">105%</div>
-    <div id="pos">2500</div>
-    <div id="prem">2500</div>
-  </div>
+<!--  <div class="flex-container">-->
+<!--    <div id="title">ЧПД+ЧНД по области/филиала/ЦБУ, шт</div>-->
+<!--    <div id="plan">2500</div>-->
+<!--    <div id="fact">2700</div>-->
+<!--    <div id="done">105%</div>-->
+<!--    <div id="pos">2500</div>-->
+<!--    <div id="prem">2500</div>-->
+<!--  </div>-->
 
 
-  <div class="flex-container">
-    <div id="title">Объём выданных кредитов ФЛ за отчетный период, %        </div>
-    <div id="plan">100</div>
-    <div id="fact">97</div>
-    <div id="done">97%</div>
-    <div id="pos">11500</div>
-    <div id="prem">11500</div>
-  </div>
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Объём выданных кредитов ФЛ за отчетный период, %        </div>-->
+<!--    <div id="plan">100</div>-->
+<!--    <div id="fact">97</div>-->
+<!--    <div id="done">97%</div>-->
+<!--    <div id="pos">11500</div>-->
+<!--    <div id="prem">11500</div>-->
+<!--  </div>-->
 
 
-  <div class="flex-container">
-    <div id="title">Milly, QR, Эл.коммерция (взвешенный показатель выполнения плана),</div>
-    <div id="plan">750</div>
-    <div id="fact">950</div>
-    <div id="done">125%</div>
-    <div id="pos">750</div>
-    <div id="prem">750</div>
-  </div>
+<!--  <div class="flex-container">-->
+<!--    <div id="title">Milly, QR, Эл.коммерция (взвешенный показатель выполнения плана),</div>-->
+<!--    <div id="plan">750</div>-->
+<!--    <div id="fact">950</div>-->
+<!--    <div id="done">125%</div>-->
+<!--    <div id="pos">750</div>-->
+<!--    <div id="prem">750</div>-->
+<!--  </div>-->
 
 </div>
 <script>
