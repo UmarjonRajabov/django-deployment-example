@@ -64,20 +64,21 @@
             </div>
             <div class="info_item">
                 <span>ДОЛЖНОСТЬ</span>
-                <span class="ikki">Главный специалист</span>
+                <span class="ikki">{{ kpi.employee.position }}</span>
+            </div>
+            <div class="info_item">
+                <span>Functional</span>
+                <span class="ikki">{{kpi.premium}}</span>
             </div>
             <div class="info_item">
                 <span>ТАБЕЛЬНЫЙ НОМЕР РАБОТНИКА</span>
-                <span class="ikki">2552</span>
-            </div>
-            <div class="info_item">
-                <span>ПИНФЛ РАБОТНИКА</span>
-                 <span class="ikki">32525018332557</span>
+                 <span class="ikki">{{ kpi.employee.tabel_number }}</span>
             </div>
             <div class="info_item">
                 <span>ОКЛАД РАБОТНИКА, СУМ</span>
-                <span class="ikki">1 500 000,00</span>
+                <span class="ikki">{{ kpi.employee.salary }}</span>
             </div>
+            {% endfor %}
     </div>
         <div class="diagram">
             <h1>KPI</h1>
