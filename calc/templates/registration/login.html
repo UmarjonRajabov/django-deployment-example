@@ -1,17 +1,75 @@
-<!-- login.html -->
+<!--&lt;!&ndash; login.html &ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Login</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h2>Login</h2>-->
+<!--    <form method="post" action="{% url 'login' %}">-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button type="submit">Login</button>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->
+
+    {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Document</title>
+    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">
+
+  <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form action="" class="login100-form">
+                    <span class="login100-form-title">
+                        Xush kelibsiz
+                    </span>
+                    <span class="login100-form-title">
+                        <i class="zmdi"></i>
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        <input type="text" class="input100" name="email">
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass"></span>
+                        <input type="password" class="input100" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn"><a href="{% url 'login' %}">Login</a></button>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <span class="txt1">
+                            Don’t have an account?
+                        </span>
+                        <a class="txt2" href="#">
+							Sign Up
+						</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
 </body>
 </html>
