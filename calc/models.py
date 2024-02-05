@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class CustomUser(AbstractUser):
-    name = models.CharField(max_length=30,default='John Doe')
+    name = models.CharField(max_length=30, default='John Doe')
     username = models.CharField(unique=True, max_length=30)
     table_number = models.CharField(max_length=10, unique=False)
     USERNAME_FIELD = 'username'
@@ -39,7 +39,8 @@ class Employee(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     branch = models.TextField(default='default_value')
     division = models.TextField(default='default_value')
-    department =models.TextField(default="Bo'linma")
+    department = models.TextField(default="Bo'linma")
+
     # user_id = models.FloatField(unique=True)
 
     # Add other relevant fields

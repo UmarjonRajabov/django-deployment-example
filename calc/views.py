@@ -123,6 +123,7 @@ def process_data_and_calculate_kpis(data_frame):
                     position=row.get('ДОЛЖНОСТЬ', ''),
                     branch=row.get('ФИЛИАЛ_ГО', ''),
                     division=row.get('ОПЕРУ_БХМ_БХО', ''),
+                    department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
 
                     # name=row['Имя_сотрудника_или_кандидата'],
                     # position=row['ДОЛЖНОСТЬ'],
