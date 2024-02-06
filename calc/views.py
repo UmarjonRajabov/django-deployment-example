@@ -57,7 +57,7 @@ def upload_excel(request):
             # Process the data and calculate KPIs
             process_data_and_calculate_kpis(excel_content)
 
-            return redirect('view_kpis')
+            return redirect('success_page')
             # print(f"File path: {excel_file.file.path}")
             # return redirect('success_page')
             # excel_file = form.cleaned_data['excel_file']
