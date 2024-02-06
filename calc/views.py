@@ -37,7 +37,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
 
 
 @staff_member_required
@@ -57,7 +57,7 @@ def upload_excel(request):
             # Process the data and calculate KPIs
             process_data_and_calculate_kpis(excel_content)
 
-            return redirect('success_page')
+            return redirect('view_kpis')
             # print(f"File path: {excel_file.file.path}")
             # return redirect('success_page')
             # excel_file = form.cleaned_data['excel_file']
