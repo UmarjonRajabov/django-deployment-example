@@ -1,3 +1,31 @@
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Success Page</title>-->
+<!--    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;    <h2>File Uploaded Successfully</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p>Your KPI calculations have been processed successfully.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p><a href="{% url 'view_kpis' %}">View KPIs</a></p>&ndash;&gt;-->
+<!--&lt;!&ndash; base.html or other template &ndash;&gt;-->
+<!--{% if user.is_authenticated %}-->
+<!--    {% if user.is_staff %}-->
+<!--        <a href="{% url 'view_kpis' %}">View KPIs</a>-->
+<!--        &lt;!&ndash; Other staff-specific links or content &ndash;&gt;-->
+<!--    {% endif %}-->
+<!--    &lt;!&ndash; Common links or content for all logged-in users &ndash;&gt;-->
+<!--        <a href="{% url 'view_kpis' %}">View KPIs</a>-->
+<!--{% else %}-->
+<!--    &lt;!&ndash; Links or content for unauthenticated users &ndash;&gt;-->
+<!--{% endif %}-->
+
+<!--</body>-->
+<!--</html>-->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,24 +33,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Success Page</title>
+    <link rel="stylesheet" href="{% static 'kpi/success.css' %}">
     <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-<!--    <h2>File Uploaded Successfully</h2>-->
-<!--    <p>Your KPI calculations have been processed successfully.</p>-->
-<!--    <p><a href="{% url 'view_kpis' %}">View KPIs</a></p>-->
-<!-- base.html or other template -->
-{% if user.is_authenticated %}
-    {% if user.is_staff %}
-        <a href="{% url 'view_kpis' %}">View KPIs</a>
-        <!-- Other staff-specific links or content -->
-    {% endif %}
-    <!-- Common links or content for all logged-in users -->
-        <a href="{% url 'view_kpis' %}">View KPIs</a>
-{% else %}
-    <!-- Links or content for unauthenticated users -->
-{% endif %}
-
+    <div class="container">
+        <div class="success-message">
+            <img src="{% static 'kpi/success-icon.png' %}" alt="Success Icon">
+            <h2>File Uploaded Successfully</h2>
+            <p>Your KPI calculations have been processed successfully.</p>
+            <a href="{% url 'view_kpis' %}" class="btn">View KPIs</a>
+        </div>
+    </div>
 </body>
 </html>
 
