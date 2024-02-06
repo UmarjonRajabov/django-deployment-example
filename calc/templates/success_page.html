@@ -37,14 +37,16 @@
     <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
+ <div class="background-container">
     <div class="container">
         <div class="success-message">
-            <img src="{% static 'kpi/success-icon.png' %}" alt="Success Icon">
             <h2>File Uploaded Successfully</h2>
             <p>Your KPI calculations have been processed successfully.</p>
             <a href="{% url 'view_kpis' %}" class="btn">View KPIs</a>
         </div>
     </div>
+ </div>
+ <img src="{% static 'images/img.png' %}" alt="Success Icon" class="success-icon">
 </body>
 </html>
 
