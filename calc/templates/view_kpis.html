@@ -126,14 +126,16 @@ new Chart("myChart1", {
 <div class="umumiy">
 
   <div class="flex-container1">
-    <div style="width: 97%;"></div>
+    <div style="width: 70%;"></div>
+       <div style="width: 15%;">АКТИВНОСТЬ</div>
+          <div style="width: 15%;">МЕТОД РАСЧОТА</div>
     <div style="width: 23%;" > <br> ПЛАН </div>
     <div > <br> ФАКТ</div>
-    <div style="width: 12%;">ИСПОЛ- <br>  НЕНИЕ,<br> %</div>
-    <div style="width: 31.5%;">СТАВКА <br>
+    <div style="width: 12%;">ИСПОЛ- <br>  НЕНИЕ,<br></div>
+    <div style="width: 21.5%;">СТАВКА <br>
       ПРЕМИРОВАНИЯ, <br>
       СУМ</div>
-    <div style="width: 31.5%;">СУММА <br>
+    <div style="width: 21.5%;">СУММА <br>
       ПРЕМИРОВАНИЯ, <br>
       СУМ
       </div>
@@ -143,11 +145,13 @@ new Chart("myChart1", {
  {% for kpi in kpi_entries %}
     <div class="flex-container">
         <div id="title">{{ kpi.kpi_name }}</div>
+          <div id="title">{{ kpi.activity }}</div>
+          <div id="title">{{ kpi.method }}</div>
         <div id="plan">{{ kpi.performance_score }}</div>
         <div id="fact">{{ kpi.fact }}</div>
         <div id="done">{{ kpi.finished }}</div>
-        <div id="pos">{{ kpi.premium }}</div>
-        <div id="prem">{{ kpi.premium }}</div>
+        <div id="pos">{{ kpi.weight }}</div>
+        <div id="prem">{{ kpi.overall|default:"0"|floatformat:"2" }}%</div>
     </div>
     {% endfor %}
 
