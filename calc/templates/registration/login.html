@@ -16,24 +16,80 @@
 <!--</body>-->
 <!--</html>-->
 
-    {% load static %}
+<!--    {% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Document</title>-->
+<!--    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">-->
+
+<!--  <link rel="stylesheet" href="{% static 'kpi/main.css' %}">-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="limiter">-->
+<!--        <div class="container-login100">-->
+<!--            <div class="wrap-login100">-->
+<!--                <form method="post" action="{% url 'login' %}" class="login100-form">-->
+<!--                      {% csrf_token %}-->
+<!--&lt;!&ndash;                      {{ form.as_p }}&ndash;&gt;-->
+<!--                    <span class="login100-form-title">-->
+<!--                        Xush kelibsiz-->
+<!--                    </span>-->
+<!--                    <span class="login100-form-title">-->
+<!--                        <i class="zmdi"></i>-->
+<!--                    </span>-->
+
+<!--                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">-->
+<!--                        <input type="text" class="input100" name="email">-->
+<!--                        <span class="focus-input100" data-placeholder="Email"></span>-->
+<!--                    </div>-->
+
+<!--                    <div class="wrap-input100 validate-input" data-validate="Enter password">-->
+<!--                        <span class="btn-show-pass"></span>-->
+<!--                        <input type="password" class="input100" name="pass">-->
+<!--                        <span class="focus-input100" data-placeholder="Password"></span>-->
+<!--                    </div>-->
+
+<!--                    <div class="container-login100-form-btn">-->
+<!--                        <div class="wrap-login100-form-btn">-->
+<!--                            <div class="login100-form-bgbtn"></div>-->
+<!--                            <button type="submit" class="login100-form-btn"><a href="{% url 'view_kpis' %}">Login</a></button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="text-center">-->
+<!--                        <span class="txt1">-->
+<!--                            Don’t have an account?-->
+<!--                        </span>-->
+<!--                        <a class="txt2" href="#">-->
+<!--							Sign Up-->
+<!--						</a>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div id="dropDownSelect1"></div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="icon" href="{% static 'kpi/favicon.ico' %}" type="image/x-icon">
-
-  <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
 </head>
 <body>
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
                 <form method="post" action="{% url 'login' %}" class="login100-form">
-                      {% csrf_token %}
-<!--                      {{ form.as_p }}-->
+                    {% csrf_token %}
                     <span class="login100-form-title">
                         Xush kelibsiz
                     </span>
@@ -42,20 +98,20 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        <input type="text" class="input100" name="email">
+                        <input type="text" class="input100" name="username" placeholder="Username">
                         <span class="focus-input100" data-placeholder="Email"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
                         <span class="btn-show-pass"></span>
-                        <input type="password" class="input100" name="pass">
+                        <input type="password" class="input100" name="password" placeholder="Password">
                         <span class="focus-input100" data-placeholder="Password"></span>
                     </div>
 
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
-                            <button type="submit" class="login100-form-btn"><a href="{% url 'view_kpis' %}">Login</a></button>
+                            <button type="submit" class="login100-form-btn">Login</button>
                         </div>
                     </div>
 
@@ -63,15 +119,12 @@
                         <span class="txt1">
                             Don’t have an account?
                         </span>
-                        <a class="txt2" href="#">
-							Sign Up
-						</a>
+                        <a class="txt2" href="#">Sign Up</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <div id="dropDownSelect1"></div>
 </body>
 </html>
