@@ -93,18 +93,12 @@ new Chart("myChart1", {
 
   <div class="flex-container1">
     <div style="width: 70%;"></div>
-       <div style="width: 15%;">АКТИВНОСТЬ</div>
-          <div style="width: 15%;">МЕТОД РАСЧОТА</div>
-    <div style="width: 23%;" > <br> ПЛАН </div>
-    <div > <br> ФАКТ</div>
-    <div style="width: 12%;">ИСПОЛ- <br>  НЕНИЕ,<br></div>
-    <div style="width: 21.5%;">СТАВКА <br>
-      ПРЕМИРОВАНИЯ, <br>
-      СУМ</div>
-    <div style="width: 21.5%;">СУММА <br>
-      ПРЕМИРОВАНИЯ, <br>
-      СУМ
-      </div>
+       <div style="width: 55%;">АКТИВНОСТЬ</div>
+          <div style="width: 45%;">МЕТОД РАСЧОТА</div>
+    <div style="width: 13%;" > ВЕС ПОКАЗАТЕЛЬЯ  </div>
+    <div style="width: 20%"> ПЛАН</div>
+    <div style="width: 18%;">ФАКТ<br></div>
+    <div style="width: 3%;">ИСПОЛ- <br>  НЕНИЕ <br></div>
   </div>
 
 
@@ -113,11 +107,10 @@ new Chart("myChart1", {
         <div id="title">{{ kpi.kpi_name }}</div>
           <div id="title">{{ kpi.activity }}</div>
           <div id="title">{{ kpi.method }}</div>
+         <div id="pos">{{ kpi.weight }}</div>
         <div id="plan">{{ kpi.performance_score }}</div>
         <div id="fact">{{ kpi.fact }}</div>
         <div id="done">{{ kpi.finished }}</div>
-        <div id="pos">{{ kpi.weight }}</div>
-        <div id="prem">{{ kpi.overall|default:"0"|floatformat:"2" }}%</div>
     </div>
     {% endfor %}
 
@@ -155,3 +148,127 @@ new Chart("myChart1", {
 </script>
 </body>
 </html>
+
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>KPI View</title>-->
+<!--    <link rel="stylesheet" href="{% static 'kpi/main.css' %}">-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>-->
+<!--    <style>-->
+<!--        /* Additional styles can be added here */-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <div class="rasm">-->
+<!--            &lt;!&ndash; Your image or content goes here &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="info">-->
+<!--            {% if kpi_entries %}-->
+<!--                {% with kpi=kpi_entries.0 %}-->
+<!--                    <h1>{{ kpi.employee.name }}</h1>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ФИЛИАЛ / ГО</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.branch }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ВСП (ОПЕРУ/БХМ/БХО)</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.division }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ПОДРАЗДЕЛЕНИЕ</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.department }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ДОЛЖНОСТЬ</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.position }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>FUNCTIONAL</span>-->
+<!--                        <span class="ikki">{{ kpi.premium }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ТАБЕЛЬНЫЙ НОМЕР РАБОТНИКА</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.table_number }}</span>-->
+<!--                    </div>-->
+<!--                    <div class="info_item">-->
+<!--                        <span>ОКЛАД РАБОТНИКА, СУМ</span>-->
+<!--                        <span class="ikki">{{ kpi.employee.salary }}</span>-->
+<!--                    </div>-->
+<!--                {% endwith %}-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--        <div class="diagram">-->
+<!--            <h1>KPI</h1>-->
+<!--            <p style="float: right; padding-top: 1px; font-size: 29px; font-weight: 900;">за июль 2023 г.</p>-->
+<!--            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <nav class="chart1">-->
+<!--        <p style="font-style: italic; font-size: 30px; font-weight: 500;">Динамика выполнение общего плановые показателей KPI</p>-->
+<!--        <canvas id="myChart"></canvas>-->
+<!--    </nav>-->
+
+<!--    <div class="umumiy">-->
+<!--        <div class="flex-container1">-->
+<!--            <div style="width: 70%;"></div>-->
+<!--            <div style="width: 15%;">АКТИВНОСТЬ</div>-->
+<!--            <div style="width: 15%;">МЕТОД РАСЧЕТА</div>-->
+<!--            <div style="width: 23%;"><br>ПЛАН</div>-->
+<!--            <div><br>ФАКТ</div>-->
+<!--            <div style="width: 12%;">ИСПОЛНЕНИЕ</div>-->
+<!--            <div style="width: 21.5%;">СТАВКА ПРЕМИРОВАНИЯ, СУМ</div>-->
+<!--            <div style="width: 21.5%;">СУММА ПРЕМИРОВАНИЯ, СУМ</div>-->
+<!--        </div>-->
+
+<!--        {% for kpi in kpi_entries %}-->
+<!--            <div class="flex-container">-->
+<!--                <div id="title">{{ kpi.kpi_name }}</div>-->
+<!--                <div id="title">{{ kpi.activity }}</div>-->
+<!--                <div id="title">{{ kpi.method }}</div>-->
+<!--                <div id="plan">{{ kpi.performance_score }}</div>-->
+<!--                <div id="fact">{{ kpi.fact }}</div>-->
+<!--                <div id="done">{{ kpi.finished }}</div>-->
+<!--                <div id="pos">{{ kpi.weight }}</div>-->
+<!--                <div id="prem">{{ kpi.overall|default:"0"|floatformat:"2" }}%</div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        // Sample data for the chart-->
+<!--        var data = {-->
+<!--            labels: ["January", "February", "March", "April", "May", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"],-->
+<!--            datasets: [{-->
+<!--                label: "",-->
+<!--                data: [10, 20, 15, 12, 14, 16, 18, 22, 24, 26, 28, 25, 30],-->
+<!--                borderColor: 'rgba(75, 192, 192, 1)',-->
+<!--                borderWidth: 2,-->
+<!--                fill: false-->
+<!--            }]-->
+<!--        };-->
+
+<!--        // Chart configuration-->
+<!--        var options = {-->
+<!--            maintainAspectRatio: false, // Set to false to adjust the aspect ratio-->
+<!--            aspectRatio: 0.9, // Adjust the height of the chart-->
+<!--            responsive: true-->
+<!--        };-->
+
+<!--        // Get the context of the canvas element-->
+<!--        var ctx = document.getElementById('myChart').getContext('2d');-->
+
+<!--        // Create the chart-->
+<!--        var myChart = new Chart(ctx, {-->
+<!--            type: 'line',-->
+<!--            data: data,-->
+<!--            options: options-->
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
