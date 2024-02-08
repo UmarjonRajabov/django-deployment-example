@@ -126,6 +126,8 @@ def process_data_and_calculate_kpis(data_frame):
                     department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
                     table_number=row.get('ТАБЕЛЬ', ''),
                     salary=row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
+                    start=row.get('Начала', ''),
+                    end=row.get('Конец', ''),
 
                     # name=row['Имя_сотрудника_или_кандидата'],
                     # position=row['ДОЛЖНОСТЬ'],

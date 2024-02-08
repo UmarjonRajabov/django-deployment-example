@@ -42,6 +42,8 @@ class Employee(models.Model):
     department = models.TextField(default="Bo'linma")
     table_number = models.CharField(max_length=10, unique=False, default=1)
     salary = models.FloatField(default=10)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 
     # user_id = models.FloatField(unique=True)
 
