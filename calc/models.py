@@ -2,6 +2,9 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from datetime import datetime
+
+from django.db.models.functions import Now
+
 from back_project import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
@@ -41,9 +44,8 @@ class Employee(models.Model):
     division = models.TextField(default='default_value')
     department = models.TextField(default="Bo'linma")
     table_number = models.CharField(max_length=10, unique=False, default=1)
-    salary = models.FloatField(default=10)
-    start = models.DateTimeField()
-    end = models.DateTimeField()
+    start = models.DateTimeField(db_default=Now())
+    end = models.DateTimeField(db_default=Now())
 
     # user_id = models.FloatField(unique=True)
 

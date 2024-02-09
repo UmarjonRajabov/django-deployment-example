@@ -41,10 +41,6 @@
                 <span>ТАБЕЛЬНЫЙ НОМЕР РАБОТНИКА</span>
                  <span class="ikki">{{ kpi.employee.table_number }}</span>
             </div>
-            <div class="info_item">
-                <span>ОКЛАД РАБОТНИКА, СУМ</span>
-                <span class="ikki">{{ kpi.employee.salary }}</span>
-            </div>
               {% endwith %}
           {% endif %}
     </div>
@@ -92,9 +88,11 @@ new Chart("myChart1", {
 <div class="umumiy">
 
   <div class="flex-container1">
-    <div style="width: 70%;"></div>
-       <div style="width: 55%;">АКТИВНОСТЬ</div>
-          <div style="width: 45%;">МЕТОД РАСЧОТА</div>
+    <div style="width: 30%;"></div>
+          <div style="width: 30%;">НАЧАЛА</div>
+          <div style="width: 30%;">КОНЕЦ</div>
+       <div style="width: 25%;">АКТИВНОСТЬ</div>
+          <div style="width: 15%;">МЕТОД РАСЧОТА</div>
     <div style="width: 13%;" > ВЕС ПОКАЗАТЕЛЬЯ  </div>
     <div style="width: 20%"> ПЛАН</div>
     <div style="width: 18%;">ФАКТ<br></div>
@@ -105,6 +103,8 @@ new Chart("myChart1", {
  {% for kpi in kpi_entries %}
     <div class="flex-container">
         <div id="title">{{ kpi.kpi_name }}</div>
+        <div>{{ kpi.employee.start }}</div>
+        <div>{{ kpi.employee.end }}</div>
           <div id="title">{{ kpi.activity }}</div>
           <div id="title">{{ kpi.method }}</div>
          <div id="pos">{{ kpi.weight }}</div>
