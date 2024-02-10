@@ -1,0 +1,8 @@
+
+Warning: imagecreatefromjpeg(): gd-jpeg: JPEG library reports unrecoverable error:  in D:\WWW\personal\modules\Tools\op\phones\phones_profile.php on line 38
+
+Warning: imagecreatefromjpeg(): 'D:/DATA/photo/phones/6433.jpg' is not a valid JPEG file in D:\WWW\personal\modules\Tools\op\phones\phones_profile.php on line 38
+
+Warning: imagejpeg() expects parameter 1 to be resource, boolean given in D:\WWW\personal\modules\Tools\op\phones\phones_profile.php on line 40
+
+Warning: imagedestroy() expects parameter 1 to be resource, boolean given in D:\WWW\personal\modules\Tools\op\phones\phones_profile.php on line 41
