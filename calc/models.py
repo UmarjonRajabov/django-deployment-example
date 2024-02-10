@@ -47,7 +47,7 @@ class Employee(models.Model):
     start = models.DateField(db_default=Now())
     end = models.DateField(db_default=Now())
 
-    photo_url = models.URLField(blank=True)  # Add this line for storing photo URLs
+    photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
 
     # user_id = models.FloatField(unique=True)
 
