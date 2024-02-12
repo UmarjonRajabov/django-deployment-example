@@ -219,16 +219,8 @@ def view_kpis(request):
     else:
         # If user doesn't have an associated Employee object or table_number is empty
         photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
-    # photo_url = None
-    # if hasattr(request.user, 'employee') and request.user.employee.table_number:
-    #     table_number = request.user.employee.table_number
-    #     photo_filename = f"{table_number}.jpg"
-    #     photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
-    # # if hasattr(request.user, 'employee') and request.user.employee.photo:
-    # #     photo_url = request.user.employee.photo.url
-    # else:
-    #     photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
 
+    # Render the template with the photo_url included in the context
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
     # photo_urls = {}
     # for kpi_entry in kpi_entries:
