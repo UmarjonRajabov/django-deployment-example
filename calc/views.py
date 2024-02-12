@@ -1,4 +1,5 @@
 # calc/views.py
+import os
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -118,21 +119,39 @@ def process_data_and_calculate_kpis(data_frame):
                 # )
                 # Try to get an existing employee for the user
                 user = CustomUser.objects.get(username=username)
-                employee, created = Employee.objects.get_or_create(
-                    user=user,
-                    name=row.get('Имя_сотрудника_или_кандидата', ''),
-                    position=row.get('ДОЛЖНОСТЬ', ''),
-                    branch=row.get('ФИЛИАЛ_ГО', ''),
-                    division=row.get('ОПЕРУ_БХМ_БХО', ''),
-                    department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                    table_number=row.get('ТАБЕЛЬ', ''),
-                    start=row.get('Начала', ''),
-                    end=row.get('Конец', ''),
+                try:
+                    employee = Employee.objects.get(user=user)
+                except Employee.DoesNotExist:
+                    employee = None
 
-                    # name=row['Имя_сотрудника_или_кандидата'],
-                    # position=row['ДОЛЖНОСТЬ'],
-                    # Add other relevant fields
-                )
+                if not employee:
+                    # Create a new Employee object if it doesn't exist
+                    employee = Employee.objects.create(
+                        user=user,
+                        name=row.get('Имя_сотрудника_или_кандидата', ''),
+                        position=row.get('ДОЛЖНОСТЬ', ''),
+                        branch=row.get('ФИЛИАЛ_ГО', ''),
+                        division=row.get('ОПЕРУ_БХМ_БХО', ''),
+                        department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                        table_number=row.get('ТАБЕЛЬ', ''),
+                        start=row.get('Начала', ''),
+                        end=row.get('Конец', ''),
+                    )
+                # employee, created = Employee.objects.get_or_create(
+                #     user=user,
+                #     name=row.get('Имя_сотрудника_или_кандидата', ''),
+                #     position=row.get('ДОЛЖНОСТЬ', ''),
+                #     branch=row.get('ФИЛИАЛ_ГО', ''),
+                #     division=row.get('ОПЕРУ_БХМ_БХО', ''),
+                #     department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                #     table_number=row.get('ТАБЕЛЬ', ''),
+                #     start=row.get('Начала', ''),
+                #     end=row.get('Конец', ''),
+                #
+                #     # name=row['Имя_сотрудника_или_кандидата'],
+                #     # position=row['ДОЛЖНОСТЬ'],
+                #     # Add other relevant fields
+                # )
                 KPI.objects.create(
                     employee=employee,
                     month=datetime.now(),  # Update with actual month from the Excel file
@@ -174,7 +193,7 @@ def process_data_and_calculate_kpis(data_frame):
 def view_kpis(request):
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
-        print(kpi_entries)
+        # print(kpi_entries)
     else:
         user = request.user
         # kpi_entries = KPI.objects.filter(employee__user=user)
@@ -184,12 +203,29 @@ def view_kpis(request):
         # Add code to retrieve photo URL
         # Retrieve photo URL for the logged-in user
     photo_url = None
+
     if hasattr(request.user, 'employee') and request.user.employee.table_number:
+        # Check if the user has an associated Employee object and table_number is not empty
         table_number = request.user.employee.table_number
         photo_filename = f"{table_number}.jpg"
-        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
-    # if hasattr(request.user, 'employee') and request.user.employee.photo:
-    #     photo_url = request.user.employee.photo.url
+        photo_path = os.path.join(settings.MEDIA_ROOT, 'employee_photos', photo_filename)
+
+        # Check if the photo file exists in the employee_photos directory
+        if os.path.exists(photo_path):
+            photo_url = os.path.join(settings.MEDIA_URL, 'employee_photos', photo_filename)
+        else:
+            photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+
+    else:
+        # If user doesn't have an associated Employee object or table_number is empty
+        photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+    # photo_url = None
+    # if hasattr(request.user, 'employee') and request.user.employee.table_number:
+    #     table_number = request.user.employee.table_number
+    #     photo_filename = f"{table_number}.jpg"
+    #     photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
+    # # if hasattr(request.user, 'employee') and request.user.employee.photo:
+    # #     photo_url = request.user.employee.photo.url
     # else:
     #     photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
 
