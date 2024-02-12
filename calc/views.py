@@ -11,7 +11,7 @@ from datetime import datetime
 from django.shortcuts import get_object_or_404
 from .utils import process_excel_file
 from .models import ExcelFile
-
+from django.conf import settings
 
 # def excel_content(request):
 #     file_id = request.GET.get('file_id')
@@ -180,7 +180,16 @@ def view_kpis(request):
         employee = get_object_or_404(Employee, user=user)
         kpi_entries = KPI.objects.filter(employee=employee)
 
-    return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries})
+        # Add code to retrieve photo URL
+    photo_urls = {}
+    for kpi_entry in kpi_entries:
+        employee = kpi_entry.employee
+        if employee.photo:
+            photo_urls[employee.id] = employee.photo.url
+        else:
+            photo_urls[employee.id] = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
+
+    return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries,'photo_urls': photo_urls})
     # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
 

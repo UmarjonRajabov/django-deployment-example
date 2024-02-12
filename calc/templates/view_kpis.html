@@ -11,16 +11,22 @@
 <body>
     <div class="container">
         <div class="rasm">
-            {% if kpi_entries %}
-                  {% with employee=kpi_entries.0.employee %}
-                      {% if employee.photo %}
-                <img src="{{ employee.photo.url }}" alt="{{ employee.name }}'s Photo" class="employee-photo">
-                      {% else %}
+             {% if request.user.employee.photo %}
+                <img src="{{ request.user.employee.photo.url }}" alt="{{ request.user.employee.name }}'s Photo" class="employee-photo">
+            {% else %}
                 <!-- If no photo is available, you can display a default image or leave it empty -->
-                <img src="{% static 'kpi/default_employee_photo.jpg' %}" alt="Default Employee Photo" class="employee-photo">
-                      {% endif %}
-                 {% endwith %}
+                <img src="{% static 'kpi/default_employee.jpg' %}" alt="Default Employee Photo" class="employee-photo">
             {% endif %}
+<!--            {% if kpi_entries %}-->
+<!--                  {% with employee=kpi_entries.0.employee %}-->
+<!--                      {% if employee.photo %}-->
+<!--                <img src="{{ employee.photo.url }}" alt="{{ employee.name }}'s Photo" class="employee-photo">-->
+<!--                      {% else %}-->
+<!--                &lt;!&ndash; If no photo is available, you can display a default image or leave it empty &ndash;&gt;-->
+<!--                <img src="{% static 'kpi/default_employee_photo.jpg' %}" alt="Default Employee Photo" class="employee-photo">-->
+<!--                      {% endif %}-->
+<!--                 {% endwith %}-->
+<!--            {% endif %}-->
         </div>
         <div class="info">
             {% if kpi_entries %}
