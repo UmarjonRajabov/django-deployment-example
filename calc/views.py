@@ -13,6 +13,7 @@ from .utils import process_excel_file
 from .models import ExcelFile
 from django.conf import settings
 
+
 # def excel_content(request):
 #     file_id = request.GET.get('file_id')
 #     if file_id:
@@ -181,15 +182,27 @@ def view_kpis(request):
         kpi_entries = KPI.objects.filter(employee=employee)
 
         # Add code to retrieve photo URL
-    photo_urls = {}
-    for kpi_entry in kpi_entries:
-        employee = kpi_entry.employee
-        if employee.photo:
-            photo_urls[employee.id] = employee.photo.url
-        else:
-            photo_urls[employee.id] = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
+        # Retrieve photo URL for the logged-in user
+    photo_url = None
+    if hasattr(request.user, 'employee') and request.user.employee.table_number:
+        table_number = request.user.employee.table_number
+        photo_filename = f"{table_number}.jpg"
+        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
+    # if hasattr(request.user, 'employee') and request.user.employee.photo:
+    #     photo_url = request.user.employee.photo.url
+    # else:
+    #     photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
 
-    return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries,'photo_urls': photo_urls})
+    return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
+    # photo_urls = {}
+    # for kpi_entry in kpi_entries:
+    #     employee = kpi_entry.employee
+    #     if employee.photo:
+    #         photo_urls[employee.id] = employee.photo.url
+    #     else:
+    #         photo_urls[employee.id] = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
+    #
+    # return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_urls': photo_urls})
     # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
 

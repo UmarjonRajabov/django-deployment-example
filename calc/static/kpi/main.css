@@ -1,5 +1,9 @@
 /* Define common styles for all screen sizes */
 
+
+body {
+    background: black url("images/nbu.jpg") repeat;
+}
 /*---------------------------------------------
 [ Utility ]
 */
