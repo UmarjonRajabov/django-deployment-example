@@ -33,7 +33,7 @@ class ExcelFile(models.Model):
         return self.file.path[len(settings.MEDIA_ROOT):]
 
     def __str__(self):
-        return f"{self.file.name} - {self.uploaded_by.username}"
+        return self.file.name
 
 
 class Employee(models.Model):

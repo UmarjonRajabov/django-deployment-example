@@ -29,12 +29,14 @@ class Command(BaseCommand):
         for index, row in df.iterrows():
             username = row['Username']
             parol = str(row['password'])  # Convert to string
+            tabel = str(row['ТableNumber'])
 
             # Check if the user already exists
             if not get_user_model().objects.filter(username=username).exists():
                 get_user_model().objects.create_user(
                     username=username,
-                    password=parol
+                    password=parol,
+                    table_number=tabel
                 )
 
                 self.stdout.write(self.style.SUCCESS(f'Successfully created user: {username}'))

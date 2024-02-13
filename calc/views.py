@@ -193,37 +193,13 @@ def process_data_and_calculate_kpis(data_frame):
 def view_kpis(request):
     # Initialize photo_url
     photo_url = None
-    if request.user.table_number:
-
-        # if hasattr(request.user, 'employee') and request.user.employee.table_number:
-        table_number = request.user.employee.table_number
-        # photo_filename = "{}.jpg".format(table_number)
-        photo_filename = f"{table_number}.jpg"  # Concatenate table_number with ".jpg"
+    if hasattr(request.user, 'employee'):
+        employee = request.user.employee  # Access the related Employee instance
+        table_number = employee.table_number
+        photo_filename = f"{table_number}.jpg"
         photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
     else:
-        table_number = request.user.employee.table_number
-        photo_filename = f"{table_number}.jpg"  # Concatenate table_number with ".jpg"
-        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
-        # photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
-
-    # if hasattr(request.user, 'employee') and request.user.employee.table_number:
-    #     # Check if the user has an associated Employee object and table_number is not empty
-    #     table_number = request.user.employee.table_number
-    #     photo_filename = f"{table_number}.jpg"
-    #     photo_path = os.path.join(settings.MEDIA_ROOT, 'employee_photos', photo_filename)
-    #
-    #     # Check if the photo file exists in the employee_photos directory
-    #     if os.path.exists(photo_path):
-    #         photo_url = os.path.join(settings.MEDIA_URL, 'employee_photos', photo_filename)
-    #     else:
-    #         photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
-    #
-    #     print("Photo Path:", photo_path)
-    #     print("Photo URL:", photo_url)
-    #
-    # else:
-    #     # If user doesn't have an associated Employee object or table_number is empty
-    #     photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+        photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
 
     # Retrieve KPI entries as needed
     print("Photo URL:", photo_url)
