@@ -8,14 +8,4 @@ class CalcConfig(AppConfig):
 
     def ready(self):
 
-        from .models import Employee
-        # Create or update Employee instances upon user creation/update
-        def create_or_update_employee(sender, instance, created, **kwargs):
-            if created:
-                Employee.objects.create(user=instance)
-            else:
-                instance.employee.save()
-
-        # Connect signal to user model
-        User = get_user_model()
-        User.post_save.connect(create_or_update_employee, sender=User)
+        import calc.signals  # This imports the signals module when the app is ready
