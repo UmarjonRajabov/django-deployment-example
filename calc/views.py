@@ -191,47 +191,50 @@ def process_data_and_calculate_kpis(data_frame):
 #     return render(request, 'view_kpis.html', {'kpis': kpis})
 @login_required
 def view_kpis(request):
-    if request.user.is_staff:
-        kpi_entries = KPI.objects.all()  # Retrieve KPI entries as needed
-        # print(kpi_entries)
-    else:
-        user = request.user
-        # kpi_entries = KPI.objects.filter(employee__user=user)
-        employee = get_object_or_404(Employee, user=user)
-        kpi_entries = KPI.objects.filter(employee=employee)
-
-        # Add code to retrieve photo URL
-        # Retrieve photo URL for the logged-in user
+    # Initialize photo_url
     photo_url = None
+    if request.user.table_number:
 
-    if hasattr(request.user, 'employee') and request.user.employee.table_number:
-        # Check if the user has an associated Employee object and table_number is not empty
+        # if hasattr(request.user, 'employee') and request.user.employee.table_number:
         table_number = request.user.employee.table_number
-        photo_filename = f"{table_number}.jpg"
-        photo_path = os.path.join(settings.MEDIA_ROOT, 'employee_photos', photo_filename)
-
-        # Check if the photo file exists in the employee_photos directory
-        if os.path.exists(photo_path):
-            photo_url = os.path.join(settings.MEDIA_URL, 'employee_photos', photo_filename)
-        else:
-            photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
-
+        # photo_filename = "{}.jpg".format(table_number)
+        photo_filename = f"{table_number}.jpg"  # Concatenate table_number with ".jpg"
+        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
     else:
-        # If user doesn't have an associated Employee object or table_number is empty
-        photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+        table_number = request.user.employee.table_number
+        photo_filename = f"{table_number}.jpg"  # Concatenate table_number with ".jpg"
+        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
+        # photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
+
+    # if hasattr(request.user, 'employee') and request.user.employee.table_number:
+    #     # Check if the user has an associated Employee object and table_number is not empty
+    #     table_number = request.user.employee.table_number
+    #     photo_filename = f"{table_number}.jpg"
+    #     photo_path = os.path.join(settings.MEDIA_ROOT, 'employee_photos', photo_filename)
+    #
+    #     # Check if the photo file exists in the employee_photos directory
+    #     if os.path.exists(photo_path):
+    #         photo_url = os.path.join(settings.MEDIA_URL, 'employee_photos', photo_filename)
+    #     else:
+    #         photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+    #
+    #     print("Photo Path:", photo_path)
+    #     print("Photo URL:", photo_url)
+    #
+    # else:
+    #     # If user doesn't have an associated Employee object or table_number is empty
+    #     photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Use default photo
+
+    # Retrieve KPI entries as needed
+    print("Photo URL:", photo_url)
+    if request.user.is_staff:
+        kpi_entries = KPI.objects.all()
+    else:
+        employee = get_object_or_404(Employee, user=request.user)
+        kpi_entries = KPI.objects.filter(employee=employee)
 
     # Render the template with the photo_url included in the context
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
-    # photo_urls = {}
-    # for kpi_entry in kpi_entries:
-    #     employee = kpi_entry.employee
-    #     if employee.photo:
-    #         photo_urls[employee.id] = employee.photo.url
-    #     else:
-    #         photo_urls[employee.id] = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
-    #
-    # return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_urls': photo_urls})
-    # return redirect('access_denied')  # Redirect to an access denied page or another appropriate view
 
 
 def access_denied(request):
