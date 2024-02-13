@@ -39,7 +39,7 @@ class ExcelFile(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     branch = models.TextField(default='default_value')
     division = models.TextField(default='default_value')
     department = models.TextField(default="Bo'linma")

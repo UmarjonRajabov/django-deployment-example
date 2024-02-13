@@ -193,12 +193,18 @@ def process_data_and_calculate_kpis(data_frame):
 def view_kpis(request):
     # Initialize photo_url
     photo_url = None
-    if hasattr(request.user, 'employee') and hasattr(request.user.employee, 'table_number'):
-        table_number = request.user.employee.table_number
-        photo_filename = f"{table_number}.jpg"
-        photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
+
+    print("User:", request.user)
+    if hasattr(request.user, 'employee'):
+        print("Employee:", request.user.employee)
+        if hasattr(request.user.employee, 'table_number'):
+            table_number = request.user.employee.table_number
+            photo_filename = f"{table_number}.jpg"
+            photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
+        else:
+            print("Employee has no table_number attribute")
     else:
-        photo_url = settings.MEDIA_URL + 'default_photo.jpg'  # Assuming you have a default photo
+        print("User has no employee attribute")
 
     # Retrieve KPI entries as needed
     print("Photo URL:", photo_url)
