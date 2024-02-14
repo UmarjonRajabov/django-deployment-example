@@ -194,9 +194,9 @@ def view_kpis(request):
     # Initialize photo_url
     photo_url = None
 
-    print("User:", request.user)
+    # print("User:", request.user)
     if hasattr(request.user, 'employee'):
-        print("Employee:", request.user.employee)
+        # print("Employee:", request.user.employee)
         if hasattr(request.user.employee, 'table_number'):
             table_number = request.user.employee.table_number
             photo_filename = f"{table_number}.jpg"
@@ -207,7 +207,7 @@ def view_kpis(request):
         print("User has no employee attribute")
 
     # Retrieve KPI entries as needed
-    print("Photo URL:", photo_url)
+    # print("Photo URL:", photo_url)
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()
     else:
