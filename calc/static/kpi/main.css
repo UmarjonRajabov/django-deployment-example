@@ -408,7 +408,7 @@ iframe {
 }
 
 .info{
-  width: 70%;
+  width: 55%;
   border: #999999 solid 2px;
   margin-left: 30px;
   margin-right: 30px;
@@ -419,7 +419,7 @@ iframe {
 }
 
 .rasm{
-  width: 7%;
+  width: 30%;
   border: #999999 solid 2px;
   margin-left: 40px;
   margin-right: 30px;
@@ -428,7 +428,7 @@ iframe {
 }
 
 .diagram{
-  width: 16%;
+  width: 15%;
   border: #999999 solid 2px;
   margin-left: 30px;
   margin-right: 30px;
