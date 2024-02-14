@@ -2,7 +2,7 @@
 
 
  body {
-            background-image: url("{% static 'images/img.png' %}");
+            background-image: url("{% static 'kpi/images/nbu.jpg' %}");
             background-size: cover; /* Cover the entire background */
             background-position: center; /* Center the background image */
             /* Additional styles for better readability */
