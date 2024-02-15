@@ -368,7 +368,8 @@ iframe {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   font-size: 24px;
-
+  text-align: left;
+  margin-left:9000px;
 }
 
 #plan{
