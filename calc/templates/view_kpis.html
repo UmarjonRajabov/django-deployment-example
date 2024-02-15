@@ -50,18 +50,15 @@
     </div>
         <div class="diagram">
             <h1>KPI</h1>
-            <p style="float: right; padding-top: 1px; font-size: 29px; font-weight: 900;">за июль 2023 г.            </p>
-            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+            <p style="float: right; margin-top: -59px; font-size: 24px; font-weight: 900;">за июль 2023 г.            </p>
+            <canvas id="myChart1" style="width:100%;max-width:600px;margin-top:-20px"></canvas>
 
 <script>
-const xValues = ["", "", "", ""];
-const yValues = [55, 49, 44, 24, 15];
+const xValues = ["", ""];
+const yValues = [78, 22];
 const barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
+  "#008000",
+  "#f2f2f2"
 ];
 
 new Chart("myChart1", {
@@ -76,7 +73,7 @@ new Chart("myChart1", {
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text: ""
     }
   }
 });
@@ -86,7 +83,7 @@ new Chart("myChart1", {
     </div>
 
     <nav class="chart1">
-        <p style="font-style: italic; font-size: 30px; font-weight: 500;">Динамика выполнение общего плановые показателей KPI</p>
+        <p style="font-style: italic; font-size: 30px; font-weight: 900;">Динамика выполнение общего плановые показателей KPI</p>
         <canvas id="myChart"></canvas>
     </nav>
 <div class="umumiy">
