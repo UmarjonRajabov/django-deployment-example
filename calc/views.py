@@ -228,3 +228,36 @@ def kpi_index(request):
 
 def kpi_card(request):
     return render(request, 'kpi/card.html')
+
+
+def read_excel_data(file_path):
+    # Read the Excel file into a pandas DataFrame
+    df = pd.read_excel(file_path)
+
+    # Process the data as needed
+    labels = df['Month'].tolist()
+    data = df['Value'].tolist()
+
+    # Prepare the data to be passed to the template
+    chart_data = {
+        'labels': labels,
+        'data': data,
+    }
+
+    return chart_data
+
+
+
+    def your_view(request):
+    # Assuming 'excel_file_path' is the path to your Excel file
+    excel_file_path = '/path/to/your/excel/file.xlsx'
+
+    # Read Excel data and prepare it for the template
+    chart_data = read_excel_data(excel_file_path)
+
+    # Pass the chart data to the template context
+    context = {
+        'chart_data': chart_data,
+    }
+
+    return render(request, 'your_template.html', context)
