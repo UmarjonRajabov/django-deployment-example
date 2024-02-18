@@ -46,7 +46,6 @@ class Employee(models.Model):
     table_number = models.CharField(max_length=10, unique=False, default=1)
     start = models.DateField(db_default=Now())
     end = models.DateField(db_default=Now())
-
     photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
 
     # user_id = models.FloatField(unique=True)
