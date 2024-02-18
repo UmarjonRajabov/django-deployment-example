@@ -12,26 +12,10 @@
     <div class="container">
         <div class="rasm">
             {% if photo_url %}
-               <img src="{{ photo_url }}" alt="Profile Picture">
+               <img style="width: 100%; height:100%" src="{{ photo_url }}" alt="Profile Picture">
             {% else %}
                <img src="{% static 'kpi/default_photo.jpg' %}" alt="Default Profile Picture">
             {% endif %}
-<!--             {% if request.user.employee.photo %}-->
-<!--                <img src="{{ request.user.employee.photo.url }}" alt="{{ request.user.employee.name }}'s Photo" class="employee-photo">-->
-<!--            {% else %}-->
-<!--                &lt;!&ndash; If no photo is available, you can display a default image or leave it empty &ndash;&gt;-->
-<!--                <img src="{% static 'kpi/default_photo.jpg' %}" alt="Default Employee Photo" class="employee-photo">-->
-<!--            {% endif %}-->
-<!--            {% if kpi_entries %}-->
-<!--                  {% with employee=kpi_entries.0.employee %}-->
-<!--                      {% if employee.photo %}-->
-<!--                <img src="{{ employee.photo.url }}" alt="{{ employee.name }}'s Photo" class="employee-photo">-->
-<!--                      {% else %}-->
-<!--                &lt;!&ndash; If no photo is available, you can display a default image or leave it empty &ndash;&gt;-->
-<!--                <img src="{% static 'kpi/default_employee_photo.jpg' %}" alt="Default Employee Photo" class="employee-photo">-->
-<!--                      {% endif %}-->
-<!--                 {% endwith %}-->
-<!--            {% endif %}-->
         </div>
         <div class="info">
             {% if kpi_entries %}
@@ -66,18 +50,15 @@
     </div>
         <div class="diagram">
             <h1>KPI</h1>
-            <p style="float: right; padding-top: 1px; font-size: 29px; font-weight: 900;">за июль 2023 г.            </p>
-            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+            <p style="float: right; margin-top: -39px; font-size: 24px; font-weight: 900;">за июль 2023 г.            </p>
+            <canvas id="myChart1" style="width:100%;max-width:600px;margin-top:-20px"></canvas>
 
 <script>
-const xValues = ["", "", "", ""];
-const yValues = [55, 49, 44, 24, 15];
+const xValues = ["", ""];
+const yValues = [78, 22];
 const barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
+  "#008000",
+  "#f2f2f2"
 ];
 
 new Chart("myChart1", {
@@ -92,7 +73,7 @@ new Chart("myChart1", {
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text:  "Исполнение: 78%"
     }
   }
 });
@@ -102,35 +83,38 @@ new Chart("myChart1", {
     </div>
 
     <nav class="chart1">
-        <p style="font-style: italic; font-size: 30px; font-weight: 500;">Динамика выполнение общего плановые показателей KPI</p>
+        <p style="font-style: italic; font-size: 30px; font-weight: 900;">Динамика выполнение общего плановые показателей KPI</p>
         <canvas id="myChart"></canvas>
     </nav>
 <div class="umumiy">
 
   <div class="flex-container1">
-    <div style="width: 30%;"></div>
-          <div style="width: 30%;">НАЧАЛА</div>
-          <div style="width: 30%;">КОНЕЦ</div>
-       <div style="width: 25%;">АКТИВНОСТЬ</div>
-          <div style="width: 15%;">МЕТОД РАСЧОТА</div>
-    <div style="width: 13%;" > ВЕС ПОКАЗАТЕЛЬЯ  </div>
-    <div style="width: 20%"> ПЛАН</div>
-    <div style="width: 18%;">ФАКТ<br></div>
-    <div style="width: 3%;">ИСПОЛ- <br>  НЕНИЕ <br></div>
+    <div style="width: 99%;"></div>
+          <div style="width: 35%;">НАЧАЛА</div>
+          <div style="width: 34%;">КОНЕЦ</div>
+       <div style="width: 9%;">АКТИВ <br>НОСТЬ</div>
+          <div style="width: 29%;">МЕТОД <br> РАСЧОТА</div>
+    <div style="width: 28%;" > ВЕС <br> ПОКАЗАТЕЛЬЯ  </div>
+    <div style="width: 25%"> ПЛАН</div>
+    <div style="width: 28%;">ФАКТ<br></div>
+    <div style="width: 18%;">ИСПОЛ- <br>  НЕНИЕ <br></div>
   </div>
 
 
  {% for kpi in kpi_entries %}
     <div class="flex-container">
         <div id="title">{{ kpi.kpi_name }}</div>
-        <div>{{ kpi.employee.start }}</div>
-        <div>{{ kpi.employee.end }}</div>
-          <div id="title">{{ kpi.activity }}</div>
-          <div id="title">{{ kpi.method }}</div>
+        <div id="start">{{ kpi.employee.start }}</div>
+        <div id="end">{{ kpi.employee.end }}</div>
+          <div id="active">{{ kpi.activity }}</div>
+          <div id="method">{{ kpi.method }}</div>
          <div id="pos">{{ kpi.weight }}</div>
-        <div id="plan">{{ kpi.performance_score }}</div>
-        <div id="fact">{{ kpi.fact }}</div>
-        <div id="done">{{ kpi.finished }}</div>
+     <!-- Update the lines where you display the numbers -->
+<div id="plan">{{ kpi.performance_score|add:0.5|floatformat:"0" }}</div>
+<div id="fact">{{ kpi.fact|add:0.5|floatformat:"0" }}</div>
+<div id="done">{{ kpi.finished|add:0.5|floatformat:"0" }}</div>
+
+
     </div>
     {% endfor %}
 
