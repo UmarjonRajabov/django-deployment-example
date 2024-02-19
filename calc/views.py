@@ -259,4 +259,4 @@ def your_view(request):
         'chart_data': chart_data,
     }
 
-    return render(request, 'your_template.html', context)
+    return render(request, 'view_kpis.html', context)
