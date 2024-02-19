@@ -247,8 +247,7 @@ def read_excel_data(file_path):
     return chart_data
 
 
-
-    def your_view(request):
+def your_view(request):
     # Assuming 'excel_file_path' is the path to your Excel file
     excel_file_path = '/path/to/your/excel/file.xlsx'
 
