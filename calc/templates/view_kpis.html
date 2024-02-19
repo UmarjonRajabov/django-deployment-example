@@ -128,7 +128,7 @@ new Chart("myChart1", {
           label: "",
           data: [10, 20, 15,12,14,16,18,22,24,26,28, 25, 30],
           borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 2,
+          borderWidth: 5,
           fill: false
       }]
   };
@@ -137,7 +137,19 @@ new Chart("myChart1", {
   var options = {
       maintainAspectRatio: false, // Set to false to adjust the aspect ratio
       aspectRatio: 0.9, // Adjust the height of the chart
-      responsive: true
+      responsive: true,
+        scales: {
+        yAxes: [{
+            ticks: {
+                fontSize: 10, // Adjust the font size for the y-axis labels
+            }
+        }],
+        xAxes: [{
+            ticks: {
+                fontSize: 10, // Adjust the font size for the x-axis labels
+            }
+        }]
+    }
   };
 
   // Get the context of the canvas element
