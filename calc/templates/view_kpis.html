@@ -68,7 +68,9 @@ new Chart("myChart1", {
     datasets: [{
       backgroundColor: barColors,
       data: yValues,
-      borderDash:[2,100]
+      borderDash:[4,40],
+      borderJoinStyle:'miter',
+      circumference:30
     }]
   },
   options: {
