@@ -62,12 +62,13 @@ const barColors = [
 ];
 
 new Chart("myChart1", {
-  type: "pie",
+  type: "doughnut",
   data: {
     labels: xValues,
     datasets: [{
       backgroundColor: barColors,
-      data: yValues
+      data: yValues,
+      borderDash:[2,100]
     }]
   },
   options: {
