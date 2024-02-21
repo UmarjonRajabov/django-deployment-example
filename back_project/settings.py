@@ -139,3 +139,8 @@ AUTH_USER_MODEL = 'calc.CustomUser'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+# Increase the maximum number of fields allowed in a POST request
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000  # Adjust this number according to your requirements

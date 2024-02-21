@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=30, default='John Doe')
     username = models.CharField(unique=True, max_length=30)
-    table_number = models.CharField(max_length=10, unique=False, default=1)
+    table_number = models.CharField(max_length=10, unique=False)
     USERNAME_FIELD = 'username'
 
     def __str__(self):

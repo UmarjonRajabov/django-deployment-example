@@ -196,7 +196,7 @@ def view_kpis(request):
 
     # print("User:", request.user)
     if hasattr(request.user, 'employee'):
-        # print("Employee:", request.user.employee)
+        print("Employee:", request.user.employee)
         if hasattr(request.user.employee, 'table_number'):
             table_number = request.user.employee.table_number
             photo_filename = f"{table_number}.jpg"
@@ -230,33 +230,33 @@ def kpi_card(request):
     return render(request, 'kpi/card.html')
 
 
-def read_excel_data(file_path):
-    # Read the Excel file into a pandas DataFrame
-    df = pd.read_excel(file_path)
+# def read_excel_data(file_path):
+#     # Read the Excel file into a pandas DataFrame
+#     df = pd.read_excel(file_path)
+#
+#     # Process the data as needed
+#     labels = df['Month'].tolist()
+#     data = df['Value'].tolist()
+#
+#     # Prepare the data to be passed to the template
+#     chart_data = {
+#         'labels': labels,
+#         'data': data,
+#     }
+#
+#     return chart_data
 
-    # Process the data as needed
-    labels = df['Month'].tolist()
-    data = df['Value'].tolist()
 
-    # Prepare the data to be passed to the template
-    chart_data = {
-        'labels': labels,
-        'data': data,
-    }
-
-    return chart_data
-
-
-def your_view(request):
-    # Assuming 'excel_file_path' is the path to your Excel file
-    excel_file_path = '/path/to/your/excel/file.xlsx'
-
-    # Read Excel data and prepare it for the template
-    chart_data = read_excel_data(excel_file_path)
-
-    # Pass the chart data to the template context
-    context = {
-        'chart_data': chart_data,
-    }
-
-    return render(request, 'view_kpis.html', context)
+# def your_view(request):
+#     # Assuming 'excel_file_path' is the path to your Excel file
+#     excel_file_path = '/path/to/your/excel/file.xlsx'
+#
+#     # Read Excel data and prepare it for the template
+#     chart_data = read_excel_data(excel_file_path)
+#
+#     # Pass the chart data to the template context
+#     context = {
+#         'chart_data': chart_data,
+#     }
+#
+#     return render(request, 'view_kpis.html', context)
