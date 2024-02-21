@@ -74,12 +74,27 @@ new Chart("myChart1", {
       circumference:30
     }]
   },
-  options: {
-    title: {
-      display: true,
-      text:  ""
+ var options = {
+    maintainAspectRatio: false,
+    aspectRatio: 1,
+    responsive: true,
+    plugins: {
+        datalabels: {
+            formatter: function(value, context) {
+                return context.chart.data.labels[context.dataIndex];
+            },
+            color: '#fff', // Color of the text
+            font: {
+                size: '16' // Font size of the text
+            }
+        }
     }
-  }
+};
+    var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
 });
 </script>
 
