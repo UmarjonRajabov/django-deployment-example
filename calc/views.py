@@ -15,17 +15,6 @@ from .models import ExcelFile
 from django.conf import settings
 
 
-# def excel_content(request):
-#     file_id = request.GET.get('file_id')
-#     if file_id:
-#         excel_file = ExcelFile.objects.get(pk=file_id)
-#         excel_content = pd.read_excel(excel_file.file.path)
-#         return render(request, 'excel_content.html',
-#                       {'excel_content': excel_content, 'file_path': excel_file.file_path()})
-#     else:
-#         return render(request, 'excel_content.html', {'excel_content': None, 'file_path': None})
-
-
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
