@@ -456,10 +456,10 @@ iframe {
 
 
 .diagram canvas {
-    width: 4090% !important; /* Ensure the canvas takes up the entire width of the container */
+    width: 490% !important; /* Ensure the canvas takes up the entire width of the container */
     height: auto !important; /* Let the height adjust automatically based on width */
      margin-top: 5px;
-     margin-right: 80px;
+     margin-right: 800px !important;
 }
 
 .info_item{
