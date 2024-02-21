@@ -60,17 +60,7 @@ def upload_excel(request):
             process_data_and_calculate_kpis(excel_content)
 
             return redirect('success_page')
-            # print(f"File path: {excel_file.file.path}")
-            # return redirect('success_page')
-            # excel_file = form.cleaned_data['excel_file']
-            # process_excel_file(excel_file)
-            # excel_file = request.FILES['excel_file']
-            # df = pd.read_excel(excel_file)
-            # #
-            # # # Process the data and calculate KPIs
-            # process_data_and_calculate_kpis(df)
 
-            # return redirect('success_page')
 
     else:
         form = ExcelFileForm()
@@ -80,13 +70,6 @@ def upload_excel(request):
 
 def success_page(request):
     return render(request, 'success_page.html')
-
-
-# def process_data_and_calculate_kpis(data_frame):
-#     # Implement your KPI calculation logic here
-#     # You can iterate through the data_frame and calculate KPIs for each employee
-#     pass
-# update this function
 
 def process_data_and_calculate_kpis(data_frame):
     print("Column names in DataFrame:", data_frame.columns)
@@ -186,9 +169,6 @@ def process_data_and_calculate_kpis(data_frame):
         print("Column 'Definition' not found in the DataFrame.")
 
 
-# def view_kpis(request):
-#     kpis = KPI.objects.all()
-#     return render(request, 'view_kpis.html', {'kpis': kpis})
 @login_required
 def view_kpis(request):
     # Initialize photo_url
