@@ -60,6 +60,7 @@ def upload_excel(request):
 def success_page(request):
     return render(request, 'success_page.html')
 
+
 def process_data_and_calculate_kpis(data_frame):
     print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
@@ -81,14 +82,6 @@ def process_data_and_calculate_kpis(data_frame):
                 overall = row['Общий_KPI']
                 username = row['Username']
 
-                # Save KPI to the database (adjust the fields based on your models)
-                # user=request.user
-                # employee = Employee.objects.create(
-                #     user=user,
-                #     name=row['Имя_сотрудника_или_кандидата'],
-                #     position=row['ДОЛЖНОСТЬ'],
-                #     # Add other relevant fields
-                # )
                 # Try to get an existing employee for the user
                 user = CustomUser.objects.get(username=username)
                 try:
@@ -197,7 +190,6 @@ def kpi_index(request):
 
 def kpi_card(request):
     return render(request, 'kpi/card.html')
-
 
 # def read_excel_data(file_path):
 #     # Read the Excel file into a pandas DataFrame
