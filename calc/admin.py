@@ -10,7 +10,13 @@ class KPIAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(KPI, KPIAdmin)
-admin.site.register(Employee)
+
+
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'position', 'branch', 'division', 'department', 'table_number', 'start', 'end', 'photo')
+
+
+admin.site.register(Employee, EmployeeAdmin)
 
 
 class CustomUserAdmin(UserAdmin):

@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from .utils import process_excel_file
 from .models import ExcelFile
 from django.conf import settings
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def login_view(request):
     if request.method == 'POST':
@@ -81,27 +81,47 @@ def process_data_and_calculate_kpis(data_frame):
                 activity = row['Активность']
                 overall = row['Общий_KPI']
                 username = row['Username']
+                try:
+                    user = CustomUser.objects.get(username=username)
+                except ObjectDoesNotExist:
+                    print(f"User with username '{username}' does not exist. Skipping KPI creation.")
+                    continue  # Skip processing for this row
+
+                    # Check if the employee exists for the user
+                employee, created = Employee.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'name': row.get('Имя_сотрудника_или_кандидата', ''),
+                        'position': row.get('ДОЛЖНОСТЬ', ''),
+                        'branch': row.get('ФИЛИАЛ_ГО', ''),
+                        'division': row.get('ОПЕРУ_БХМ_БХО', ''),
+                        'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                        'table_number': row.get('ТАБЕЛЬ', ''),
+                        'start': row.get('Начала', ''),
+                        'end': row.get('Конец', ''),
+                    }
+                )
 
                 # Try to get an existing employee for the user
-                user = CustomUser.objects.get(username=username)
-                try:
-                    employee = Employee.objects.get(user=user)
-                except Employee.DoesNotExist:
-                    employee = None
-
-                if not employee:
-                    # Create a new Employee object if it doesn't exist
-                    employee = Employee.objects.create(
-                        user=user,
-                        name=row.get('Имя_сотрудника_или_кандидата', ''),
-                        position=row.get('ДОЛЖНОСТЬ', ''),
-                        branch=row.get('ФИЛИАЛ_ГО', ''),
-                        division=row.get('ОПЕРУ_БХМ_БХО', ''),
-                        department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                        table_number=row.get('ТАБЕЛЬ', ''),
-                        start=row.get('Начала', ''),
-                        end=row.get('Конец', ''),
-                    )
+                # user = CustomUser.objects.get(username=username)
+                # try:
+                #     employee = Employee.objects.get(user=user)
+                # except Employee.DoesNotExist:
+                #     employee = None
+                #
+                # if not employee:
+                #     # Create a new Employee object if it doesn't exist
+                #     employee = Employee.objects.create(
+                #         user=user,
+                #         name=row.get('Имя_сотрудника_или_кандидата', ''),
+                #         position=row.get('ДОЛЖНОСТЬ', ''),
+                #         branch=row.get('ФИЛИАЛ_ГО', ''),
+                #         division=row.get('ОПЕРУ_БХМ_БХО', ''),
+                #         department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                #         table_number=row.get('ТАБЕЛЬ', ''),
+                #         start=row.get('Начала', ''),
+                #         end=row.get('Конец', ''),
+                #     )
                 # employee, created = Employee.objects.get_or_create(
                 #     user=user,
                 #     name=row.get('Имя_сотрудника_или_кандидата', ''),
@@ -118,6 +138,7 @@ def process_data_and_calculate_kpis(data_frame):
                 #     # Add other relevant fields
                 # )
                 KPI.objects.create(
+                    user=user,
                     employee=employee,
                     month=datetime.now(),  # Update with actual month from the Excel file
                     performance_score=row['ПЛАН'],
@@ -169,7 +190,7 @@ def view_kpis(request):
         print("User has no employee attribute")
 
     # Retrieve KPI entries as needed
-    # print("Photo URL:", photo_url)
+    print("Photo URL:", photo_url)
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()
     else:
@@ -191,33 +212,3 @@ def kpi_index(request):
 def kpi_card(request):
     return render(request, 'kpi/card.html')
 
-# def read_excel_data(file_path):
-#     # Read the Excel file into a pandas DataFrame
-#     df = pd.read_excel(file_path)
-#
-#     # Process the data as needed
-#     labels = df['Month'].tolist()
-#     data = df['Value'].tolist()
-#
-#     # Prepare the data to be passed to the template
-#     chart_data = {
-#         'labels': labels,
-#         'data': data,
-#     }
-#
-#     return chart_data
-
-
-# def your_view(request):
-#     # Assuming 'excel_file_path' is the path to your Excel file
-#     excel_file_path = '/path/to/your/excel/file.xlsx'
-#
-#     # Read Excel data and prepare it for the template
-#     chart_data = read_excel_data(excel_file_path)
-#
-#     # Pass the chart data to the template context
-#     context = {
-#         'chart_data': chart_data,
-#     }
-#
-#     return render(request, 'view_kpis.html', context)

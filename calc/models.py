@@ -53,11 +53,11 @@ class Employee(models.Model):
     # Add other relevant fields
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.position}"
 
 
 class KPI(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     month = models.DateTimeField()
     performance_score = models.FloatField()
