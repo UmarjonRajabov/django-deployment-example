@@ -145,3 +145,7 @@ media/*
 !media/default_photo.jpg
 static/
 static_root/
+
+
+# db files
+db.sqlite3
