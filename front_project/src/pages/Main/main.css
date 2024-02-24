@@ -1,0 +1,158 @@
+.container{
+    box-sizing: border-box;
+    margin: 0 auto;
+    height: 100%;
+    width: 1440px;
+    padding: 10px;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.imageDiv{
+    width: 12%;
+    height: 218px;
+    border-radius: 8px;
+}
+.workerImageStyle{
+    width: 168px;
+    height: 218px;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+/* person data style */
+.personData{
+    width: 65%;
+    height: 220px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 5px 10px;
+    gap: 2px;
+    display: flex;
+    flex-direction: column;
+}
+.fullName{
+    text-align: left;
+    text-transform: uppercase;
+}
+.spaceBetweenDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+}
+.leftText {
+    text-transform: uppercase;
+}
+.rightText{
+    font-weight: 800;
+}
+/* kpi piechart style */
+.kpiPie{
+    width: 18%;
+    height: 218px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.kpiDataText{
+    font-size: 8;
+    font-weight: 700;
+}
+.topTexts{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+}
+.kpiStyle{
+    font-weight: 800;
+    font-size: 24;
+}
+/* line chart style */
+.graphDiv{
+    width: 100%;
+    height: 350px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin: 12px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.lineChartText{
+    text-align: left;
+    font-weight: 600;
+    font-size: 20;
+}
+
+.pieCartDiv{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+/* table styles */
+.longest{
+    width: 420px;
+}
+tbody td{
+    border: 1px solid gray;
+    height: 40px;
+}
+
+thead th{
+    height: 40px;
+    /* border: 1px solid gray; */
+}
+.stavkaColumn{
+    width: 50px;
+}
+.blueTable{
+    background-color:rgba(0, 255, 255, 0.342);
+}
+.greenTable{
+    background-color: rgb(12, 246, 12);
+    width: 4%;
+}
+.yellowTable{
+    background-color: rgba(252, 252, 28, 0.584);
+}
+.rightRounded{
+    border-radius: 0 5px 5px 0;
+}
+.leftRounded{
+    border-radius: 5px 0 0 5px;
+    width: 50%;
+    text-align: left;
+    font-weight: 700;
+}
+.ispol{
+    width: 10%;
+}
+.planFakt{
+    width:100px;
+}
+.yellowSoul{
+    width:70px;
+}
+tr td{
+    padding:  10px;
+    height: 50px;
+    text-align: end;
+    font-weight: 700;
+}
+.firstRow td{
+    gap: 5px;
+}
+.spaceTable {
+    margin: 0 5px;
+}
