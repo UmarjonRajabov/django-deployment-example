@@ -61,111 +61,123 @@ def success_page(request):
     return render(request, 'success_page.html')
 
 
+def create_KPIs_for_group(group, user):
+    print(f"Processing group: {group}")
+    kpis_to_create = []
+    for index, row in group.iterrows():
+        print(f"Processing row {index}: {row}")
+        performance_score = row['ПЛАН']
+        kpi_name = row['KPI_name']
+        metric = row['Единица']
+        fact = row['ФАКТ']
+        finished = row['ИСПОЛНЕНИЕ']
+        premium = row['Functional']
+        definition = row['Definition']
+        method = row['Метод_расчота']
+        weight = row['Вес_показателья']
+        activity = row['Активность']
+        overall = row['Общий_KPI']
+        username = row['Username']
+        
+            # Check if the employee exists for the user
+        employee, created = Employee.objects.get_or_create(
+            user=user,
+            defaults={
+                'name': row.get('Имя_сотрудника_или_кандидата', ''),
+                'position': row.get('ДОЛЖНОСТЬ', ''),
+                'branch': row.get('ФИЛИАЛ_ГО', ''),
+                'division': row.get('ОПЕРУ_БХМ_БХО', ''),
+                'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                'table_number': row.get('ТАБЕЛЬ', ''),
+                'start': row.get('Начала', ''),
+                'end': row.get('Конец', ''),
+            }
+        )
+
+        # Try to get an existing employee for the user
+        # user = CustomUser.objects.get(username=username)
+        # try:
+        #     employee = Employee.objects.get(user=user)
+        # except Employee.DoesNotExist:
+        #     employee = None
+        #
+        # if not employee:
+        #     # Create a new Employee object if it doesn't exist
+        #     employee = Employee.objects.create(
+        #         user=user,
+        #         name=row.get('Имя_сотрудника_или_кандидата', ''),
+        #         position=row.get('ДОЛЖНОСТЬ', ''),
+        #         branch=row.get('ФИЛИАЛ_ГО', ''),
+        #         division=row.get('ОПЕРУ_БХМ_БХО', ''),
+        #         department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+        #         table_number=row.get('ТАБЕЛЬ', ''),
+        #         start=row.get('Начала', ''),
+        #         end=row.get('Конец', ''),
+        #     )
+        # employee, created = Employee.objects.get_or_create(
+        #     user=user,
+        #     name=row.get('Имя_сотрудника_или_кандидата', ''),
+        #     position=row.get('ДОЛЖНОСТЬ', ''),
+        #     branch=row.get('ФИЛИАЛ_ГО', ''),
+        #     division=row.get('ОПЕРУ_БХМ_БХО', ''),
+        #     department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+        #     table_number=row.get('ТАБЕЛЬ', ''),
+        #     start=row.get('Начала', ''),
+        #     end=row.get('Конец', ''),
+        #
+        #     # name=row['Имя_сотрудника_или_кандидата'],
+        #     # position=row['ДОЛЖНОСТЬ'],
+        #     # Add other relevant fields
+        # )
+        kpi = KPI(
+            user=user,
+            employee=employee,
+            month=datetime.now(),  # Update with actual month from the Excel file
+            performance_score=row['ПЛАН'],
+            kpi_name=row['KPI_name'],
+            metric=row['Единица'],
+            fact=row['ФАКТ'],
+            finished=row['ИСПОЛНЕНИЕ'],
+            premium=row['Functional'],
+            definition=row['Definition'],
+            method=row['Метод_расчота'],
+            weight=row['Вес_показателья'],
+            activity=row['Активность'],
+            overall=row['Общий_KPI'],
+            # performance_score=performance_score,
+            # kpi_name=kpi_name,
+            # metric=metric,
+            # fact=fact,
+            # finished=finished,
+            # premium=premium,
+            # definition=definition,
+            # method=method,
+            # weight=weight,
+            # activity=activity,
+            # overall=overall,
+            # Add other KPI-related fields
+        )
+        kpis_to_create.append(kpi)
+    KPI.objects.bulk_create(kpis_to_create)
+    print(f"Created {len(kpis_to_create)} KPIs for user {user.username}")
+
 def process_data_and_calculate_kpis(data_frame):
     print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
     print(data_frame.head())  # Print the first few rows of the DataFrame
     if 'Definition' in data_frame.columns:
         if 'Username' in data_frame.columns:
-            for index, row in data_frame.iterrows():
-                print(f"Processing row {index}: {row}")
-                performance_score = row['ПЛАН']
-                kpi_name = row['KPI_name']
-                metric = row['Единица']
-                fact = row['ФАКТ']
-                finished = row['ИСПОЛНЕНИЕ']
-                premium = row['Functional']
-                definition = row['Definition']
-                method = row['Метод_расчота']
-                weight = row['Вес_показателья']
-                activity = row['Активность']
-                overall = row['Общий_KPI']
-                username = row['Username']
+            grouped_df = data_frame.groupby('Username')
+            for name, group in grouped_df:
                 try:
-                    user = CustomUser.objects.get(username=username)
+                    user = CustomUser.objects.get(username=name)
                 except ObjectDoesNotExist:
-                    print(f"User with username '{username}' does not exist. Skipping KPI creation.")
+                    print(f"User with username '{name}' does not exist. Skipping KPI creation.")
                     continue  # Skip processing for this row
 
-                    # Check if the employee exists for the user
-                employee, created = Employee.objects.get_or_create(
-                    user=user,
-                    defaults={
-                        'name': row.get('Имя_сотрудника_или_кандидата', ''),
-                        'position': row.get('ДОЛЖНОСТЬ', ''),
-                        'branch': row.get('ФИЛИАЛ_ГО', ''),
-                        'division': row.get('ОПЕРУ_БХМ_БХО', ''),
-                        'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                        'table_number': row.get('ТАБЕЛЬ', ''),
-                        'start': row.get('Начала', ''),
-                        'end': row.get('Конец', ''),
-                    }
-                )
+                print(f"Processing group {name}")
 
-                # Try to get an existing employee for the user
-                # user = CustomUser.objects.get(username=username)
-                # try:
-                #     employee = Employee.objects.get(user=user)
-                # except Employee.DoesNotExist:
-                #     employee = None
-                #
-                # if not employee:
-                #     # Create a new Employee object if it doesn't exist
-                #     employee = Employee.objects.create(
-                #         user=user,
-                #         name=row.get('Имя_сотрудника_или_кандидата', ''),
-                #         position=row.get('ДОЛЖНОСТЬ', ''),
-                #         branch=row.get('ФИЛИАЛ_ГО', ''),
-                #         division=row.get('ОПЕРУ_БХМ_БХО', ''),
-                #         department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                #         table_number=row.get('ТАБЕЛЬ', ''),
-                #         start=row.get('Начала', ''),
-                #         end=row.get('Конец', ''),
-                #     )
-                # employee, created = Employee.objects.get_or_create(
-                #     user=user,
-                #     name=row.get('Имя_сотрудника_или_кандидата', ''),
-                #     position=row.get('ДОЛЖНОСТЬ', ''),
-                #     branch=row.get('ФИЛИАЛ_ГО', ''),
-                #     division=row.get('ОПЕРУ_БХМ_БХО', ''),
-                #     department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                #     table_number=row.get('ТАБЕЛЬ', ''),
-                #     start=row.get('Начала', ''),
-                #     end=row.get('Конец', ''),
-                #
-                #     # name=row['Имя_сотрудника_или_кандидата'],
-                #     # position=row['ДОЛЖНОСТЬ'],
-                #     # Add other relevant fields
-                # )
-                KPI.objects.create(
-                    user=user,
-                    employee=employee,
-                    month=datetime.now(),  # Update with actual month from the Excel file
-                    performance_score=row['ПЛАН'],
-                    kpi_name=row['KPI_name'],
-                    metric=row['Единица'],
-                    fact=row['ФАКТ'],
-                    finished=row['ИСПОЛНЕНИЕ'],
-                    premium=row['Functional'],
-                    definition=row['Definition'],
-                    method=row['Метод_расчота'],
-                    weight=row['Вес_показателья'],
-                    activity=row['Активность'],
-                    overall=row['Общий_KPI'],
-                    # performance_score=performance_score,
-                    # kpi_name=kpi_name,
-                    # metric=metric,
-                    # fact=fact,
-                    # finished=finished,
-                    # premium=premium,
-                    # definition=definition,
-                    # method=method,
-                    # weight=weight,
-                    # activity=activity,
-                    # overall=overall,
-                    # Add other KPI-related fields
-                )
-
+                create_KPIs_for_group(group, user)            
         else:
             print("Column 'username' not found in the DataFrame.")
     else:

@@ -21,7 +21,7 @@ admin.site.register(Employee, EmployeeAdmin)
 
 class CustomUserAdmin(UserAdmin):
     # Add any customization for the admin view of your custom user model
-    pass
+    list_display = ('name', 'username', 'table_number')
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
