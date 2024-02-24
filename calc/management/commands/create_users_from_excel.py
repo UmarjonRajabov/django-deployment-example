@@ -24,19 +24,16 @@ class Command(BaseCommand):
         except pd.errors.EmptyDataError:
             self.stdout.write(self.style.ERROR('Empty Excel file'))
             return
-
+        USER_MODEL = get_user_model()
         # Create users based on the Excel data
+        users_to_create = []
         for index, row in df.iterrows():
             username = row['Username']
             parol = str(row['password'])  # Convert to string
             tabel = str(row['ТableNumber'])
-
+            users_to_create.append(USER_MODEL(username=username, password=parol, table_number=tabel))
             # Check if the user already exists
-            if not get_user_model().objects.filter(username=username).exists():
-                get_user_model().objects.create_user(
-                    username=username,
-                    password=parol,
-                    table_number=tabel
-                )
-
-                self.stdout.write(self.style.SUCCESS(f'Successfully created user: {username}'))
+        print(f"creating {len(users_to_create)} users...")
+        for i in range(0, len(users_to_create), 100):
+            result = USER_MODEL.objects.bulk_create(users_to_create[i:i + 100], ignore_conflicts=True)
+            self.stdout.write(self.style.SUCCESS(f'Successfully created {len(result)} user:'))
