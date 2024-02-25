@@ -80,9 +80,17 @@ def create_KPIs_for_group(group, user):
         username = row['Username']
         
             # Check if the employee exists for the user
-        employee, created = Employee.objects.get_or_create(
+        employee, created = Employee.objects.update_or_create(
             user=user,
             defaults={
+                'name': row.get('Имя_сотрудника_или_кандидата', ''),
+                'position': row.get('ДОЛЖНОСТЬ', ''),
+                'branch': row.get('ФИЛИАЛ_ГО', ''),
+                'division': row.get('ОПЕРУ_БХМ_БХО', ''),
+                'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
+                'table_number': row.get('ТАБЕЛЬ', ''),     
+            },
+            create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
                 'position': row.get('ДОЛЖНОСТЬ', ''),
                 'branch': row.get('ФИЛИАЛ_ГО', ''),
@@ -144,6 +152,8 @@ def create_KPIs_for_group(group, user):
             weight=row['Вес_показателья'],
             activity=row['Активность'],
             overall=row['Общий_KPI'],
+            start=row.get('Начала', ''),
+            end=row.get('Конец', ''),
             # performance_score=performance_score,
             # kpi_name=kpi_name,
             # metric=metric,

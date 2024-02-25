@@ -72,6 +72,9 @@ class KPI(models.Model):
     activity = models.CharField(max_length=4, default='Нет')
     overall = models.FloatField(null=True)
 
+    start = models.DateField(null=True)
+    end = models.DateField(null=True)
+    
     def __str__(self):
         return self.kpi_name
     # Add other KPI-related fields
