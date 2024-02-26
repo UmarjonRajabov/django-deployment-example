@@ -19,11 +19,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.name
 
-
-# Create your models here.
-
-# calc/models.py
-
 class ExcelFile(models.Model):
     file = models.FileField(upload_to='excel_files/')
     uploaded_at = models.DateTimeField(default=datetime.now, blank=True)
