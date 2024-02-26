@@ -103,40 +103,7 @@ def create_KPIs_for_group(group, user):
         )
 
         # Try to get an existing employee for the user
-        # user = CustomUser.objects.get(username=username)
-        # try:
-        #     employee = Employee.objects.get(user=user)
-        # except Employee.DoesNotExist:
-        #     employee = None
-        #
-        # if not employee:
-        #     # Create a new Employee object if it doesn't exist
-        #     employee = Employee.objects.create(
-        #         user=user,
-        #         name=row.get('Имя_сотрудника_или_кандидата', ''),
-        #         position=row.get('ДОЛЖНОСТЬ', ''),
-        #         branch=row.get('ФИЛИАЛ_ГО', ''),
-        #         division=row.get('ОПЕРУ_БХМ_БХО', ''),
-        #         department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-        #         table_number=row.get('ТАБЕЛЬ', ''),
-        #         start=row.get('Начала', ''),
-        #         end=row.get('Конец', ''),
-        #     )
-        # employee, created = Employee.objects.get_or_create(
-        #     user=user,
-        #     name=row.get('Имя_сотрудника_или_кандидата', ''),
-        #     position=row.get('ДОЛЖНОСТЬ', ''),
-        #     branch=row.get('ФИЛИАЛ_ГО', ''),
-        #     division=row.get('ОПЕРУ_БХМ_БХО', ''),
-        #     department=row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-        #     table_number=row.get('ТАБЕЛЬ', ''),
-        #     start=row.get('Начала', ''),
-        #     end=row.get('Конец', ''),
-        #
-        #     # name=row['Имя_сотрудника_или_кандидата'],
-        #     # position=row['ДОЛЖНОСТЬ'],
-        #     # Add other relevant fields
-        # )
+
         kpi = KPI(
             user=user,
             employee=employee,
@@ -154,18 +121,7 @@ def create_KPIs_for_group(group, user):
             overall=row['Общий_KPI'],
             start=row.get('Начала', ''),
             end=row.get('Конец', ''),
-            # performance_score=performance_score,
-            # kpi_name=kpi_name,
-            # metric=metric,
-            # fact=fact,
-            # finished=finished,
-            # premium=premium,
-            # definition=definition,
-            # method=method,
-            # weight=weight,
-            # activity=activity,
-            # overall=overall,
-            # Add other KPI-related fields
+
         )
         kpis_to_create.append(kpi)
     KPI.objects.bulk_create(kpis_to_create)
