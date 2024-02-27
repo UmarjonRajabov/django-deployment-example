@@ -483,6 +483,7 @@ iframe {
   height: 30vh;
   width: 97vw;
   border: gray solid 3px;
+  border-bottom:none;
   margin-top: 20px;
   padding-bottom: 20px;
   padding-left: 10px;
