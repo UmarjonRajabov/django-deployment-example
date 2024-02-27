@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,11 +111,17 @@ new Chart("myChart1", {
         <div id="end">{{ kpi.end }}</div>
           <div id="active">{{ kpi.activity }}</div>
           <div id="method">{{ kpi.method }}</div>
-         <div id="pos">{{ kpi.weight }}</div>
+<!--         <div id="pos">{{ kpi.weight }}</div>-->
+          {% with percent_value=kpi.weight|multiply:100 %}
+<div id="pos">{{ percent_value|floatformat:"0" }}%</div>
+{% endwith %}
      <!-- Update the lines where you display the numbers -->
 <div id="plan">{{ kpi.performance_score|add:0.5|floatformat:"0" }}</div>
 <div id="fact">{{ kpi.fact|add:0.5|floatformat:"0" }}</div>
-<div id="done">{{ kpi.finished|add:0.5|floatformat:"0" }}</div>
+<!--<div id="done">{{ kpi.finished|add:0.5|floatformat:"0" }}</div>-->
+        {% with percent_value=kpi.finished|multiply:100 %}
+<div id="done">{{ percent_value|floatformat:"2" }}%</div>
+{% endwith %}
 
 
     </div>
