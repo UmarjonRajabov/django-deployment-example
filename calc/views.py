@@ -15,6 +15,7 @@ from .models import ExcelFile
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -78,8 +79,8 @@ def create_KPIs_for_group(group, user):
         activity = row['Активность']
         overall = row['Общий_KPI']
         username = row['Username']
-        
-            # Check if the employee exists for the user
+
+        # Check if the employee exists for the user
         employee, created = Employee.objects.update_or_create(
             user=user,
             defaults={
@@ -88,7 +89,7 @@ def create_KPIs_for_group(group, user):
                 'branch': row.get('ФИЛИАЛ_ГО', ''),
                 'division': row.get('ОПЕРУ_БХМ_БХО', ''),
                 'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
-                'table_number': row.get('ТАБЕЛЬ', ''),     
+                'table_number': row.get('ТАБЕЛЬ', ''),
             },
             create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
@@ -127,6 +128,7 @@ def create_KPIs_for_group(group, user):
     KPI.objects.bulk_create(kpis_to_create)
     print(f"Created {len(kpis_to_create)} KPIs for user {user.username}")
 
+
 def process_data_and_calculate_kpis(data_frame):
     print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
@@ -143,7 +145,7 @@ def process_data_and_calculate_kpis(data_frame):
 
                 print(f"Processing group {name}")
 
-                create_KPIs_for_group(group, user)            
+                create_KPIs_for_group(group, user)
         else:
             print("Column 'username' not found in the DataFrame.")
     else:
@@ -189,4 +191,3 @@ def kpi_index(request):
 
 def kpi_card(request):
     return render(request, 'kpi/card.html')
-
