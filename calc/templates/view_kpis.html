@@ -38,7 +38,7 @@
                 <span class="ikki">{{ kpi.employee.position }}</span>
             </div>
             <div class="info_item">
-                <span>FUNCTIONAL</span>
+                <span>ФУНКЦИОНАЛ</span>
                 <span class="ikki">{{kpi.premium}}</span>
             </div>
             <div class="info_item">
@@ -50,7 +50,7 @@
     </div>
         <div class="diagram">
             <h1 style="padding-top:10px;padding-left:10px;">KPI</h1>
-            <p style="float: right; margin-top: -39px; font-size: 24px; font-weight: 900;padding-left:200px;">за июль 2023 г.            </p>
+            <p style="float: right; margin-top: -39px; font-size: 24px; font-weight: 900;padding-left:200px;">за декабрь 2023 г.            </p>
             <canvas id="myChart1" style="width:100%;max-width:1000px;margin-top:-280px;padding-right:309px;padding-bottom:400px;padding-left:-90px"></canvas>
 
 <script>
@@ -85,21 +85,21 @@ new Chart("myChart1", {
     </div>
 
     <nav class="chart1">
-        <p style="font-style: italic; font-size: 30px; font-weight: 900;">Динамика выполнение общего плановые показателей KPI</p>
+        <p style="font-style: italic; font-size: 30px; font-weight: 900;">Динамика выполнения общих плановых показателей KPI</p>
         <canvas id="myChart"></canvas>
     </nav>
 <div class="umumiy">
 
   <div class="flex-container1">
     <div style="width: 99%;"></div>
-          <div style="width: 35%;">НАЧАЛА</div>
+          <div style="width: 35%;">НАЧАЛО</div>
           <div style="width: 34%;">КОНЕЦ</div>
-       <div style="width: 9%;">АКТИВ <br>НОСТЬ</div>
-          <div style="width: 29%;">МЕТОД <br> РАСЧОТА</div>
-    <div style="width: 28%;" > ВЕС <br> ПОКАЗАТЕЛЬЯ  </div>
+       <div style="width: 9%;">АКТИВ <br> <br> НОСТЬ</div>
+          <div style="width: 29%;">МЕТОД <br> <br> РАСЧЁТА</div>
+    <div style="width: 28%;" > ВЕС <br> <br> ПОКАЗАТЕЛЬЯ  </div>
     <div style="width: 25%"> ПЛАН</div>
     <div style="width: 28%;">ФАКТ<br></div>
-    <div style="width: 18%;">ИСПОЛ- <br>  НЕНИЕ <br></div>
+    <div style="width: 18%;">ИСПОЛ- <br> <br> НЕНИЕ <br></div>
   </div>
 
 
@@ -125,7 +125,7 @@ new Chart("myChart1", {
 <script>
   // Sample data for the chart
   var data = {
-      labels: ["January", "February", "March", "April", "May","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"],
+      labels: ["авг 23'", "сен 23'", "окт 23'", "ноя 23'", "дек 23'","янв 24'","фев 24'","мар 24'","апр 24'","май 24'","июн 24'","июл 24'"],
       datasets: [{
           label: "",
           data: [10, 20, 15,12,14,16,18,22,24,26,28, 25, 30],
@@ -155,7 +155,7 @@ new Chart("myChart1", {
         }],
         xAxes: [{
             ticks: {
-                fontSize: 10, // Adjust the font size for the x-axis labels
+                fontSize: 20, // Adjust the font size for the x-axis labels
             }
         }]
     }
