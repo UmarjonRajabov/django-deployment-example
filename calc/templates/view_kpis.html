@@ -64,39 +64,22 @@ const barColors = [
 new Chart("myChart1", {
   type: "doughnut",
   data: {
-    labels: "",
+    labels: xValues,
     datasets: [{
       backgroundColor: barColors,
       data: yValues,
-      borderDash:[4,40],
-      borderDashOffset:12.0,
-      borderJoinStyle:'miter',
-      circumference:30
+      borderDash:[2,100]
     }]
   },
- var options = {
-    maintainAspectRatio: false,
-    aspectRatio: 1,
-    responsive: true,
-    plugins: {
-        datalabels: {
-            formatter: function(value, context) {
-                return context.chart.data.labels[context.dataIndex];
-            },
-            color: '#fff', // Color of the text
-            font: {
-                size: '16' // Font size of the text
-            }
-        }
+  options: {
+    title: {
+      display: true,
+      text:  "Исполнение: 78%"
     }
-};
-    var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: data,
-    options: options
+  }
 });
 </script>
+
 
         </div>
     </div>
