@@ -110,9 +110,13 @@ new Chart("myChart1", {
         <div id="start">{{ kpi.start }}</div>
         <div id="end">{{ kpi.end }}</div>
 <!--          <div id="active">{{ kpi.activity }}</div>-->
-        <div id="active" class="{% if kpi.activity == 'yes' %}yellow-bg{% elif kpi.activity == 'no' %}red-bg{% endif %}">
+<!--        <div id="active" class="{% if kpi.activity == 'Да' %}yellow-bg{% elif kpi.activity == 'Нет' %}red-bg{% endif %}">-->
+<!--    {{ kpi.activity }}-->
+<!--</div>-->
+        <div id="active" style="{% if kpi.activity == 'Да' %}background-color: yellow;{% elif kpi.activity == 'Нет' %}background-color: red;{% endif %}">
     {{ kpi.activity }}
 </div>
+
           <div id="method">{{ kpi.method }}</div>
 <!--         <div id="pos">{{ kpi.weight }}</div>-->
           {% with percent_value=kpi.weight|multiply:100 %}
