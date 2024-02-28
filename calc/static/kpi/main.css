@@ -490,3 +490,10 @@ iframe {
   border-radius: 20px;
 }
 
+.yellow-bg {
+    background-color: yellow;
+}
+
+.red-bg {
+    background-color: red;
+}
