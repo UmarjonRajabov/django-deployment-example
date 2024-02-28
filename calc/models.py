@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from datetime import datetime
 
 from django.db.models.functions import Now
@@ -18,6 +17,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.name
+
 
 class ExcelFile(models.Model):
     file = models.FileField(upload_to='excel_files/')
@@ -69,7 +69,7 @@ class KPI(models.Model):
 
     start = models.DateField(null=True)
     end = models.DateField(null=True)
-    
+
     def __str__(self):
         return self.kpi_name
     # Add other KPI-related fields

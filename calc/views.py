@@ -10,8 +10,6 @@ from .models import Employee, KPI, CustomUser
 import pandas as pd
 from datetime import datetime
 from django.shortcuts import get_object_or_404
-from .utils import process_excel_file
-from .models import ExcelFile
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
