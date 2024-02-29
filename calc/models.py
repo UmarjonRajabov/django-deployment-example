@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=30)
     username = models.CharField(unique=True, max_length=30)
-    table_number = models.CharField(max_length=10, unique=False)
+    table_number = models.IntegerField( unique=False)
     USERNAME_FIELD = 'username'
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Employee(models.Model):
     branch = models.TextField()
     division = models.TextField()
     department = models.TextField()
-    table_number = models.CharField(max_length=10, unique=False)
+    table_number = models.IntegerField( unique=False)
     start = models.DateField(null=True)
     end = models.DateField(null=True)
     photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
