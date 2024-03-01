@@ -8,7 +8,7 @@ urlpatterns = [
     path('success_page/', success_page, name='success_page'),
     path('view_kpis/', view_kpis, name='view_kpis'),
     # Authentication URLs
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # path('login/', login_view, name='login'),
     # path('excel_content/', excel_content, name='excel_content'),
