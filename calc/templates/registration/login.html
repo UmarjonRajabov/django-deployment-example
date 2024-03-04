@@ -7,73 +7,112 @@
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
     <style>
- body {
-    background-image: url("{% static 'kpi/images/background.png' %}");
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
-}
+<!-- body {-->
+<!--    margin: 0; /* Remove default body margins */-->
+<!--}-->
 
-/* Semi-transparent layer within the body */
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); /* Adjust opacity as needed */
-    z-index: 1;
-}
+<!--.bg-image-container {-->
+<!--    background-image: url("{% static 'kpi/images/background.png' %}");-->
+<!--    background-size: cover;-->
+<!--    background-position: top;-->
+<!--    background-repeat: no-repeat;-->
+<!--    position: fixed; /* Keep image fixed on scroll */-->
+<!--    top: 0;-->
+<!--    left: 0;-->
+<!--    width: 100%;-->
+<!--    height: 100%;-->
+<!--    z-index: -1; /* Place the image behind other content */-->
+<!--}-->
+        * {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			}
 
-.login100-form {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    z-index: 2;
-    opacity: 1;
-}
+
+		body{
+			background-image: url("{% static 'kpi/images/background.png' %}");
+			background-repeat: no-repeat;
+			background-color: black;
+			background-size: cover;
+			height: 60vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+            background-position: top;
+		}
+		.container{
+            height: 600px;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			padding: 25px;
+            align-items: center;
+		}
+		input{
+			margin: 5px 0px;
+			height: 35px;
+			padding: 10px;
+			}
+		button{
+			height: 35px;
+			margin: 5px 0px;
+			background-color: skyblue;
+			border: none;
+			border-radius: 5px;
+			color: #333;
+			}
+		button:hover{
+			background-color: #333;
+			color: skyblue;
+			}
 
     </style>
 </head>
 <body>
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <form method="post" action="{% url 'login' %}" class="login100-form">
-                    {% csrf_token %}
-                    <span class="login100-form-title">
-                        Xush kelibsiz
-                    </span>
-                    <span class="login100-form-title">
-                        <i class="zmdi"></i>
-                    </span>
-
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        <input type="text" class="input100" name="username" placeholder="Username">
-                        <span class="focus-input100" data-placeholder=""></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <span class="btn-show-pass"></span>
-                        <input type="password" class="input100" name="password" placeholder="Password">
-                        <span class="focus-input100" data-placeholder=""></span>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button type="submit" class="login100-form-btn">Login</button>
-                        </div>
-                    <div class="text-center">
-                        <span class="txt1">
+<div class="bg-image-container"></div>
+<!--    <div class="limiter">-->
+<!--        <div class="container-login100">-->
+<!--            <div class="wrap-login100">-->
+   <div class="container">
+    <div id="y" style="top: 10px; font-size: xxx-large;">  O'ZMILLIYBANK KPI TIZIMIGA   XUSH KELIBSIZ!!</div>
+    <div id="f" style="width:20%; margin-top: 300px;">
+        
+           <form method="post" action="{% url 'login' %}" class="login100-form">
+                        {% csrf_token %}
+                        <span class="login100-form-title" style="text-weight:bold;">
+                        
                         </span>
-                        <a class="txt2" href="#"></a>
-                    </div>
-                </form>
-            </div>
-        </div>
+                        <span class="login100-form-title">
+                            <i class="zmdi"></i>
+                        </span>
+    
+                        <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                            <input type="text" class="input100" name="username" placeholder="Username" style="font-size:xx-large;">
+                            <span class="focus-input100" data-placeholder=""></span>
+                        </div>
+    
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <span class="btn-show-pass"></span>
+                            <input type="password" class="input100" name="password" placeholder="Password" style="font-size:xx-large;">
+                            <span class="focus-input100" data-placeholder=""></span>
+                        </div>
+    
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" class="login100-form-btn">Login</button>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <span class="txt1">
+                            </span>
+                            <a class="txt2" href="#"></a>
+                        </div>
+                    </form>
     </div>
+   </div>
+      
 
     <div id="dropDownSelect1"></div>
 </body>
