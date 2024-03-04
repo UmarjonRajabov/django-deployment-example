@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'kpi/main.css' %}">
+    <style>
+         body {
+    background-image: url("{% static 'kpi/images/background.jpg' %}"); /* Adjust the path if needed */
+    background-size: cover;          /* Scale the image to cover the entire screen */
+    background-position: center;     /* Center the image */
+    background-repeat: no-repeat;    /* Prevent the image from tiling */
+}
+.limiter,
+.container-login100 {
+    opacity: 0.9; /* Add semi-transparency to content over the background */
+}
+
+.login100-form {
+    background-color: white;  /* Add background color to form */
+    border-radius: 10px;     /* Add rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+    </style>
 </head>
 <body>
     <div class="limiter">

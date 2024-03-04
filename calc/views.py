@@ -169,7 +169,6 @@ def view_kpis(request):
 
     # Retrieve KPI entries as needed
     print("Photo URL:", photo_url)
-    print(kpi)
     if request.user.is_staff:
         kpi_entries = KPI.objects.all()
     else:
