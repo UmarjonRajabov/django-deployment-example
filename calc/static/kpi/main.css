@@ -366,7 +366,7 @@ iframe {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   font-size: 24px;
-  text-align: center;
+  text-align: left;
 
 }
 
@@ -400,6 +400,7 @@ iframe {
 }
 #start, #end,#method{
   width: 15%;
+  text-align: left;
 }
 
 

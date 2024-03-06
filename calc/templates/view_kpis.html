@@ -53,13 +53,28 @@
         <div class="diagram" style="align-items: center; position: relative; ">
             <h1 style="padding-top:10px;padding-left:10px;">за декабрь 2023 г. </h1>
 
- <div style="align-items: center; align-self: center;">
-       {% if kpi_entries %}
-                {% with kpi=kpi_entries.0 %}
-        <p style="float: right; margin-top: 1px; font-size: 100px; font-weight: 900; position: fixed; margin: 100px 0px 180px 185px;">{{kpi.overall}}</p>
-        <p style="float: right; margin-top: 1px; font-size: 50px; font-weight: 900; position: fixed; margin: 150px 0px 0px 335px;">%</p>
+ <div style="align-items: center; align-self: center; position: relative;">
+     <div style="position: absolute;">
+      <div id="raqam" style="text-align: right; margin-right: -60px;">
+        {% if kpi_entries %}
+        {% with kpi=kpi_entries.0 %}
+            {% with percent_value=kpi.overall|multiply:100 %}
+                {% if percent_value < 100 %}
+                    <p style="float: right; margin-top: 1px; font-size: 85px; font-weight: 900; position: absolute; margin: 100px 0px 180px 185px;">{{ percent_value|floatformat:"1" }}</p>
+                {% else %}
+                    <p style="float: right; margin-top: 1px; font-size: 100px; font-weight: 900; position: absolute; margin: 100px 0px 180px 185px;">{{ percent_value|floatformat:"0" }}</p>
+                {% endif %}
+            {% endwith %}
         {% endwith %}
-          {% endif %}
+    {% endif %}
+    
+      </div>
+
+<div id="birlik">
+    <p style="float: right; margin-top: 1px; font-size: 65px; font-weight: 900; position: absolute; margin: 130px 0px 0px 335px;">%</p>
+</div>
+     </div>
+    
     </div>
 
             <div style="position:relative;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-600 2700 16000 70000"> <!-- width="500mm" height="500mm" -->
