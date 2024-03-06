@@ -88,6 +88,7 @@ def create_KPIs_for_group(group, user):
                 'division': row.get('ОПЕРУ_БХМ_БХО', ''),
                 'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
                 'table_number': row.get('ТАБЕЛЬ', ''),
+                'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ',''),
             },
             create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
@@ -98,6 +99,7 @@ def create_KPIs_for_group(group, user):
                 'table_number': row.get('ТАБЕЛЬ', ''),
                 'start': row.get('Начала', ''),
                 'end': row.get('Конец', ''),
+                'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
             }
         )
 

@@ -42,6 +42,7 @@ class Employee(models.Model):
     start = models.DateField(null=True)
     end = models.DateField(null=True)
     photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
+    fixed = models.FloatField(null=True)
 
     # user_id = models.FloatField(unique=True)
 
