@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db.models.functions import Now
 
@@ -74,3 +74,28 @@ class KPI(models.Model):
     def __str__(self):
         return self.kpi_name
     # Add other KPI-related fields
+
+
+# Define your Archive model similar to your KPI model
+class KPIArchive(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    month = models.DateField()
+    performance_score = models.FloatField()
+    kpi_name = models.CharField(max_length=255)
+    metric = models.CharField(max_length=255)
+    fact = models.FloatField()
+    finished = models.FloatField(null=True)
+    premium = models.TextField()
+    definition = models.TextField()
+    method = models.TextField()
+    weight = models.FloatField(null=True)
+    activity = models.CharField(max_length=4, default='Нет')
+    overall = models.FloatField(null=True)
+
+    start = models.DateField(null=True)
+    end = models.DateField(null=True)
+
+    def __str__(self):
+        return f"{self.employee} - {self.month}"
+
