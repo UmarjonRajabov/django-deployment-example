@@ -168,6 +168,7 @@ def process_data_and_calculate_kpis(data_frame, month):
     else:
         print("Column 'Definition' not found in the DataFrame.")
 
+
 # 3. Display Data According to Current Month
 # In your view_kpis view:
 @login_required
@@ -175,7 +176,9 @@ def view_kpis(request):
     # Initialize photo_url
     photo_url = None
 
-    # print("User:", request.user)
+    # Get the current month
+    current_month = datetime.now().month
+
     if hasattr(request.user, 'employee'):
         print("Employee:", request.user.employee)
         if hasattr(request.user.employee, 'table_number'):
@@ -187,13 +190,13 @@ def view_kpis(request):
     else:
         print("User has no employee attribute")
 
-    # Retrieve KPI entries as needed
+    # Retrieve KPI entries for the current month
     print("Photo URL:", photo_url)
     if request.user.is_staff:
-        kpi_entries = KPI.objects.all()
+        kpi_entries = KPI.objects.filter(month__month=current_month)
     else:
         employee = get_object_or_404(Employee, user=request.user)
-        kpi_entries = KPI.objects.filter(employee=employee)
+        kpi_entries = KPI.objects.filter(employee=employee, month__month=current_month)
 
     # Render the template with the photo_url included in the context
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
@@ -209,3 +212,7 @@ def kpi_index(request):
 
 def kpi_card(request):
     return render(request, 'kpi/card.html')
+
+# 4. Allow Users to View Previous Months
+# You can implement a dropdown menu or any other UI element in your template
+# to allow users to select and view data for previous months.
