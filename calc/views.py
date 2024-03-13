@@ -14,6 +14,18 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
 
+def extract_month(excel_file):
+    # Assume the file name contains the month information, e.g., "january_data.xlsx"
+    file_name = excel_file.file.name
+    month_names = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october',
+                   'november', 'december']
+    for month_name in month_names:
+        if month_name in file_name.lower():
+            return month_names.index(month_name) + 1  # Adding 1 to match Python's month numbering (1-12)
+    # If no month name found, default to the current month
+    return datetime.now().month
+
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -92,7 +104,7 @@ def create_KPIs_for_group(group, user):
                 'division': row.get('ОПЕРУ_БХМ_БХО', ''),
                 'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
                 'table_number': row.get('ТАБЕЛЬ', ''),
-                'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ',''),
+                'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
             },
             create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
