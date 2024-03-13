@@ -40,6 +40,10 @@ def upload_excel(request):
             excel_file.save()
             try:
                 excel_content = pd.read_excel(excel_file.file.path)
+                # Extract month from file name or content
+                month = extract_month(excel_file)
+                # Store data in the database with the month information
+                process_data_and_store_kpis(excel_content, month)
             except pd.errors.EmptyDataError:
                 # Handle empty Excel file
                 return render(request, 'upload_excel.html', {'form': form, 'error_message': 'Empty Excel file'})
