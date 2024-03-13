@@ -55,16 +55,11 @@ def upload_excel(request):
                 # Extract month from file name or content
                 month = extract_month(excel_file)
                 # Store data in the database with the month information
-                process_data_and_store_kpis(excel_content, month)
+                process_data_and_calculate_kpis(excel_content, month)
             except pd.errors.EmptyDataError:
                 # Handle empty Excel file
                 return render(request, 'upload_excel.html', {'form': form, 'error_message': 'Empty Excel file'})
-
-            # Process the data and calculate KPIs
-            process_data_and_calculate_kpis(excel_content)
-
             return redirect('success_page')
-
 
     else:
         form = ExcelFileForm()
@@ -72,11 +67,17 @@ def upload_excel(request):
     return render(request, 'upload_excel.html', {'form': form})
 
 
+# 2. Archive Previous Months
+# You can implement this logic in a separate function or as part of process_data_and_store_kpis.
+
+# 3. Display Data According to Current Month
+# In your view_kpis view:
+
 def success_page(request):
     return render(request, 'success_page.html')
 
 
-def create_KPIs_for_group(group, user):
+def create_KPIs_for_group(group, user, month):
     print(f"Processing group: {group}")
     kpis_to_create = []
     for index, row in group.iterrows():
@@ -124,7 +125,7 @@ def create_KPIs_for_group(group, user):
         kpi = KPI(
             user=user,
             employee=employee,
-            month=datetime.now(),  # Update with actual month from the Excel file
+            month=month,  # Use the provided month
             performance_score=row['ПЛАН'],
             kpi_name=row['KPI_name'],
             metric=row['Единица'],
@@ -142,10 +143,10 @@ def create_KPIs_for_group(group, user):
         )
         kpis_to_create.append(kpi)
     KPI.objects.bulk_create(kpis_to_create)
-    print(f"Created {len(kpis_to_create)} KPIs for user {user.username}")
+    print(f"Created {len(kpis_to_create)} KPIs for user {user.username} and month {month}")
 
 
-def process_data_and_calculate_kpis(data_frame):
+def process_data_and_calculate_kpis(data_frame, month):
     print("Column names in DataFrame:", data_frame.columns)
     print(data_frame)  # Add this line to print the DataFrame
     print(data_frame.head())  # Print the first few rows of the DataFrame
@@ -161,13 +162,14 @@ def process_data_and_calculate_kpis(data_frame):
 
                 print(f"Processing group {name}")
 
-                create_KPIs_for_group(group, user)
+                create_KPIs_for_group(group, user, month)
         else:
             print("Column 'username' not found in the DataFrame.")
     else:
         print("Column 'Definition' not found in the DataFrame.")
 
-
+# 3. Display Data According to Current Month
+# In your view_kpis view:
 @login_required
 def view_kpis(request):
     # Initialize photo_url
