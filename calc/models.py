@@ -99,33 +99,3 @@ class KPIArchive(models.Model):
     def __str__(self):
         return f"{self.employee} - {self.month}"
 
-
-# def archive_previous_months():
-#     # Calculate the start and end dates for the previous month
-#     today = datetime.now()
-#     last_month_end = datetime(today.year, today.month, 1) - timedelta(days=1)
-#     last_month_start = datetime(last_month_end.year, last_month_end.month, 1)
-#
-#     # Query KPI entries for the previous month
-#     previous_month_kpis = KPI.objects.filter(month__gte=last_month_start, month__lte=last_month_end)
-#
-#     # Move the data to the archive
-#     kpi_archive_entries = []
-#     for kpi_entry in previous_month_kpis:
-#         kpi_archive_entry = KPIArchive.objects.create(
-#             user=kpi_entry.user,
-#             employee=kpi_entry.employee,
-#             month=kpi_entry.month,
-#             performance_score=kpi_entry.performance_score,
-#             # Copy other fields as needed
-#         )
-#         kpi_archive_entries.append(kpi_archive_entry)
-#
-#     # Delete or mark the original KPI entries as archived
-#     # previous_month_kpis.delete()  # Delete entries from the original table
-#     # Or, mark them as archived if you want to keep them in the original table
-#     previous_month_kpis.update(archived=True)
-#
-#
-# # Call this function before storing new data for the current month
-# archive_previous_months()
