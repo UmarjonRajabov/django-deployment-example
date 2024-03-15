@@ -72,8 +72,8 @@ def upload_excel(request):
 def archive_previous_months():
     # Calculate the start and end dates for the previous month
     today = datetime.now()
-    last_month_end = datetime(today.year, today.month, 1) - timedelta(days=1)
-    last_month_start = datetime(last_month_end.year, last_month_end.month, 1)
+    last_month_end = datetime.combine(datetime(today.year, today.month, 1) - timedelta(days=1), datetime.min.time())
+    last_month_start = datetime.combine(datetime(last_month_end.year, last_month_end.month, 1), datetime.min.time())
 
     # Query KPI entries for the previous month
     previous_month_kpis = KPI.objects.filter(month__gte=last_month_start, month__lte=last_month_end)
