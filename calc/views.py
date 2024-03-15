@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.utils import timezone
+
 from .forms import ExcelFileForm
 from .models import Employee, KPI, CustomUser
 import pandas as pd
@@ -12,6 +14,14 @@ from datetime import datetime, timedelta
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.timezone import make_aware
+from datetime import datetime
+from django.utils import timezone
+from .models import KPIArchive
+
+
+# naive_datetime = timezone.now()  # Assuming this is a naive datetime
+# aware_datetime = make_aware(naive_datetime)
 
 
 def extract_month(excel_file):
@@ -23,7 +33,7 @@ def extract_month(excel_file):
         if month_name in file_name.lower():
             return month_names.index(month_name) + 1  # Adding 1 to match Python's month numbering (1-12)
     # If no month name found, default to the current month
-    return datetime.now().month
+    return timezone.now().month
 
 
 def login_view(request):
@@ -69,14 +79,19 @@ def upload_excel(request):
 
 # 2. Archive Previous Months
 # You can implement this logic in a separate function or as part of process_data_and_store_kpis.
+# Import KPIArchive model if not imported
+
+
+# No need to import datetime and make_aware, since you're already using timezone
+
 def archive_previous_months():
     # Calculate the start and end dates for the previous month
-    today = datetime.now()
-    last_month_end = datetime.combine(datetime(today.year, today.month, 1) - timedelta(days=1), datetime.min.time())
-    last_month_start = datetime.combine(datetime(last_month_end.year, last_month_end.month, 1), datetime.min.time())
+    today = timezone.now()
+    last_month_end = timezone.datetime(today.year, today.month, 1) - timezone.timedelta(days=1)
+    last_month_start = timezone.datetime(last_month_end.year, last_month_end.month, 1)
 
     # Query KPI entries for the previous month
-    previous_month_kpis = KPI.objects.filter(month__gte=last_month_start, month__lte=last_month_end)
+    previous_month_kpis = KPI.objects.filter(month__gte=last_month_start, month__lt=last_month_end)
 
     # Move the data to the archive
     kpi_archive_entries = []
@@ -99,6 +114,8 @@ def archive_previous_months():
 # Call this function before storing new data for the current month
 archive_previous_months()
 
+# In create_KPIs_for_group(), parse dates like this:
+
 
 # 3. Display Data According to Current Month
 # In your view_kpis view:
@@ -108,6 +125,7 @@ def success_page(request):
 
 
 def create_KPIs_for_group(group, user, month):
+
     print(f"Processing group: {group}")
     kpis_to_create = []
     for index, row in group.iterrows():
@@ -151,6 +169,25 @@ def create_KPIs_for_group(group, user, month):
         )
 
         # Try to get an existing employee for the user
+        start_value = row.get('Начала', '')
+        end_value = row.get('Конец', '')
+        try:
+            # Assuming 'Начала' and 'Конец' have dates in "YYYY-MM-DD" format
+            if start_value:
+                start_date = datetime.strptime(start_value, '%Y-%m-%d').date()
+            else:
+                start_date = None  # Handle missing values
+
+            if end_value:
+                end_date = datetime.strptime(end_value, '%Y-%m-%d').date()
+            else:
+                end_date = None  # Handle missing values
+
+        except ValueError:
+            print(f"Error parsing dates for row {index}. Skipping this row.")
+            continue  # Skip this row if date parsing fails
+        start_date = timezone.datetime.strptime(start_value, '%Y-%m-%d').date() if start_value else None
+        end_date = timezone.datetime.strptime(end_value, '%Y-%m-%d').date() if end_value else None
 
         kpi = KPI(
             user=user,
@@ -167,8 +204,8 @@ def create_KPIs_for_group(group, user, month):
             weight=row['Вес_показателья'],
             activity=row['Активность'],
             overall=row['Общий_KPI'],
-            start=row.get('Начала', ''),
-            end=row.get('Конец', ''),
+            start=start_date,
+            end=end_date,
 
         )
         kpis_to_create.append(kpi)
@@ -207,7 +244,7 @@ def view_kpis(request):
     photo_url = None
 
     # Get the current month
-    current_month = datetime.now().month
+    current_month = timezone.now().month
 
     if hasattr(request.user, 'employee'):
         print("Employee:", request.user.employee)
