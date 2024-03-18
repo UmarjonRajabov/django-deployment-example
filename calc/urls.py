@@ -16,12 +16,3 @@ urlpatterns = [
     path('kpi/index/', kpi_index, name='kpi_index'),
     path('kpi/card/', kpi_card, name='kpi_card'),
 ]
-
-# # kpi_project/urls.py
-# from django.contrib import admin
-# from django.urls import path, include
-#
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#
-# ]
