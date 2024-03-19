@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from datetime import datetime, timedelta
-
+from django.utils import timezone
 from django.db.models.functions import Now
 
 from back_project import settings
@@ -55,7 +55,7 @@ class Employee(models.Model):
 class KPI(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    month = models.DateTimeField()
+    month = models.DateTimeField(default=timezone.now, auto_now_add=True)
     performance_score = models.FloatField()
     kpi_name = models.CharField(max_length=255)
     metric = models.CharField(max_length=255)
