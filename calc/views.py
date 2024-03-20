@@ -20,8 +20,8 @@ from django.utils import timezone
 from .models import KPIArchive
 
 
-naive_datetime = timezone.now()  # Assuming this is a naive datetime
-aware_datetime = make_aware(naive_datetime)
+# naive_datetime = timezone.now()  # Assuming this is a naive datetime
+# aware_datetime = make_aware(naive_datetime)
 
 
 def extract_month(excel_file):
