@@ -171,23 +171,23 @@ def create_KPIs_for_group(group, user, month):
         # Try to get an existing employee for the user
         start_value = row.get('Начала', '')
         end_value = row.get('Конец', '')
-        try:
-            # Assuming 'Начала' and 'Конец' have dates in "YYYY-MM-DD" format
-            if start_value:
-                start_date = datetime.strptime(start_value, '%Y-%m-%d').date()
-            else:
-                start_date = None  # Handle missing values
-
-            if end_value:
-                end_date = datetime.strptime(end_value, '%Y-%m-%d').date()
-            else:
-                end_date = None  # Handle missing values
-
-        except ValueError:
-            print(f"Error parsing dates for row {index}. Skipping this row.")
-            continue  # Skip this row if date parsing fails
-        start_date = timezone.datetime.strptime(start_value, '%Y-%m-%d').date() if start_value else None
-        end_date = timezone.datetime.strptime(end_value, '%Y-%m-%d').date() if end_value else None
+        # try:
+        #     # Assuming 'Начала' and 'Конец' have dates in "YYYY-MM-DD" format
+        #     if start_value:
+        #         start_date = datetime.strptime(start_value, '%Y-%m-%d').date()
+        #     else:
+        #         start_date = None  # Handle missing values
+        #
+        #     if end_value:
+        #         end_date = datetime.strptime(end_value, '%Y-%m-%d').date()
+        #     else:
+        #         end_date = None  # Handle missing values
+        #
+        # except ValueError:
+        #     print(f"Error parsing dates for row {index}. Skipping this row.")
+        #     continue  # Skip this row if date parsing fails
+        # start_date = timezone.datetime.strptime(start_value, '%Y-%m-%d').date() if start_value else None
+        # end_date = timezone.datetime.strptime(end_value, '%Y-%m-%d').date() if end_value else None
 
         kpi = KPI(
             user=user,
