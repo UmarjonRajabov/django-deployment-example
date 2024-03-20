@@ -204,8 +204,8 @@ def create_KPIs_for_group(group, user, month):
             weight=row['Вес_показателья'],
             activity=row['Активность'],
             overall=row['Общий_KPI'],
-            start=start_date,
-            end=end_date,
+            start=start_value,
+            end=end_value,
 
         )
         kpis_to_create.append(kpi)
