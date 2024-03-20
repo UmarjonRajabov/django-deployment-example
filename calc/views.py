@@ -245,6 +245,7 @@ def view_kpis(request):
 
     # Get the current month
     current_month = timezone.now().month
+    current_year = timezone.now().year
 
     if hasattr(request.user, 'employee'):
         print("Employee:", request.user.employee)
@@ -260,10 +261,10 @@ def view_kpis(request):
     # Retrieve KPI entries for the current month
     print("Photo URL:", photo_url)
     if request.user.is_staff:
-        kpi_entries = KPI.objects.filter(month__month=current_month)
+        kpi_entries = KPI.objects.filter(month__month=current_month, month__year=current_year)
     else:
         employee = get_object_or_404(Employee, user=request.user)
-        kpi_entries = KPI.objects.filter(employee=employee, month__month=current_month)
+        kpi_entries = KPI.objects.filter(employee=employee, month__month=current_month, month__year=current_year)
 
     # Render the template with the photo_url included in the context
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
