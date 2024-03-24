@@ -117,8 +117,6 @@ archive_previous_months()
 # In create_KPIs_for_group(), parse dates like this:
 
 
-# 3. Display Data According to Current Month
-# In your view_kpis view:
 
 def success_page(request):
     return render(request, 'success_page.html')
