@@ -114,8 +114,8 @@ def archive_previous_months():
 # Call this function before storing new data for the current month
 archive_previous_months()
 
-# In create_KPIs_for_group(), parse dates like this:
 
+# In create_KPIs_for_group(), parse dates like this:
 
 
 def success_page(request):
@@ -123,7 +123,6 @@ def success_page(request):
 
 
 def create_KPIs_for_group(group, user, month):
-
     print(f"Processing group: {group}")
     kpis_to_create = []
     for index, row in group.iterrows():
