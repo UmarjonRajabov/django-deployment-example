@@ -117,7 +117,6 @@ archive_previous_months()
 
 # In create_KPIs_for_group(), parse dates like this:
 
-
 def success_page(request):
     return render(request, 'success_page.html')
 
