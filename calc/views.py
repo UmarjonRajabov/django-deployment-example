@@ -244,6 +244,11 @@ def view_kpis(request):
     current_year = timezone.now().year
     print(current_month)
     print(current_year)
+    # Get the first day of the current month
+    start_date = datetime(current_year, current_month, 1)
+    # Get the last day of the current month
+    end_date = start_date.replace(day=28) + timedelta(days=4)
+    end_date = end_date - timedelta(days=end_date.day)
 
     if hasattr(request.user, 'employee'):
         print("Employee:", request.user.employee)
@@ -274,14 +279,23 @@ def view_kpis(request):
     #         Q(employee=employee, month__month=current_month, month__year=current_year) |
     #         Q(employee=employee, start=current_month, end=current_month)
     #     )
+    # if request.user.is_staff:
+    #     kpi_entries = KPI.objects.filter(
+    #         Q(start=current_month, end=current_month)
+    #     )
+    # else:
+    #     employee = get_object_or_404(Employee, user=request.user)
+    #     kpi_entries = KPI.objects.filter(
+    #         Q(employee=employee, start=current_month, end=current_month)
+    #     )
     if request.user.is_staff:
         kpi_entries = KPI.objects.filter(
-            Q(start=current_month, end=current_month)
+            Q(start=start_date, end=end_date)
         )
     else:
         employee = get_object_or_404(Employee, user=request.user)
         kpi_entries = KPI.objects.filter(
-            Q(employee=employee, start=current_month, end=current_month)
+            Q(employee=employee, start=start_date, end=end_date)
         )
 
     # Render the template with the photo_url included in the context
