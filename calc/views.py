@@ -242,6 +242,8 @@ def view_kpis(request):
     # Get the current month
     current_month = timezone.now().month
     current_year = timezone.now().year
+    print(current_month)
+    print(current_year)
 
     if hasattr(request.user, 'employee'):
         print("Employee:", request.user.employee)
