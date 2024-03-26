@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import timezone
-
+from django.db.models import Q
 from .forms import ExcelFileForm
 from .models import Employee, KPI, CustomUser
 import pandas as pd
@@ -258,11 +258,31 @@ def view_kpis(request):
 
     # Retrieve KPI entries for the current month
     print("Photo URL:", photo_url)
+    # if request.user.is_staff:
+    #     kpi_entries = KPI.objects.filter(month__month=current_month, month__year=current_year)
+    # else:
+    #     employee = get_object_or_404(Employee, user=request.user)
+    #     kpi_entries = KPI.objects.filter(employee=employee, month__month=current_month, month__year=current_year)
+    # if request.user.is_staff:
+    #     kpi_entries = KPI.objects.filter(
+    #         Q(month__month=current_month, month__year=current_year) |
+    #         Q(start=current_month, end=current_month)
+    #     )
+    # else:
+    #     employee = get_object_or_404(Employee, user=request.user)
+    #     kpi_entries = KPI.objects.filter(
+    #         Q(employee=employee, month__month=current_month, month__year=current_year) |
+    #         Q(employee=employee, start=current_month, end=current_month)
+    #     )
     if request.user.is_staff:
-        kpi_entries = KPI.objects.filter(month__month=current_month, month__year=current_year)
+        kpi_entries = KPI.objects.filter(
+            Q(start=current_month, end=current_month)
+        )
     else:
         employee = get_object_or_404(Employee, user=request.user)
-        kpi_entries = KPI.objects.filter(employee=employee, month__month=current_month, month__year=current_year)
+        kpi_entries = KPI.objects.filter(
+            Q(employee=employee, start=current_month, end=current_month)
+        )
 
     # Render the template with the photo_url included in the context
     return render(request, 'view_kpis.html', {'kpi_entries': kpi_entries, 'photo_url': photo_url})
