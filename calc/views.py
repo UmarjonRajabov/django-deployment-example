@@ -242,8 +242,7 @@ def view_kpis(request):
     # Get the current month
     current_month = timezone.now().month
     current_year = timezone.now().year
-    print(current_month)
-    print(current_year)
+
     # Get the first day of the current month
     start_date = datetime(current_year, current_month, 1)
     # Get the last day of the current month
