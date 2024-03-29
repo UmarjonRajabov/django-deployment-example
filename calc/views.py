@@ -258,7 +258,6 @@ def view_kpis(request):
     else:
         print("User has no employee attribute")
 
-    # Retrieve KPI entries for the current month
     print("Photo URL:", photo_url)
     # if request.user.is_staff:
     #     kpi_entries = KPI.objects.filter(month__month=current_month, month__year=current_year)
