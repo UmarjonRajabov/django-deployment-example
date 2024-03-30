@@ -162,7 +162,7 @@ def create_KPIs_for_group(group, user, month):
             }
         )
 
-        # Try to get an existing employee for the user
+        
         start_value = row.get('Начала', '')
         end_value = row.get('Конец', '')
         # try:
