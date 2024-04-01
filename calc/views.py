@@ -82,8 +82,6 @@ def upload_excel(request):
 # Import KPIArchive model if not imported
 
 
-# No need to import datetime and make_aware, since you're already using timezone
-
 def archive_previous_months():
     # Calculate the start and end dates for the previous month
     today = timezone.now()
