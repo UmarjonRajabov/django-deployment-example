@@ -160,7 +160,6 @@ def create_KPIs_for_group(group, user, month):
             }
         )
 
-        
         start_value = row.get('Начала', '')
         end_value = row.get('Конец', '')
         # try:
