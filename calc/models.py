@@ -46,7 +46,6 @@ class Employee(models.Model):
 
     # user_id = models.FloatField(unique=True)
 
-    # Add other relevant fields
 
     def __str__(self):
         return f"{self.name} - {self.position}"
