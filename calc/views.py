@@ -19,6 +19,20 @@ from datetime import datetime
 from django.utils import timezone
 from .models import KPIArchive
 
+from rest_framework import generics
+from .models import KPI
+from .serializers import KPISerializer
+
+
+class KPIListCreateView(generics.ListCreateAPIView):
+    queryset = KPI.objects.all()
+    serializer_class = KPISerializer
+
+
+class KPIRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = KPI.objects.all()
+    serializer_class = KPISerializer
+
 
 # naive_datetime = timezone.now()  # Assuming this is a naive datetime
 # aware_datetime = make_aware(naive_datetime)

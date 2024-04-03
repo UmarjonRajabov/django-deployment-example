@@ -2,8 +2,13 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import upload_excel, success_page, view_kpis, login_view, access_denied, kpi_card, kpi_index
+from django.urls import path
+from .views import KPIListCreateView, KPIRetrieveUpdateDestroyView
+
 
 urlpatterns = [
+    path('kpis/', KPIListCreateView.as_view(), name='kpi-list'),
+    path('kpis/<int:pk>/', KPIRetrieveUpdateDestroyView.as_view(), name='kpi-detail'),
     path('upload_excel/', upload_excel, name='upload_excel'),
     path('success_page/', success_page, name='success_page'),
     path('view_kpis/', view_kpis, name='view_kpis'),
