@@ -24,6 +24,8 @@ from .models import KPI
 from .serializers import KPISerializer, KPIArchiveSerializer
 
 
+aware_datetime = timezone.make_aware(naive_datetime, timezone.get_current_timezone())
+
 class KPIListCreateView(generics.ListCreateAPIView):
     queryset = KPI.objects.all()
     serializer_class = KPISerializer
@@ -123,6 +125,7 @@ def archive_previous_months():
             employee=kpi_entry.employee,
             month=kpi_entry.month,
             performance_score=kpi_entry.performance_score,
+            fact=kpi_entry.fact,
             # Copy other fields as needed
         )
         kpi_archive_entries.append(kpi_archive_entry)
