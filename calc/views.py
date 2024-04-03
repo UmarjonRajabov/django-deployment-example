@@ -21,7 +21,7 @@ from .models import KPIArchive
 
 from rest_framework import generics
 from .models import KPI
-from .serializers import KPISerializer
+from .serializers import KPISerializer, KPIArchiveSerializer
 
 
 class KPIListCreateView(generics.ListCreateAPIView):
@@ -32,6 +32,16 @@ class KPIListCreateView(generics.ListCreateAPIView):
 class KPIRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = KPI.objects.all()
     serializer_class = KPISerializer
+
+
+class KPIArchiveListCreateView(generics.ListCreateAPIView):
+    queryset = KPIArchive.objects.all()
+    serializer_class = KPIArchiveSerializer
+
+
+class KPIArchiveDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = KPIArchive.objects.all()
+    serializer_class = KPIArchiveSerializer
 
 
 # naive_datetime = timezone.now()  # Assuming this is a naive datetime
