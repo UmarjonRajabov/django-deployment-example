@@ -23,8 +23,8 @@ from rest_framework import generics
 from .models import KPI
 from .serializers import KPISerializer, KPIArchiveSerializer
 
-
 aware_datetime = timezone.make_aware(naive_datetime, timezone.get_current_timezone())
+
 
 class KPIListCreateView(generics.ListCreateAPIView):
     queryset = KPI.objects.all()
@@ -44,10 +44,6 @@ class KPIArchiveListCreateView(generics.ListCreateAPIView):
 class KPIArchiveDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = KPIArchive.objects.all()
     serializer_class = KPIArchiveSerializer
-
-
-# naive_datetime = timezone.now()  # Assuming this is a naive datetime
-# aware_datetime = make_aware(naive_datetime)
 
 
 def extract_month(excel_file):
