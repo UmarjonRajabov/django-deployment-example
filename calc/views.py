@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from django.utils import timezone
 from django.db.models import Q
 from .forms import ExcelFileForm
 from .models import Employee, KPI, CustomUser
