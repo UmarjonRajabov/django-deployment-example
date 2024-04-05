@@ -22,8 +22,6 @@ from rest_framework import generics
 from .models import KPI
 from .serializers import KPISerializer, KPIArchiveSerializer
 
-# aware_datetime = timezone.make_aware(naive_datetime, timezone.get_current_timezone())
-
 
 class KPIListCreateView(generics.ListCreateAPIView):
     queryset = KPI.objects.all()
