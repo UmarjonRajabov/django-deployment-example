@@ -248,7 +248,7 @@ def process_data_and_calculate_kpis(data_frame, month):
 
 
 # 3. Display Data According to Current Month
-# In your view_kpis view:
+
 @login_required
 def view_kpis(request):
     # Initialize photo_url
