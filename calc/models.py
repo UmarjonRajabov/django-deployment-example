@@ -72,13 +72,14 @@ class KPI(models.Model):
 
     def __str__(self):
         return self.kpi_name
+    
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'employee','month','kpi_name'], name='unique_kpi_per_month')
 
-    # Add other KPI-related fields
-    def save(self, *args, **kwargs):
-        if self.start and self.end:
-            # Set month attribute to the start of the month of the 'start' attribute
-            self.month = timezone.make_aware(timezone.datetime(self.start.year, self.start.month, 1))
-        super().save(*args, **kwargs)
+        ]
+
 
 
 # Define your Archive model similar to your KPI model
