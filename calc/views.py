@@ -98,7 +98,6 @@ def upload_excel(request):
 
 # 2. Archive Previous Months
 # You can implement this logic in a separate function or as part of process_data_and_store_kpis.
-# Import KPIArchive model if not imported
 
 
 def archive_previous_months():
