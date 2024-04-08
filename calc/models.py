@@ -46,7 +46,6 @@ class Employee(models.Model):
 
     # user_id = models.FloatField(unique=True)
 
-
     def __str__(self):
         return f"{self.name} - {self.position}"
 
@@ -72,14 +71,12 @@ class KPI(models.Model):
 
     def __str__(self):
         return self.kpi_name
-    
-    
+
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'employee','month','kpi_name'], name='unique_kpi_per_month')
+            models.UniqueConstraint(fields=['user', 'employee', 'month', 'kpi_name'], name='unique_kpi_per_month')
 
         ]
-
 
 
 # Define your Archive model similar to your KPI model
