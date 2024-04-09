@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'calc',
     'rest_framework',
-    'drf-yasg',
+    # 'drf-yasg',
 
 ]
 
