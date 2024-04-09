@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'calc',
     'rest_framework',
     'drf-yasg',
+
 ]
 
 AUTHENTICATION_BACKENDS = [
