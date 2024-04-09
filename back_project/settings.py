@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'calc',
     'rest_framework',
+    'drf-yasg',
 ]
 
 AUTHENTICATION_BACKENDS = [
