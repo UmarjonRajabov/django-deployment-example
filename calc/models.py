@@ -65,7 +65,7 @@ class KPI(models.Model):
     weight = models.FloatField(null=True)
     activity = models.CharField(max_length=4, default='Нет')
     overall = models.FloatField(null=True)
-    archived = models.BooleanField(default=False)  # New field for archiving
+    archived = models.BooleanField(default=False)  
     start = models.DateField(null=True)
     end = models.DateField(null=True)
 
