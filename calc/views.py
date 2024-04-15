@@ -129,7 +129,7 @@ def archive_previous_months():
 
 
 # Call this function before storing new data for the current month
-#archive_previous_months()
+# archive_previous_months()
 
 
 def success_page(request):
@@ -198,7 +198,7 @@ def create_KPIs_for_group(group, user, month):
         #     continue  # Skip this row if date parsing fails
         # start_date = timezone.datetime.strptime(start_value, '%Y-%m-%d').date() if start_value else None
         # end_date = timezone.datetime.strptime(end_value, '%Y-%m-%d').date() if end_value else None
-       
+
         kpi = KPI(
             user=user,
             employee=employee,
@@ -218,9 +218,9 @@ def create_KPIs_for_group(group, user, month):
             end=end_value,
 
         )
-        kpi.month = timezone.make_aware(timezone.datetime( kpi.start.year, kpi.start.month, 1))
+        kpi.month = timezone.make_aware(timezone.datetime(kpi.start.year, kpi.start.month, 1))
         kpis_to_create.append(kpi)
-    KPI.objects.bulk_create(kpis_to_create,ignore_conflicts=True)
+    KPI.objects.bulk_create(kpis_to_create, ignore_conflicts=True)
     print(f"Created {len(kpis_to_create)} KPIs for user {user.username} and month {month}")
 
 
