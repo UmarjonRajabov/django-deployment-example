@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'calc',
     'rest_framework',
+    'corsheaders',
     # 'drf-yasg',
 
 ]
@@ -52,6 +53,7 @@ AUTHENTICATION_BACKENDS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -143,3 +145,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Increase the maximum number of fields allowed in a POST request
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000  # Adjust this number according to your requirements
+CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from all origins

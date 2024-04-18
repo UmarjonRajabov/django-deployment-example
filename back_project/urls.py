@@ -23,7 +23,7 @@ urlpatterns = [
     path('api/', include('calc.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('calc.urls')),
+    # path('', include('calc.urls')),
 
     # swagger
     # path('swagger/',schema_view.with_ui(
