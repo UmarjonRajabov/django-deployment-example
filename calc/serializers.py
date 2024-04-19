@@ -8,6 +8,8 @@ class KPISerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
 class KPIArchiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = KPIArchive
