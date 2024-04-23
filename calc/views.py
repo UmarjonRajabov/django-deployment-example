@@ -328,4 +328,4 @@ def kpi_card(request):
 
 # 4. Allow Users to View Previous Months
 # You can implement a dropdown menu or any other UI element in your template
-# to allow users to select and view data for previous months.
+# to allow users to select and view data for previous months
