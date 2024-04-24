@@ -92,7 +92,7 @@ class KPIArchive(models.Model):
     premium = models.TextField()
     definition = models.TextField()
     method = models.TextField()
-    weight = models.FloatField(null=True)
+    weight = models.FloatField(null=False)
     activity = models.CharField(max_length=4, default='Нет')
     overall = models.FloatField(null=True)
 
