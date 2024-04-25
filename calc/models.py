@@ -96,7 +96,7 @@ class KPIArchive(models.Model):
     activity = models.CharField(max_length=4, default='Нет')
     overall = models.FloatField(null=False)
 
-    start = models.DateField(null=True)
+    start = models.DateField(null=False)
     end = models.DateField(null=True)
 
     def __str__(self):
