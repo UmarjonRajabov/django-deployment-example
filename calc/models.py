@@ -83,20 +83,20 @@ class KPI(models.Model):
 class KPIArchive(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    month = models.DateField(auto_now_add=True)
+    month = models.DateField(auto_now_add=False)
     performance_score = models.FloatField()
     kpi_name = models.CharField(max_length=255)
     metric = models.CharField(max_length=255)
     fact = models.FloatField()
-    finished = models.FloatField(null=True)
+    finished = models.FloatField(null=False)
     premium = models.TextField()
     definition = models.TextField()
     method = models.TextField()
-    weight = models.FloatField(null=True)
+    weight = models.FloatField(null=False)
     activity = models.CharField(max_length=4, default='Нет')
-    overall = models.FloatField(null=True)
+    overall = models.FloatField(null=False)
 
-    start = models.DateField(null=True)
+    start = models.DateField(null=False)
     end = models.DateField(null=True)
 
     def __str__(self):
