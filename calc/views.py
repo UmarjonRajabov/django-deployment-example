@@ -19,7 +19,7 @@ from django.utils import timezone
 from .models import KPIArchive
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.status import status
+from rest_framework import status
 from .serializers import KPISerializer, KPIArchiveSerializer, EmployeeSerializer
 
 
@@ -28,7 +28,7 @@ class EmployeeDetailAPIView(generics.RetrieveAPIView):
     def get(self, _, pk):
         employee = Employee.objects.get(id=pk)
         serialized_data = EmployeeSerializer(employee)
-        return Response({"employee": serialized_data.data}, status=status.HTTP_OK)
+        return Response(serialized_data.data, status=status.HTTP_200_OK)
 
 
 class KPIListCreateView(generics.ListCreateAPIView):

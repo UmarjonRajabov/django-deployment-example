@@ -12,7 +12,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     kpies = KPISerializer(many=True)
     class Meta:
         model = Employee
-        fields = ("username", "kpies")
+        fields = ("name", "kpies")
     
 
 # class KPIArchiveSerializer(serializers.ModelSerializer):
