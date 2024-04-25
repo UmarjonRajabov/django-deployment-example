@@ -52,7 +52,7 @@ class Employee(models.Model):
 
 class KPI(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, related_name='kpies', on_delete=models.CASCADE)
     month = models.DateField(auto_now_add=True)
     performance_score = models.FloatField()
     kpi_name = models.CharField(max_length=255)

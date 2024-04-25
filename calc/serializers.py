@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import KPI, KPIArchive
+from .models import KPI, KPIArchive, Employee
 
 
 class KPISerializer(serializers.ModelSerializer):
@@ -7,6 +7,13 @@ class KPISerializer(serializers.ModelSerializer):
         model = KPI
         fields = '__all__'
 
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    kpies = KPISerializer(many=True)
+    class Meta:
+        model = Employee
+        fields = ("username", "kpies")
+    
 
 # class KPIArchiveSerializer(serializers.ModelSerializer):
 #     class Meta:
