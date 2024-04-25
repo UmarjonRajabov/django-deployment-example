@@ -17,9 +17,7 @@ from django.utils.timezone import make_aware
 from datetime import datetime
 from django.utils import timezone
 from .models import KPIArchive
-
 from rest_framework import generics
-from .models import KPI
 from .serializers import KPISerializer, KPIArchiveSerializer
 
 
