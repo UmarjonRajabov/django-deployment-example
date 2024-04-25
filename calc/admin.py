@@ -14,6 +14,7 @@ admin.site.register(KPI, KPIAdmin)
 
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('name', 'position', 'branch', 'division', 'department', 'table_number', 'start', 'end', 'photo')
+    list_per_page = 1000
 
 
 admin.site.register(Employee, EmployeeAdmin)

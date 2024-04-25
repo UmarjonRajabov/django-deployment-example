@@ -24,11 +24,16 @@ from .serializers import KPISerializer, KPIArchiveSerializer, EmployeeSerializer
 
 
 class EmployeeDetailAPIView(generics.RetrieveAPIView):
-    
-    def get(self, _, pk):
-        employee = Employee.objects.get(id=pk)
-        serialized_data = EmployeeSerializer(employee)
+    def get(self, request, pk):  # Include 'request' parameter
+        employee = Employee.objects.get(table_number=pk)
+        serialized_data = EmployeeSerializer(employee,
+                                             context={'request': request})  # Pass request object to serializer context
         return Response(serialized_data.data, status=status.HTTP_200_OK)
+    
+    # def get(self, _, pk):
+    #     employee = Employee.objects.get(table_number=pk)
+    #     serialized_data = EmployeeSerializer(employee)
+    #     return Response(serialized_data.data, status=status.HTTP_200_OK)
 
 
 class KPIListCreateView(generics.ListCreateAPIView):
@@ -261,6 +266,7 @@ def process_data_and_calculate_kpis(data_frame, month):
 def view_kpis(request):
     # Initialize photo_url
     photo_url = None
+    print(photo_url)
 
     # Get the current month
     current_month = timezone.now().month
