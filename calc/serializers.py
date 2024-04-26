@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import KPI, KPIArchive, Employee
 from django.conf import settings
 
+
 class KPISerializer(serializers.ModelSerializer):
     class Meta:
         model = KPI
@@ -16,10 +17,12 @@ class EmployeeSerializer(serializers.ModelSerializer):
         photo_filename = f"{table_number}.jpg"
         photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
         return photo_url
+
     kpies = KPISerializer(many=True)
+
     class Meta:
         model = Employee
-        fields = ("name", "photo","photo_url", "kpies")
+        fields = ("name", "photo", "photo_url", "kpies")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -30,7 +33,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             # Add photo_url to the response data
             data['photo_url'] = photo_url
         return data
-    
+
 
 # class KPIArchiveSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -46,4 +49,5 @@ class KPIArchiveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = KPIArchive
-        fields = ['id', 'month', 'performance_score', 'kpi_name', 'metric', 'fact', 'finished', 'premium', 'definition', 'method', 'weight', 'activity', 'overall', 'start', 'end', 'user', 'employee']
+        fields = ['id', 'month', 'performance_score', 'kpi_name', 'metric', 'fact', 'finished', 'premium', 'definition',
+                  'method', 'weight', 'activity', 'overall', 'start', 'end', 'user', 'employee']
