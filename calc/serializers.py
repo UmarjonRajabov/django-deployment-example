@@ -5,21 +5,31 @@ from django.conf import settings
 
 class EmployeeSerializer(serializers.ModelSerializer):
     photo_url = serializers.SerializerMethodField()
+    kpies = serializers.SerializerMethodField()
 
     def get_kpies(self, obj):
         kpi_queryset = obj.kpies.all()
-        if kpi_queryset.exists():  # Check if there are any KPI instances
-            # Get the start date and overall value from the first KPI instance
-            start_date = kpi_queryset.first().start
-            overall_value = kpi_queryset.first().overall
-        else:
-            start_date = None
-            overall_value = None
-
-            # Serialize the KPI instances
-        month_data = KPISerializer(kpi_queryset, many=True).data
-        # Construct the response structure
-        return [{"month": start_date, "overall": overall_value, "month_data": month_data}]
+        kpi_data = KPISerializer(kpi_queryset, many=True).data
+        months = {}
+        for kpi in kpi_data:
+            month = kpi.pop('month')  # Remove 'month' from kpi data
+            overall = kpi.pop('overall')  # Remove 'overall' from kpi data
+            if month not in months:
+                months[month] = {'month': month, 'overall': overall, 'month_data': []}
+            months[month]['month_data'].append(kpi)
+        return list(months.values())
+        # if kpi_queryset.exists():  # Check if there are any KPI instances
+        #     # Get the start date and overall value from the first KPI instance
+        #     start_date = kpi_queryset.first().start
+        #     overall_value = kpi_queryset.first().overall
+        # else:
+        #     start_date = None
+        #     overall_value = None
+        #
+        #     # Serialize the KPI instances
+        # month_data = KPISerializer(kpi_queryset, many=True).data
+        # # Construct the response structure
+        # return [{"month": start_date, "overall": overall_value, "month_data": month_data}]
 
         # month_data = KPISerializer(kpi_queryset, many=True).data
         # return [{"month": "2024-04-25", "overall": 0.24, "month_data": month_data}]
@@ -30,7 +40,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         photo_url = settings.MEDIA_URL + 'employee_photos/' + photo_filename
         return photo_url
 
-    kpies = serializers.SerializerMethodField()
+    # kpies = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
@@ -51,9 +61,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class KPISerializer(serializers.ModelSerializer):
     class Meta:
         model = KPI
-        fields = ("id", "performance_score", "kpi_name", "metric", "fact", "finished",
+        fields = ("id","month", "performance_score", "kpi_name", "metric", "fact", "finished",
                   "definition", "method", "weight", "activity", "archived", "start", "end", "user",
-                  "employee")
+                  "employee","overall")
 
 
 #     # class Meta:
