@@ -22,7 +22,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ("name", "photo", "photo_url", "kpies")
+        fields = ("name", "photo_url","table_number", "branch","division","department","position","premium"",fixed", "kpies")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
