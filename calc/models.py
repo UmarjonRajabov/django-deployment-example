@@ -43,7 +43,7 @@ class Employee(models.Model):
     end = models.DateField(null=True)
     photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
     fixed = models.FloatField(null=True)
-    premium = models.TextField()
+    premium = models.TextField(null=False, default="Xodim")
 
     # user_id = models.FloatField(unique=True)
 

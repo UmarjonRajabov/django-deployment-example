@@ -159,7 +159,6 @@ def create_KPIs_for_group(group, user, month):
         metric = row['Единица']
         fact = row['ФАКТ']
         finished = row['ИСПОЛНЕНИЕ']
-        premium = row['Functional']
         definition = row['Definition']
         method = row['Метод_расчота']
         weight = row['Вес_показателья']
@@ -178,6 +177,8 @@ def create_KPIs_for_group(group, user, month):
                 'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
                 'table_number': row.get('ТАБЕЛЬ', ''),
                 'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
+                'premium' : row.get('Functional', ''),
+
             },
             create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
@@ -189,6 +190,7 @@ def create_KPIs_for_group(group, user, month):
                 'start': row.get('Начала', ''),
                 'end': row.get('Конец', ''),
                 'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
+                'premium' : row.get('Functional', ''),
             }
         )
 
@@ -221,7 +223,7 @@ def create_KPIs_for_group(group, user, month):
             metric=row['Единица'],
             fact=row['ФАКТ'],
             finished=row['ИСПОЛНЕНИЕ'],
-            premium=row['Functional'],
+
             definition=row['Definition'],
             method=row['Метод_расчота'],
             weight=row['Вес_показателья'],
@@ -343,3 +345,4 @@ def kpi_card(request):
 # 4. Allow Users to View Previous Months
 # You can implement a dropdown menu or any other UI element in your template
 # to allow users to select and view data for previous months
+#  'premium'=row.get('Functional',''),
