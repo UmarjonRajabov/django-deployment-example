@@ -43,6 +43,7 @@ class Employee(models.Model):
     end = models.DateField(null=True)
     photo = models.ImageField(upload_to='employee_photos', blank=True, null=True)
     fixed = models.FloatField(null=True)
+    premium = models.TextField(null=False, default="Xodim")
 
     # user_id = models.FloatField(unique=True)
 
@@ -52,14 +53,13 @@ class Employee(models.Model):
 
 class KPI(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    month = models.DateField(auto_now_add=True)
+    employee = models.ForeignKey(Employee, related_name='kpies', on_delete=models.CASCADE)
+    month = models.DateField(auto_now_add=False)
     performance_score = models.FloatField()
     kpi_name = models.CharField(max_length=255)
     metric = models.CharField(max_length=255)
     fact = models.FloatField()
     finished = models.FloatField(null=True)
-    premium = models.TextField()
     definition = models.TextField()
     method = models.TextField()
     weight = models.FloatField(null=True)

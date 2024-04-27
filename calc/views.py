@@ -18,7 +18,22 @@ from datetime import datetime
 from django.utils import timezone
 from .models import KPIArchive
 from rest_framework import generics
-from .serializers import KPISerializer, KPIArchiveSerializer
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import KPISerializer, KPIArchiveSerializer, EmployeeSerializer
+
+
+class EmployeeDetailAPIView(generics.RetrieveAPIView):
+    def get(self, request, pk):  # Include 'request' parameter
+        employee = Employee.objects.get(table_number=pk)
+        serialized_data = EmployeeSerializer(employee,
+                                             context={'request': request})  # Pass request object to serializer context
+        return Response(serialized_data.data, status=status.HTTP_200_OK)
+    
+    # def get(self, _, pk):
+    #     employee = Employee.objects.get(table_number=pk)
+    #     serialized_data = EmployeeSerializer(employee)
+    #     return Response(serialized_data.data, status=status.HTTP_200_OK)
 
 
 class KPIListCreateView(generics.ListCreateAPIView):
@@ -144,7 +159,6 @@ def create_KPIs_for_group(group, user, month):
         metric = row['Единица']
         fact = row['ФАКТ']
         finished = row['ИСПОЛНЕНИЕ']
-        premium = row['Functional']
         definition = row['Definition']
         method = row['Метод_расчота']
         weight = row['Вес_показателья']
@@ -163,6 +177,8 @@ def create_KPIs_for_group(group, user, month):
                 'department': row.get('ПОДРАЗДЕЛЕНИЕ', ''),
                 'table_number': row.get('ТАБЕЛЬ', ''),
                 'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
+                'premium' : row.get('Functional', ''),
+
             },
             create_defaults={
                 'name': row.get('Имя_сотрудника_или_кандидата', ''),
@@ -174,6 +190,7 @@ def create_KPIs_for_group(group, user, month):
                 'start': row.get('Начала', ''),
                 'end': row.get('Конец', ''),
                 'fixed': row.get('ОКЛАД_РАБОТНИКА_СУМ', ''),
+                'premium' : row.get('Functional', ''),
             }
         )
 
@@ -206,7 +223,7 @@ def create_KPIs_for_group(group, user, month):
             metric=row['Единица'],
             fact=row['ФАКТ'],
             finished=row['ИСПОЛНЕНИЕ'],
-            premium=row['Functional'],
+
             definition=row['Definition'],
             method=row['Метод_расчота'],
             weight=row['Вес_показателья'],
@@ -251,6 +268,7 @@ def process_data_and_calculate_kpis(data_frame, month):
 def view_kpis(request):
     # Initialize photo_url
     photo_url = None
+    print(photo_url)
 
     # Get the current month
     current_month = timezone.now().month
@@ -327,3 +345,4 @@ def kpi_card(request):
 # 4. Allow Users to View Previous Months
 # You can implement a dropdown menu or any other UI element in your template
 # to allow users to select and view data for previous months
+#  'premium'=row.get('Functional',''),
