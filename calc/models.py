@@ -97,7 +97,7 @@ class KPIArchive(models.Model):
     overall = models.FloatField(null=False)
 
     start = models.DateField(null=False)
-    end = models.DateField(null=True)
+    end = models.DateField(null=False)
 
     def __str__(self):
         return f"{self.employee} - {self.month}"
