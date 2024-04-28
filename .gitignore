@@ -143,8 +143,8 @@ __pycache__/
 
 # media + static
 media/*
-!media/employee_photos/
-!media/default_photo.jpg
+# !media/employee_photos/
+# !media/default_photo.jpg
 static/
 static_root/
 
